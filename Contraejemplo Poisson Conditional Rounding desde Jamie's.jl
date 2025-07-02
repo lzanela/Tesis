@@ -36,10 +36,38 @@ md"""
 Realizo corridas sobre vectores $\theta$, $\theta'$ $\in \mathbb{R}^{n}$ tales que suman k, $\theta_i \leq \theta'_i \space$ $\forall i \in \{1, \dots, k\} \space$ y $\space \theta_i \geq \theta'_i$ $\forall i \in \{k+1, \dots, n\}$, para encontrar un contraejemplo a $\textit{selection monotonicity}$.
 """
 
+# ╔═╡ 21307643-4656-4e3d-a9bf-2fde973dad66
+md"""Defino como p1 el contraejemplo encontrado por Jamie para $n = 6$ y $k = 3$
+"""
+
+# ╔═╡ c895cd78-6fd0-472d-a51f-eafd0891ba57
+begin
+	p1 = [
+    Rational{BigInt}(BigInt(50725394825993519278096800656275153334288384969061806535166055966652175553215110626112154355363727),
+                     BigInt(820344544708777686628383921246921807685840301005725685964582767932498825215270734395260460182489056)),
+
+    Rational{BigInt}(BigInt(16995635448467104183757178014765702738718813669542372343274191569647329181122211511135709477229515),
+                     BigInt(820344544708777686628383921246921807685840301005725685964582767932498825215270734395260460182489056)),
+
+    Rational{BigInt}(BigInt(16995635448467104183757178014765702738718813669542372343274191569647329181122211511135709477229515),
+                     BigInt(820344544708777686628383921246921807685840301005725685964582767932498825215270734395260460182489056)),
+
+    Rational{BigInt}(BigInt(203732522694899282198523379819523750032272292460663481324189224126535182285019873726167269517595483),
+                     BigInt(205086136177194421657095980311730451921460075251431421491145691983124706303817683598815115045622264)),
+
+    Rational{BigInt}(BigInt(203732522694899282198523379819523750032272292460663481324189224126535182285019873726167269517595483),
+                     BigInt(205086136177194421657095980311730451921460075251431421491145691983124706303817683598815115045622264)),
+
+    Rational{BigInt}(BigInt(746456786844211074651353568498768863987616551023722656078520071679268183450193679728059651096880547),
+                     BigInt(820344544708777686628383921246921807685840301005725685964582767932498825215270734395260460182489056))
+]
+
+end
+
 # ╔═╡ 07aa2842-28b2-4dd7-a4b4-6d2b9f9fd0ad
 begin
 	Random.seed!(1234)
-	n2 = 9
+	n2 = 6
 	k2 = 3
 	M2 = collect(CoolLexCombinations(n2,k2))
 	M_bool2 = []
@@ -53,24 +81,11 @@ end
 
 # ╔═╡ 089ae76f-a0c7-4213-93ed-76b4a6532e1a
 begin
-	# Función para generar un vector θ que cumpla con los requisitos enunciados
-	function rand_vector_sum3(dim::Int=8, total::Float64=3.0)
-	    while true
-	        # Generate dim-1 sorted uniform random numbers in (0, total)
-	        cuts = sort(rand(dim - 1) .* total)
-	        # Add 0 and total to make full partition
-	        parts = diff([0.0; cuts; total])
-	        # Retry if any component ≥ 1
-	        if all(x -> x < 1.0, parts)
-	            return parts
-	        end
-	    end
-	end
-
-	# Función para perturbar el vector θ y generar θ'
-	function perturb_vector(p::Vector{Float64}, delta::Float64=0.1)
+	# Función para perturbar el vector θ de manera aleatoria y generar θ'
+	function perturb_vector_rand(p::Vector{Float64})
 	    admisible = false
 		d = length(p)
+		delta = rand()/2
 		
 		while !admisible
 			p_aux = copy(p)
@@ -91,10 +106,10 @@ begin
 				admisible = true
 				return(p_aux)
 		    else
-		        delta = delta*0.95
+		        delta = delta*0.85
 		    end
 		end
-		return p_new	
+		return p_new
 	end
 end
 
@@ -131,47 +146,53 @@ begin
 	end
 end
 
-# ╔═╡ 10eb4370-55c7-45ec-a0af-1834606b2e97
+# ╔═╡ a2794b94-0d64-4fd6-b528-bf5752e8c588
+md"""Calculo la distribución de máxima entropía para $p1$ y la probabilidad de que Conditional Poisson Rounding seleccione B con esa distribución.
+
+"""
+
+# ╔═╡ 82b47801-51bc-4651-bdbc-7ebc5d620735
 begin
-	p2 = zeros(n2)
-	p2_prima = zeros(n2)
-	#p2 = [0.48335038080257964, 0.543244045037911, 0.5499614356131295, 0.6271079395222612, 0.4659913396300168, 0.4996918575938243, 0.3300357065829176, 0.6366986832382411, 0.8639186119791189]
-	#p2_prima = [0.4834503808025796, 0.543344045037911, 0.5500614356131295, 0.6270579395222612, 0.4659413396300168, 0.4996418575938243, 0.3299857065829176, 0.6366486832382411, 0.8638686119791189]
-	λ2_opt = zeros(n2)
-	λ2_prima_opt = zeros(n2)
+	p2 = Float64.(p1)
+	res_p = optimize(λ -> f2(λ, p2),-50ones(n2),50ones(n2), zeros(n2),SAMIN(),Optim.Options(iterations=1000000))
+	λ2_opt = Optim.minimizer(res_p)
+	z2 = 0    # Cte de normalización para p
+	
+	for A in M_bool2
+		z2 += ℯ^(-dot(λ2_opt, A))
+	end
+
 	B = zeros(n2)
 	B[1:k2] .= 1
+	p_B = ℯ^(-dot(λ2_opt, B)) * (1/z2)
 end
 
 # ╔═╡ c67600a0-5544-48ea-97a7-9db11ef31e79
 begin
+	p2_prima = zeros(n2)
 	encontrado = false
 	intentos = 0
+	λ2_prima_opt = zeros(n2)
 
 	while !encontrado
 		intentos += 1
 		println("Intentos: ", intentos)
-		# Defino p y p'
-		p2 = rand_vector_sum3(n2, float(k2))
-		p2_prima = perturb_vector(p2)
+		
+		# Defino p'
+		p2_prima = perturb_vector_rand(p2)
 	
-		# Resuelvo para p y p'
-		res_p = optimize(λ -> f2(λ, p2),-50ones(n2),50ones(n2), zeros(n2),SAMIN(),Optim.Options(iterations=1000000))
+		# Resuelvo para p'
 		res_p_prima = optimize(λ -> f2(λ, p2_prima),-50ones(n2),50ones(n2), zeros(n2),SAMIN(),Optim.Options(iterations=1000000))
-		λ2_opt = Optim.minimizer(res_p)
 		λ2_prima_opt = Optim.minimizer(res_p_prima)
 		#println("Distribución óptima λ para p:", λ2_opt)
 		#println("Distribución óptima λ' para p':", λ2_prima_opt)
 	
-		# Calculo las probabilidades P(S={1,...,k}) para p y p'
-		local z2 = 0    # Cte de normalización para p
+		# Calculo P(S={1,...,k}) para p'
 		local z2_prima = 0     # Cte de normalización para p'
 		for A in M_bool2
-			z2 += ℯ^(-dot(λ2_opt, A))
 			z2_prima += ℯ^(-dot(λ2_prima_opt, A))
 		end
 	
-		p_B = ℯ^(-dot(λ2_opt, B)) * (1/z2)
 		p_B_prima = ℯ^(-dot(λ2_prima_opt, B)) * (1/z2_prima)
 	
 		encontrado = p_B > p_B_prima
@@ -184,29 +205,28 @@ end
 
 # ╔═╡ a00ed0dc-1fe7-45f4-92cd-650b61604226
 begin
-	zz2 = 0    # Cte de normalización para p
 	zz2_prima = 0     # Cte de normalización para p'
-	#λ2_opt = [0.060890885934397655, -0.1496049330691749, -0.1733985987738607, -0.455042731439148, 0.12199511096990195, 0.0035458409461933543, 0.6291175794766187, -0.49166428952482183, -1.6767772353970014]
-	#λ2_prima_opt = [-3.8383775540489498, -4.048876318812886, -4.072671111121402, -4.3537710095923945, -3.776745565187412, -3.89519619089828, -3.2695951976341218, -4.39039013682461, -5.575291322097886]
 
 	for A in M_bool2
-		zz2 += ℯ^(-dot(λ2_opt, A))
 		zz2_prima += ℯ^(-dot(λ2_prima_opt, A))
 	end
 
-	p_B = ℯ^(-dot(λ2_opt, B)) * (1/zz2)
 	p_B_prima = ℯ^(-dot(λ2_prima_opt, B)) * (1/zz2_prima)
 
 	m = length(M2)
 	probabilidades2 = zeros(m)
+	probabilidades2_prima = zeros(m)
 	for i in 1:m
 		probabilidades2[i] = ℯ^(-dot(λ2_opt, M_bool2[i]))
+		probabilidades2_prima[i] = ℯ^(-dot(λ2_prima_opt, M_bool2[i]))
 	end
 
-	probabilidades2 = probabilidades2*(1/zz2)
+	probabilidades2 = probabilidades2*(1/z2)
+	probabilidades2_prima = probabilidades2*(1/zz2_prima)
 
 	println("El vector de probabilidades es ", probabilidades2)
-	println("La suma de probabilidades es ", sum(probabilidades2))
+	println("La suma de probabilidades para p es ", sum(probabilidades2))
+	println("La suma de probabilidades para p' es ", sum(probabilidades2_prima))
 end
 
 # ╔═╡ b2711614-5fa4-4451-89a7-e220fa084d9b
@@ -754,9 +774,12 @@ version = "17.4.0+2"
 # ╠═76823222-2137-466c-9be2-d251a1132de3
 # ╟─abbb0b74-6d5d-4e93-8ba4-207d0ecc95ef
 # ╠═089ae76f-a0c7-4213-93ed-76b4a6532e1a
+# ╟─21307643-4656-4e3d-a9bf-2fde973dad66
+# ╠═c895cd78-6fd0-472d-a51f-eafd0891ba57
 # ╠═07aa2842-28b2-4dd7-a4b4-6d2b9f9fd0ad
 # ╠═0821fac1-0b9f-4311-81e1-03c6531db730
-# ╠═10eb4370-55c7-45ec-a0af-1834606b2e97
+# ╟─a2794b94-0d64-4fd6-b528-bf5752e8c588
+# ╠═82b47801-51bc-4651-bdbc-7ebc5d620735
 # ╠═c67600a0-5544-48ea-97a7-9db11ef31e79
 # ╠═a00ed0dc-1fe7-45f4-92cd-650b61604226
 # ╠═b2711614-5fa4-4451-89a7-e220fa084d9b

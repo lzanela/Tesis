@@ -9,6 +9,7 @@ begin
 	using Random
 	using StatsBase: Weights
 	using Combinatorics
+	using LinearAlgebra
 end
 
 # ╔═╡ a29751ad-5eab-4988-ae35-0c6b098014ba
@@ -120,7 +121,7 @@ $P_B(S=A)$
 """
 
 # ╔═╡ 140ec3dc-8169-4211-8b46-e5bee4397aa8
-# Esta función no puede ser ejecutada con vectores p que tengan 0 o 1 en alguna coordenada (tampoco tendría sentido, pues en ese casos, simplemente se elimina de la repartición al partido que tenga coordenada 0 y se le asigna una banca al partido que tenga proba 1)
+# Esta función no puede ser ejecutada con vectores p que tengan 0 o 1 en alguna coordenada (tampoco tendría sentido, pues en esos casos, simplemente se elimina de la repartición al partido que tenga coordenada 0 y se le asigna una banca al partido que tenga proba 1)
 
 function selection_probability(A, p)
     N = collect(1:length(p))
@@ -152,7 +153,187 @@ function selection_probability(A, p)
     return total
 end
 
+# ╔═╡ f6294aad-4a04-4fea-aabf-cf9561d30b7e
+md"""
+    generate_hyperplane_grid(n_dimensions::Int, target_sum::Float64, points_per_dim::Int)
+
+Generates a grid of points for testing apportionment methods.
+
+The function finds points `p = (p₁, p₂, ..., pₙ)` that satisfy three conditions:
+1.  The vector has `n_dimensions` coordinates.
+2.  Each coordinate `pᵢ` is strictly between 0 and 1 (i.e., `0 < pᵢ < 1`).
+3.  The coordinates sum to a specific value: `sum(p) = target_sum`.
+
+### Arguments
+- `n_dimensions::Int`: The number of coordinates in each vector (`n`). Must be >= 1.
+- `target_sum::Float64`: The value `k` that the coordinates must sum to. For solutions to exist, `0 < target_sum < n_dimensions`.
+- `points_per_dim::Int`: The number of grid points to generate along each of the first `n-1` independent dimensions. A larger number creates a denser grid.
+
+### Returns
+- `Vector{Vector{Float64}}`: A vector of vectors, where each inner vector is a point on the grid that satisfies all conditions. Returns an empty vector if no such points are found on the grid or if the inputs are invalid.
+
+### Methodology
+The problem has `n-1` degrees of freedom. We generate a grid for the first `n-1` coordinates and then calculate the `n`-th coordinate as `pₙ = target_sum - sum(p₁, ..., pₙ₋₁)`. We then filter out any points where any coordinate (including the calculated `pₙ`) falls outside the `(0, 1)` range.
+
+A small epsilon is used to ensure coordinates are *strictly* greater than 0 and less than 1.
+"""
+
+# ╔═╡ f1ffd09a-da9c-4c4a-8997-28747f92f210
+function generate_hyperplane_grid(n_dimensions::Int, target_sum::Float64, points_per_dim::Int)
+    # --- Input Validation ---
+    if n_dimensions < 1
+        @error "Number of dimensions must be at least 1."
+        return Vector{Float64}[]
+    end
+    if !(0 < target_sum < n_dimensions)
+        # If the sum is outside this range, no solutions are possible.
+        @warn "target_sum is outside the valid range (0, n_dimensions). No solutions exist."
+        return Vector{Float64}[]
+    end
+
+    # A small value to ensure strict inequality (0 < p_i < 1)
+    epsilon = 1e-9
+
+    # This will hold the valid grid points
+    grid_points = Vector{Float64}[]
+
+    # Handle the simple n=1 case separately for clarity
+    if n_dimensions == 1
+        if 0 < target_sum < 1
+            push!(grid_points, [target_sum])
+        end
+        return grid_points
+    end
+
+    # --- Grid Generation ---
+
+    # 1. Create the grid ticks for one dimension
+    # We create a grid for each of the first n-1 dimensions
+    ticks = range(epsilon, 1.0 - epsilon, length=points_per_dim)
+
+    # 2. Create a Cartesian product iterator for the n-1 dimensions
+    # ntuple creates a tuple of `ticks` of length `n_dimensions - 1`
+    # The splat `...` operator passes them as separate arguments to product()
+    prefix_iterator = Iterators.product(ntuple(i -> ticks, n_dimensions - 1)...)
+
+    # 3. Iterate, calculate the last component, and filter
+    for p_prefix in prefix_iterator
+        # p_prefix is a tuple, e.g., (0.1, 0.25)
+        prefix_sum = sum(p_prefix)
+        last_component = target_sum - prefix_sum
+
+        # 4. Check if the generated point is valid
+        # We already know the prefix components are in (0,1).
+        # We only need to check the last one.
+        if epsilon < last_component < 1.0 - epsilon
+            # Also, ensure the prefix sum itself doesn't make a valid solution impossible.
+            # This check is implicitly handled by the check on last_component, but it's
+            # good to be aware of the constraint: target_sum - 1 < prefix_sum < target_sum
+            
+            # Construct the full valid vector and add it to our list
+            full_vector = [p_prefix..., last_component]
+            push!(grid_points, full_vector)
+        end
+    end
+
+    return grid_points
+end
+
+# ╔═╡ e57e9672-a42c-42e9-8854-2bdece4f4475
+begin
+	encontrado = false
+	intentos = 0
+	points_per_dim = 10
+	p = zeros(n)
+	p_prima = zeros(n)
+	grilla = generate_hyperplane_grid(n, float(k), points_per_dim)
+	A = collect(1:k)
+
+	for vect in grilla
+		if encontrado
+			break
+		end
+		intentos += 1
+		println("Intentos: ", intentos)
+		
+		# Defino p y p'
+		p = vect
+		p_prima = perturb_vector(p, 0.1)
+
+		# Calculo P(S=A) para p y p', con A={1,...,k}
+		proba_p = selection_probability(A, p)
+		proba_p_prima = selection_probability(A, p_prima)
+
+		encontrado = proba_p > proba_p_prima
+	end
+
+	if encontrado
+		println("Contraejemplo encontrado:")
+		println("Vector p:", p)
+		println("Vector p':", p_prima)
+	else
+		println("Grilla de n = ", n, " y k = ", k, " completada. Sin contraejemplos encontrados.")
+	end
+end
+
+# ╔═╡ 64a3499b-5e78-442f-9178-7277fe88531c
+begin
+	tuplas = []
+
+	for i in 3:15
+		for j in 2:i-1
+			tupla = (i, j)
+			push!(tuplas, tupla)
+		end
+	end
+
+	println(tuplas)
+end
+
+# ╔═╡ d133bac7-271b-44e8-8350-7515eb05e66a
+begin
+	for tupla in tuplas
+		encontrado = false
+		intentos = 0
+		n = tupla[1]
+		k = tupla[2]
+		points_per_dim = 10
+		tupla
+		p = zeros(n)
+		p_prima = zeros(n)
+		grilla = generate_hyperplane_grid(n, float(k), points_per_dim)
+		A = collect(1:k)
+	
+		for vect in grilla
+			if encontrado
+				break
+			end
+			intentos += 1
+			
+			# Defino p y p'
+			p = vect
+			p_prima = perturb_vector(p, 0.1)
+	
+			# Calculo P(S=A) para p y p', con A={1,...,k}
+			proba_p = selection_probability(A, p)
+			proba_p_prima = selection_probability(A, p_prima)
+	
+			encontrado = proba_p > proba_p_prima
+		end
+	
+		if encontrado
+			println("Contraejemplo encontrado:")
+			println("Vector p:", p)
+			println("Vector p':", p_prima)
+		else
+			println("Grilla de n = ", n, " y k = ", k, " completada. Sin contraejemplos encontrados.")
+		end		
+	end
+end
+
 # ╔═╡ 4123a03b-b86b-4427-b59a-a65bd9249a4d
+# ╠═╡ disabled = true
+#=╠═╡
 begin
 	encontrado = false
 	intentos = 0
@@ -179,11 +360,13 @@ begin
 	println("Vector p:", p)
 	println("Vector p':", p_prima)
 end
+  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 Combinatorics = "861a8166-3701-5b0c-9a16-15d98fcdc6aa"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 
@@ -198,7 +381,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.10.2"
 manifest_format = "2.0"
-project_hash = "36de67a9cb3b0c2da66881285e55a777e46f1eca"
+project_hash = "4e1107f5e957a2938b6cf7faf3d93357feddff18"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -399,6 +582,11 @@ version = "5.8.0+1"
 # ╠═1c8f6a7d-3308-473f-86ec-ab3189d7b77a
 # ╟─28b2efaa-bd96-429b-8a38-042b71f7e9a8
 # ╠═140ec3dc-8169-4211-8b46-e5bee4397aa8
+# ╟─f6294aad-4a04-4fea-aabf-cf9561d30b7e
+# ╠═f1ffd09a-da9c-4c4a-8997-28747f92f210
+# ╠═e57e9672-a42c-42e9-8854-2bdece4f4475
+# ╠═64a3499b-5e78-442f-9178-7277fe88531c
+# ╠═d133bac7-271b-44e8-8350-7515eb05e66a
 # ╠═4123a03b-b86b-4427-b59a-a65bd9249a4d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
