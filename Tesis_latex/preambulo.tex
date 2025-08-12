@@ -1,0 +1,45 @@
+% Codificación y idioma
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+
+% Matemática
+\usepackage{amsmath, amssymb, amsthm, mathtools}
+
+% Gráficos e imágenes
+\usepackage{graphicx}
+\graphicspath{{imagenes/}}
+
+% --- Datos de la portada ---
+\newcommand{\TituloTesis}{TITULO DE LA TESIS}
+\newcommand{\AutorTesis}{Luca Zanela}
+\newcommand{\DirectorTesis}{José Correa Haeussler}
+\newcommand{\FechaTesis}{Fecha de presentación: 15 de diciembre de 2025}
+
+% Tablas
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+% Hipervínculos
+\usepackage[hidelinks]{hyperref}
+
+% Márgenes
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% Otros paquetes útiles
+\usepackage{enumitem}
+\usepackage{csquotes} % Recomendado con biblatex
+
+% Bibliografía
+\usepackage[
+    backend=biber,
+    style=numeric,
+    citestyle=numeric-comp,
+    sorting=none
+]{biblatex}
+\addbibresource{referencias.bib}
+
+% Nuevo comando para citar autor + número
+\newcommand{\cita}[1]{\citeauthor{#1}~\cite{#1}}

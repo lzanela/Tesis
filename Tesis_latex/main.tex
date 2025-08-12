@@ -1,0 +1,32 @@
+% !TEX output_directory=out
+\documentclass[12pt,a4paper]{report}
+
+% Paquetes y configuraciones en un archivo separado
+\input{preambulo.tex}
+
+\begin{document}
+
+% Incluye la carátula
+\input{caratula.tex}
+
+% Luego continúa con índice, capítulos, etc.
+\tableofcontents
+\listoffigures
+\listoftables
+
+% Capítulos
+\include{capitulos/01_introduccion}
+\include{capitulos/02_marco_teorico}
+\include{capitulos/03_metodologia}
+\include{capitulos/04_resultados}
+\include{capitulos/05_conclusiones}
+
+% Bibliografía
+\printbibliography
+
+% Anexos
+\appendix
+\include{anexos/anexo_a}
+\include{anexos/anexo_b}
+
+\end{document}

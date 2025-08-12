@@ -13,7 +13,7 @@ begin
 end
 
 # ╔═╡ 6d5700d0-22ec-11f0-3b35-ab9c2a365742
-md""" # Final de Optimización
+md""" # Búsqueda de contraejemplo para Conditional Poisson Rounding
 ## Distribución de máxima entropía usando dualidad
 
 Para resolver el problema de encontrar la distribución de máxima entropía, donde $\cal{M} = \{ A \in \cal{P}([n]) : \# A=k \}$ 
@@ -39,22 +39,22 @@ Realizo corridas sobre vectores $\theta$, $\theta'$ $\in \mathbb{R}^{n}$ tales q
 # ╔═╡ 07aa2842-28b2-4dd7-a4b4-6d2b9f9fd0ad
 begin
 	Random.seed!(1234)
-	n2 = 9
-	k2 = 3
-	M2 = collect(CoolLexCombinations(n2,k2))
-	M_bool2 = []
+	N = 6
+	K = 3
+	M = collect(CoolLexCombinations(N,K))
+	M_bool = []
 	
-	for A in M2
-		a = zeros(n2)
+	for A in M
+		a = zeros(N)
 		a[A] .= 1
-		push!(M_bool2, a)
+		push!(M_bool, a)
 	end	
 end
 
 # ╔═╡ 089ae76f-a0c7-4213-93ed-76b4a6532e1a
 begin
 	# Función para generar un vector θ que cumpla con los requisitos enunciados
-	function rand_vector_sum3(dim::Int=8, total::Float64=3.0)
+	function rand_vector_sum_k(dim::Int=6, total::Float64=3.0)
 	    while true
 	        # Generate dim-1 sorted uniform random numbers in (0, total)
 	        cuts = sort(rand(dim - 1) .* total)
@@ -75,14 +75,14 @@ begin
 		while !admisible
 			p_aux = copy(p)
 			# Total amount to shift
-		    shift_total = delta * k2  # increase k2 elements by delta
-		    shift_per_rest = shift_total / (d - k2)
+		    shift_total = delta * K  # increase K elements by delta
+		    shift_per_rest = shift_total / (d - K)
 		
-		    for i in 1:k2
+		    for i in 1:K
 		        p_aux[i] += delta
 		    end
 		
-		    for i in (k2+1):d
+		    for i in (K+1):d
 		        p_aux[i] -= shift_per_rest
 		    end
 		
@@ -102,7 +102,7 @@ end
 begin
 	function f2(λ, p)
 	    suma = 0
-		for A in M_bool2
+		for A in M_bool
 		suma += ℯ^(-dot(λ, A))
 		end
 		logaritmo = log(suma)
@@ -110,16 +110,16 @@ begin
 	end
 
 	function ∇f2(λ, p)
-		suma1 = 0
-		for A in M_bool2
-			suma1 += ℯ^(-dot(λ, A))
+		suma = 0
+		for A in M_bool
+			suma += ℯ^(-dot(λ, A))
 		end
-		logaritmo = log(suma1)
+		logaritmo = log(suma)
 
-		g = zeros(n2)
-		for i in 1:n2
+		g = zeros(N)
+		for i in 1:N
 			suma = 0
-			for A in M_bool2
+			for A in M_bool
 				if A[i] == 1
 					suma += ℯ^(-dot(λ, A))
 				end
@@ -127,20 +127,19 @@ begin
 			g[i] = suma
 		end
 		
-		return p - g*suma1
+		return p - g*suma
 	end
 end
 
 # ╔═╡ 10eb4370-55c7-45ec-a0af-1834606b2e97
 begin
-	p2 = zeros(n2)
-	p2_prima = zeros(n2)
-	#p2 = [0.48335038080257964, 0.543244045037911, 0.5499614356131295, 0.6271079395222612, 0.4659913396300168, 0.4996918575938243, 0.3300357065829176, 0.6366986832382411, 0.8639186119791189]
-	#p2_prima = [0.4834503808025796, 0.543344045037911, 0.5500614356131295, 0.6270579395222612, 0.4659413396300168, 0.4996418575938243, 0.3299857065829176, 0.6366486832382411, 0.8638686119791189]
-	λ2_opt = zeros(n2)
-	λ2_prima_opt = zeros(n2)
-	B = zeros(n2)
-	B[1:k2] .= 1
+	p = zeros(N)
+	p_prima = zeros(N)
+	λ_opt = zeros(N)
+	λ_prima_opt = zeros(N)
+	B = zeros(N)
+	B[1:K] .= 1
+	println("Vector B:", B)
 end
 
 # ╔═╡ c67600a0-5544-48ea-97a7-9db11ef31e79
@@ -149,96 +148,102 @@ begin
 	intentos = 0
 
 	while !encontrado
+		
 		intentos += 1
 		println("Intentos: ", intentos)
+
 		# Defino p y p'
-		p2 = rand_vector_sum3(n2, float(k2))
-		p2_prima = perturb_vector(p2)
+		p = rand_vector_sum_k(N, float(K))
+		p_prima = perturb_vector(p)
 	
 		# Resuelvo para p y p'
-		res_p = optimize(λ -> f2(λ, p2),-50ones(n2),50ones(n2), zeros(n2),SAMIN(),Optim.Options(iterations=1000000))
-		res_p_prima = optimize(λ -> f2(λ, p2_prima),-50ones(n2),50ones(n2), zeros(n2),SAMIN(),Optim.Options(iterations=1000000))
-		λ2_opt = Optim.minimizer(res_p)
-		λ2_prima_opt = Optim.minimizer(res_p_prima)
-		#println("Distribución óptima λ para p:", λ2_opt)
-		#println("Distribución óptima λ' para p':", λ2_prima_opt)
+		res_p = optimize(λ -> f2(λ, p),-50ones(N),50ones(N), zeros(N),SAMIN(),Optim.Options(iterations=1000000))
+		res_p_prima = optimize(λ -> f2(λ, p_prima),-50ones(N),50ones(N), zeros(N),SAMIN(),Optim.Options(iterations=1000000))
+		λ_opt = Optim.minimizer(res_p)
+		λ_prima_opt = Optim.minimizer(res_p_prima)
+		
+		#println("Distribución óptima λ para p:", λ_opt)
+		#println("Distribución óptima λ' para p':", λ_prima_opt)
 	
 		# Calculo las probabilidades P(S={1,...,k}) para p y p'
-		local z2 = 0    # Cte de normalización para p
-		local z2_prima = 0     # Cte de normalización para p'
-		for A in M_bool2
-			z2 += ℯ^(-dot(λ2_opt, A))
-			z2_prima += ℯ^(-dot(λ2_prima_opt, A))
+		local z = 0    # Cte de normalización para p
+		local z_prima = 0     # Cte de normalización para p'
+		for A in M_bool
+			z += ℯ^(-dot(λ_opt, A))
+			z_prima += ℯ^(-dot(λ_prima_opt, A))
 		end
 	
-		p_B = ℯ^(-dot(λ2_opt, B)) * (1/z2)
-		p_B_prima = ℯ^(-dot(λ2_prima_opt, B)) * (1/z2_prima)
+		p_B = ℯ^(-dot(λ_opt, B)) * (1/z)
+		p_B_prima = ℯ^(-dot(λ_prima_opt, B)) * (1/z_prima)
 	
 		encontrado = p_B > p_B_prima
+
 	end
 
 	println("Contraejemplo encontrado:")
-	println("Vector p:", p2)
-	println("Vector p':", p2_prima)	
+	println("Vector p:", p)
+	println("Vector p':", p_prima)
+	println("Distribución óptima λ para p:", λ_opt)
+	println("Distribución óptima λ' para p':", λ_prima_opt)
 end
 
 # ╔═╡ a00ed0dc-1fe7-45f4-92cd-650b61604226
 begin
-	zz2 = 0    # Cte de normalización para p
-	zz2_prima = 0     # Cte de normalización para p'
-	#λ2_opt = [0.060890885934397655, -0.1496049330691749, -0.1733985987738607, -0.455042731439148, 0.12199511096990195, 0.0035458409461933543, 0.6291175794766187, -0.49166428952482183, -1.6767772353970014]
-	#λ2_prima_opt = [-3.8383775540489498, -4.048876318812886, -4.072671111121402, -4.3537710095923945, -3.776745565187412, -3.89519619089828, -3.2695951976341218, -4.39039013682461, -5.575291322097886]
+	z = 0    # Cte de normalización para p
+	z_prima = 0     # Cte de normalización para p'
+	#λ_opt = [0.060890885934397655, -0.1496049330691749, -0.1733985987738607, -0.455042731439148, 0.12199511096990195, 0.0035458409461933543, 0.6291175794766187, -0.49166428952482183, -1.6767772353970014]
+	#λ_prima_opt = [-3.8383775540489498, -4.048876318812886, -4.072671111121402, -4.3537710095923945, -3.776745565187412, -3.89519619089828, -3.2695951976341218, -4.39039013682461, -5.575291322097886]
 
-	for A in M_bool2
-		zz2 += ℯ^(-dot(λ2_opt, A))
-		zz2_prima += ℯ^(-dot(λ2_prima_opt, A))
+	for A in M_bool
+		z += ℯ^(-dot(λ_opt, A))
+		z_prima += ℯ^(-dot(λ_prima_opt, A))
 	end
 
-	p_B = ℯ^(-dot(λ2_opt, B)) * (1/zz2)
-	p_B_prima = ℯ^(-dot(λ2_prima_opt, B)) * (1/zz2_prima)
+	p_B = ℯ^(-dot(λ_opt, B)) * (1/z)
+	p_B_prima = ℯ^(-dot(λ_prima_opt, B)) * (1/z_prima)
 
-	m = length(M2)
-	probabilidades2 = zeros(m)
+	m = length(M)
+	probabilidades = zeros(m)
 	for i in 1:m
-		probabilidades2[i] = ℯ^(-dot(λ2_opt, M_bool2[i]))
+		probabilidades[i] = ℯ^(-dot(λ_opt, M_bool[i]))
 	end
 
-	probabilidades2 = probabilidades2*(1/zz2)
+	probabilidades = probabilidades*(1/z)
 
-	println("El vector de probabilidades es ", probabilidades2)
-	println("La suma de probabilidades es ", sum(probabilidades2))
+	println("El vector de probabilidades es ", probabilidades)
+	println("La suma de probabilidades es ", sum(probabilidades))
 end
 
 # ╔═╡ b2711614-5fa4-4451-89a7-e220fa084d9b
 begin
 	println("Contraejemplo encontrado:")
-	println("N = ", n2, "   k = ", k2)
-	println("Vector p:", p2)
-	println("Vector p':", p2_prima)	
-	println("Distribución óptima λ para p:", λ2_opt)
-	println("Distribución óptima λ' para p':", λ2_prima_opt)
+	println("N = ", N, "   k = ", K)
+	pintln("Vector p:", p)
+	pintln("Vector p':", p_prima)	
+	println("Distribución óptima λ para p:", λ_opt)
+	println("Distribución óptima λ' para p':", λ_prima_opt)
 	println("Probabilidades para B = {1,...,k} según λ y λ':", p_B, ";  ", p_B_prima)
 end
 
 # ╔═╡ 701ed612-cce5-49b9-850b-f124d2de3457
 begin
-	marginales2 = zeros(n2)
-	marginales2_prima = zeros(n2)
-	for i in 1:n2
-		for j in 1:m
-			if (M_bool2[j])[i] == 1
-				marginales2[i] += probabilidades2[j]
-				marginales2_prima[i] += probabilidades2[j]
+	marginales = zeros(N)
+	marginales_prima = zeros(N)
+	for i in 1:N
+	for j in 1:m
+		if (M_bool[j])[i] == 1
+				marginales[i] += probabilidades[j]
+				marginales_prima[i] += probabilidades[j]
 			end
 		end
 	end
 
-	println("Las marginales dadas por los residuos son ", p2)
-	println(p2_prima)
-	println("\nLas marginales calculadas con la distribución óptima son ", marginales2)
-	println(marginales2_prima)
-	println("\nLa norma 2 de la diferencia entre las marginales es ", norm(p2-marginales2))
-	println(norm(p2_prima-marginales2_prima))
+	println("Las marginales dadas por los residuos son ", p)
+	println(p_prima)
+	println("\nLas marginales calculadas con la distribución óptima son ", marginales)
+	println(marginales_prima)
+	println("\nLa norma 2 de la diferencia entre las marginales es ", norm(p-marginales))
+	println(norm(p_prima-marginales_prima))
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -467,7 +472,7 @@ uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
 version = "0.6.4"
 
 [[deps.LibCURL_jll]]
-deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
+deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
 version = "8.4.0+0"
 
@@ -738,7 +743,7 @@ deps = ["Artifacts", "Libdl"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
 version = "5.8.0+1"
 
-[[deps.nghttp2_jll]]
+[[deps.nghttp_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.52.0+1"
