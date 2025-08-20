@@ -14,7 +14,7 @@ def p(q, i):
 # Problem parameters
 N = 10
 K = 3
-eps = 1e-15
+eps = 1e-7
 all_sets = list(itertools.combinations(range(N), K))
 S = tuple(range(K))
 S_c = tuple(range(K, N))

@@ -35,7 +35,7 @@ model.Params.TimeLimit = 100          # (seconds) Give Gurobi a time budget
 model.Params.SolutionLimit = 6       # Stop after second feasible solution
 model.Params.NonConvex = 2  # Enable non-convex QC constraints
 model.Params.OutputFlag = 1  # Show solver output
-model.Params.FeasibilityTol = 1e-8
+model.Params.FeasibilityTol = 1e-9
 
 # Variables q and q'
 q = model.addVars(N, lb=eps, name="q")
@@ -152,7 +152,8 @@ if model.Status == GRB.OPTIMAL or model.Status == GRB.SUBOPTIMAL:
 else:
     print(f"Optimization ended with status {model.Status}")
     model.computeIIS()
-    model.write("infeasible.ilp")
+    if model.IISMinimal:
+        model.write("infeasible.ilp")
 
 
 n_sols = model.SolCount
