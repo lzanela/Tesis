@@ -1,4 +1,4 @@
-from Tesis.High_precision_counterexample_search.max_entropy_distribution import max_entropy, max_entropy_fraction
+from Tesis.max_entropy.max_entropy_distribution import max_entropy, max_entropy_fraction
 from fractions import Fraction
 import numpy as np
 import random
