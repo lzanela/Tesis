@@ -10,7 +10,7 @@ from gurobipy import GRB
 
 
 # Global parameters
-N = 5
+N = 4
 K = 2
 M = math.comb(N, K)
 c = [random.randint(0, 1000) for _ in range(M)]
@@ -53,7 +53,7 @@ def perturb_vector(p: list):
     p_ = p.copy()
     delta_max = min(1-p[0], p[n-1])
     delta = random.uniform(0, delta_max)
-    eps = min(delta, 0.05)  # Limit the perturbation to 0.05 for stability
+    eps = min(delta, 0.05)  # Limit the perturbation to 0.05
 
     p_[0] = p_[0] + eps
     p_[n-1] = p_[n-1] - eps
@@ -249,9 +249,11 @@ def results_print(mu_sol):
 
 if __name__ == "__main__":
     # Global setup
+    random.seed(43)
     all_sets = kSubsets(range(N), K)
     sets_containing = setsContaining(all_sets)
-    c = [random.randint(0, 1000) for _ in range(M)]
+    #c = [random.randint(0, 1000) for _ in range(M)]
+    c = [(6-i) for i in range(M)]
     contraejemplo_found = False
 
     while not contraejemplo_found:
