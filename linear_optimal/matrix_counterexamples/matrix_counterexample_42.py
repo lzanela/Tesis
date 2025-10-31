@@ -62,7 +62,7 @@ def buscar_contraejemplo(B: np.array):
     model.Params.PoolSolutions = 4  # Store up to 4 solutions
     model.Params.PoolSearchMode = 2 # Find the n best solutions, where n is given by PoolSolutions
 
-    # Variables eps, alpha_1,...,alplha_4 determining the marginal probabilities vector.
+    # Variables eps, alpha_1,...,alpha_4 determining the marginal probabilities vector.
     eps = model.addVar(lb=tol, ub=1/5, name="eps")
     alpha = model.addVars(N, lb=0.0, ub=1, name="alpha")
 
