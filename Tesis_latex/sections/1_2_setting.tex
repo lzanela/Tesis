@@ -1,0 +1,15 @@
+\section{Marco del problema}
+
+Sean $n \in \mathbb{N}$ con $[n] := \{ 1, \dots, n\}$ un conjunto de partidos, $H \in \mathbb{N}$ cierta cantidad de bancas a repartir.
+\vspace{0.25cm}
+
+\textbullet \ $ \vec{v} = (v_1, \dots, v_n) \in \mathbb{N}^n$ vector de votos recibidos por cada partido,
+
+\textbullet \ $\vec{q} = (q_1, \dots, q_n)$ vector de proporciones, con $q_i = H\frac{v_i}{\sum_{i=1}^{n}{v_i}}$ y $\sum_{i=1}^{n}{q_i} = H$
+
+Adicionalmente, para ciertos modelos se considera el vector $\vec{r} \in \mathbb{N}_0^{n}$ como un vector de requerimientos mínimos,
+de forma tal que cada partido $i$ debe recibir al menos $r_i$ bancas, y usualmente se toma $r_i = r \in \mathbb{N}_0^{n}$ constante.
+Sin embargo, para el presente trabajo no consideraremos la presencia de restricciones de esta índole sobre las cantidades de bancas asignadas.
+
+\begin{definition} Un método de \textit{apportionment a} es una función que toma un vector de votos $\vec{v}$, una cantidad de bancas $H$, y retorna un vector $a(\vec{v}, H) \in \mathbb{N}^n$ que suma H, e indica la cantidad de bancas asignadas a cada partido.
+\end{definition}

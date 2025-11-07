@@ -1,0 +1,34 @@
+\section{Algunos de los métodos más típicos}
+
+Una cantidad que aparecerá recurrentemente en distintos métodos es la \textit{Hare Quota}, definida como
+
+$$HQ(\vec{v}, H)=\frac{1}{H} \cdot \sum_{i=1}^{n}{v_i},$$
+
+que podemos pensar como la cantidad promedio de votos representados por una banca.
+
+\subsection{Método de Hamilton}
+El primer sistema de distribución de bancas diseñado para el congreso estadounidense fue el \textit{método de Hamilton},
+diseñado por Alexander Hamilton en 1792, también conocido como el \textit{método de restos mayores} (\textit{greatest remainders}).
+Usualmente es considerado como el método más intuitivo. 
+El método consiste en:
+
+\begin{enumerate}[label=\textbf{Paso \arabic*.}, leftmargin=1.8em, itemsep=0.6em]
+    \item \textbf{Cálculo de cuotas exactas:} 
+    dividir los votos de cada partido por \( HQ(\vec{v}, H) \) y obtener \( q_i \coloneqq \frac{v_i}{HQ(\vec{v}, H)} = H\frac{v_i}{\sum_{i=1}^{n}{v_i}} \).
+
+    \item \textbf{Asignación inicial:} 
+    otorgar a cada partido \( i \) su \textit{lower quota}, \( \lfloor q_i \rfloor \).
+
+    \item \textbf{Distribución de bancas restantes:} 
+    ordenar los \textit{restos} \( p_i \coloneqq q_i - \lfloor q_i \rfloor \) de forma decreciente, 
+    y asignar las bancas a los partidos con mayores restos.
+\end{enumerate}
+
+\vspace{0.25cm}
+
+
+
+
+
+\begin{definition} Un método de \textit{apportionment a} es una función que toma un vector de votos $\vec{v}$, una cantidad de bancas $H$, y retorna un vector $a(\vec{v}, H) \in \mathbb{N}^n$ que suma H, e indica la cantidad de bancas asignadas a cada partido.
+\end{definition}

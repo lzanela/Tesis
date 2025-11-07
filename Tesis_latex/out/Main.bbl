@@ -18,57 +18,7 @@
 
 
 \refsection{0}
-  \datalist[entry]{none/global//global/global}
-    \entry{knuth1984texbook}{book}{}
-      \name{author}{1}{}{%
-        {{hash=ec08e6f01da5f3814f28a70c89c64656}{%
-           family={Knuth},
-           familyi={K\bibinitperiod},
-           given={Donald\bibnamedelima E.},
-           giveni={D\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{fullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{bibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorbibnamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authornamehash}{ec08e6f01da5f3814f28a70c89c64656}
-      \strng{authorfullhash}{ec08e6f01da5f3814f28a70c89c64656}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{title}{The TeXbook}
-      \field{year}{1984}
-    \endentry
-    \entry{einstein1905}{article}{}
-      \name{author}{1}{}{%
-        {{hash=3ebf53e52a3ce84f0ffb8553200a6a63}{%
-           family={Einstein},
-           familyi={E\bibinitperiod},
-           given={Albert},
-           giveni={A\bibinitperiod}}}%
-      }
-      \strng{namehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \strng{fullhash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \strng{bibnamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \strng{authorbibnamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \strng{authornamehash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \strng{authorfullhash}{3ebf53e52a3ce84f0ffb8553200a6a63}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{journaltitle}{Annalen der Physik}
-      \field{number}{10}
-      \field{title}{Zur Elektrodynamik bewegter Körper}
-      \field{volume}{322}
-      \field{year}{1905}
-      \field{pages}{891\bibrangedash 921}
-      \range{pages}{31}
-    \endentry
+  \datalist[entry]{nyt/global//global/global}
     \entry{balinski1982fair}{book}{}
       \name{author}{2}{}{%
         {{hash=901db9dec71a11167a16a418b5b36101}{%
@@ -87,12 +37,65 @@
       \strng{authorbibnamehash}{9049adf7ec6a3af42470576ef1937290}
       \strng{authornamehash}{9049adf7ec6a3af42470576ef1937290}
       \strng{authorfullhash}{9049adf7ec6a3af42470576ef1937290}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{extraname}{1}
+      \field{labelalpha}{BY01}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Fair Representation, Meeting the Ideal of One Man, One Vote}
       \field{year}{2001}
+    \endentry
+    \entry{balinski1980theory}{book}{}
+      \name{author}{2}{}{%
+        {{hash=901db9dec71a11167a16a418b5b36101}{%
+           family={Balinski},
+           familyi={B\bibinitperiod}}}%
+        {{hash=692ea45151430cc7da683a463fe39ca5}{%
+           family={Young},
+           familyi={Y\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Brookings Institution Press}%
+      }
+      \strng{namehash}{9049adf7ec6a3af42470576ef1937290}
+      \strng{fullhash}{9049adf7ec6a3af42470576ef1937290}
+      \strng{bibnamehash}{9049adf7ec6a3af42470576ef1937290}
+      \strng{authorbibnamehash}{9049adf7ec6a3af42470576ef1937290}
+      \strng{authornamehash}{9049adf7ec6a3af42470576ef1937290}
+      \strng{authorfullhash}{9049adf7ec6a3af42470576ef1937290}
+      \field{extraname}{2}
+      \field{labelalpha}{BY}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Theory of Apportionment}
+    \endentry
+    \entry{pukkelsheim2017}{book}{}
+      \name{author}{1}{}{%
+        {{hash=efe7f186adeedb65a41f25f7616a1f1b}{%
+           family={Pukkelsheim},
+           familyi={P\bibinitperiod},
+           given={Friedrich},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{fullhash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{bibnamehash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{authorbibnamehash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{authornamehash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{authorfullhash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \field{labelalpha}{Puk17}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Proportional Representation}
+      \field{year}{2017}
     \endentry
   \enddatalist
 \endrefsection

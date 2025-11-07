@@ -6,10 +6,11 @@ import gurobipy as gp
 from gurobipy import GRB
 
 # Global parameters
-N = 4
+N = 5
 K = 2
 M = math.comb(N, K)
-tol = 1e-7
+tol = 5e-6
+delta = 0.1
 
 # Aux functions
 def indicator_vector(S):
@@ -71,7 +72,7 @@ def chequear_contraejemplo(B, B_, indice_seleccionado, modo='interseccion'):
     
     # Variables alpha_1,...,alpha_N determining the marginal probabilities vector.
     alpha = model.addVars(N, lb=0.0, ub=1, name="alpha")
-    p = model.addVars(N, lb=tol, ub=1-tol, name="p")
+    p = model.addVars(N, lb=delta, ub=1-delta, name="p")
 
     # Conjuntos de indices seleccionados para verificar selection monotonicity
     selected_set = set(all_sets[indice_seleccionado])
@@ -88,8 +89,8 @@ def chequear_contraejemplo(B, B_, indice_seleccionado, modo='interseccion'):
         model.addConstr(p[i] - alpha[i] <= 1, name=f"p_prime_{i}_leq_1")
         model.addConstr(p[i] - alpha[i] >= 0, name=f"p_prime_{i}_geq_0")
     
-    # p suma 2
-    model.addConstr(gp.quicksum(p[i] for i in range(N)) == 2, name="p_suma_2")
+    # p suma K
+    model.addConstr(gp.quicksum(p[i] for i in range(N)) == K, name="p_suma_K")
 
     # p' suma 2 (alpha suma 0)
     model.addConstr(gp.quicksum(alpha[i] for i in selected_set) - 
@@ -144,7 +145,7 @@ def chequear_contraejemplo(B, B_, indice_seleccionado, modo='interseccion'):
     for row in range(N):
         model.addConstr((gp.quicksum(B_inv_[row, j] * p[j] for j in range(N)) + tol) * z_p_B_prime[row] <= 0,
                         name=f"infeasibility_p_base_B_prime_row_{row}_leq_0")
-    model.addConstr(gp.quicksum(z_p_B_prime[row] for row in range(N)) == 1, 
+    model.addConstr(gp.quicksum(z_p_B_prime[row] for row in range(N)) >= 1, 
                     name=f"infeasibility_p_base_B_prime_at_least_one_violated")
     
     # At least one constraint violated for p'
@@ -152,7 +153,7 @@ def chequear_contraejemplo(B, B_, indice_seleccionado, modo='interseccion'):
         model.addConstr((gp.quicksum(B_inv[row, j] * (p[j] + (alpha[j] if j in selected_set else -alpha[j])) 
                                     for j in range(N)) + tol)*z_p_prime_B[row] <= 0,
                         name=f"infeasibility_p_prime_base_B_row_{row}_leq_0")
-    model.addConstr(gp.quicksum(z_p_prime_B[row] for row in range(N)) == 1, 
+    model.addConstr(gp.quicksum(z_p_prime_B[row] for row in range(N)) >= 1, 
                     name=f"infeasibility_p_prime_base_B_at_least_one_violated")
     
     # Selection monotonicity violation
@@ -201,7 +202,7 @@ if __name__ == "__main__":
     A = build_matrix(all_sets)
     bases = build_bases(A)
     found = False
-    N_SOLUTIONS_DESIRED = 2
+    N_SOLUTIONS_DESIRED = 1
     solutions = []
 
     for _, B in enumerate(bases):

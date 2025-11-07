@@ -1,0 +1,61 @@
+\section{Introducción al problema de apportionment (\textit{prorateo})}
+
+El problema de \textit{apportionment} (o \textit{prorateo} en español, pero es una palabra un poco
+fea así que usaremos su versión en inglés) trata sobre cómo repartir de 
+forma "justa" las bancas de un congreso o parlamento según la proporción de votos obtenidos
+por distintos partidos políticos, o según la proporción de poblaciones de los distintos estados
+o provincias. La definición de qué significa que un sistema sea "justo" tendrá que ver con 
+qué tan cercano es a la proporcionalidad exacta, y la definiremos con precisión en la próxima sección.
+
+A un nivel un poco más general, el problema consiste en repartir cierta cantidad predeterminada de objetos discretos, indivisibles,
+entre ciertos agentes de acuerdo a proporciones de correspondencia dadas: a cada agente $i$ le corresponde una proporción 
+$p_i$ de la cantidad de objetos discretos. Esencialmente, el problema se reduce al redondeo de fracciones: cómo redondear de la forma más "justa" posible
+un vector de fracciones (las proporciones de bancas correspondientes a los distintos partidos/estados)
+a valores enteros, de manera tal que la suma de las fracciones sea igual a la suma de los enteros
+redondeados (en ambos casos, esta suma debe ser igual a la cantidad total de bancas a repartir).
+
+A pesar de que el problema aparenta ser de una naturaleza simple, veremos que tiene una complejidad
+intrínseca muy grande, que incluso nos llevará a concluir que la existencia de un sistema "perfecto"
+es imposible. Para comenzar con un ejemplo quizás clarificador, pensemos en el siguiente escenario de juguete:
+2 partidos que reciben exactamente la mitad de los votos cada uno, entre los cuales hay que repartir únicamente una banca.
+¿Cómo se asigna esa banca de la forma más justa posible, y qué significa que esa asignación sea "justa"?
+Más allá de la definición que se brinde
+del término \textit{justicia} - siempre y cuando no haya preferencia particular por ninguno de los partidos- cualquiera de los candidatos
+merecería la banca en igual proporción, y por ende cualquiera de las asignaciones sería igual de justa o injusta.
+
+Otro ejemplo, ubicado en las antípodas, sería el caso en el que la cantidad de bancas a repartir es
+exactamente igual a la cantidad de votantes: podría ser el caso de un consejo barrial, por ejemplo, en donde cada miembro tiene representatividad 
+total, como ejemplifican \cita{balinski1982fair}.
+
+Haremos un recorrido por la historia de este problema, enunciando su definición
+formal, los axiomas solicitados para considerar que un sistema es deseable, coherente o "justo", 
+los desarrollos teóricos que se fueron produciendo alrededor de esto (principalmente por Balinski, Young,
+Pukhelsheim \cita{balinski1980theory}, \cita{balinski1982fair}, \cita{pukkelsheim2017}). Enunciaremos la definición de los llamados "\textit{métodos de divisor}", junto 
+con sus propiedades fundamentales, para luego enunciar y demostrar el teorema de imposibilidad de Balinski-Young.
+Esto nos servirá como motivación para definir métodos aleatorizados junto con sus respectivos axiomas deseables. 
+Atravesaremos algunos ejemplos de métodos aleatorizados,
+
+Si los métodos aleatorizados son factibles de ser usados en escenarios electorales reales es una 
+inquietud que queda para el lector.
+
+%Another category of methods may appeal to the gambling man. As one example, 
+%construct a roulette wheel divided into fifty slots, one for each state, the 
+%size of each slot being exactly proportional to the population of the state. 
+%Spin the wheel and drop a small ball onto it: the state at which it comes to 
+%rest4 'wins5 5 and is awarded one seat. Do this 435 times consecutively and the 
+%house is apportioned. The method is perfectly unbiased: every state is treated 
+%fairly; none can complain that the method discriminates against it. 
+%An alternative and perhaps preferable scheme is to compare the quotas of the states 
+%and first give to each the whole number in its quota; then use a roulette 
+%wheel, with each slot proportional to a state's remainder, to distribute the 
+%seats left over. Which of all possible methods is fairest! To answer this question, 
+%standards or principles must be formulated by which methods can be evaluated. 
+%History itself points to such principles. What are the methods that avoid the population 
+%paradox, the Alabama paradox, the new states paradox? What are the methods that 
+%always stay within the quota? What are the methods that systematically favor neither 
+%the large states at the expense of the small nor the small at the expense of the large? 
+%Or, for proportional representation systems, which methods discourage the splintering 
+%of large parties into smaller ones? Each of these questions captures a principle of apportionment. 
+%They have repeatedly been used in history to judge the merits of competing proposals. 
+%In a word, they are the guides to those methods that feel right, that are fair, 
+%that are indeed proportional. \cita{balinski1982fair} discusses various methods of apportionment in detail.

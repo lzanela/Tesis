@@ -1,7 +1,8 @@
 % Codificación y idioma
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
+\usepackage[spanish,es-noquoting,es-noshorthands]{babel}
+
 
 % Matemática
 \usepackage{amsmath, amssymb, amsthm, mathtools}
@@ -10,11 +11,28 @@
 \usepackage{graphicx}
 \graphicspath{{imagenes/}}
 
+% Nombres en español
+\addto\captionsspanish{\renewcommand{\proofname}{Prueba}}
+
+% Estilo de teoremas (numerados por capítulo; cambia [chapter] por [section] si prefieres)
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{corollary}[theorem]{Corolario}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definición}
+\newtheorem{example}[theorem]{Ejemplo}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observación}
+
 % --- Datos de la portada ---
 \newcommand{\TituloTesis}{TITULO DE LA TESIS}
 \newcommand{\AutorTesis}{Luca Zanela}
 \newcommand{\DirectorTesis}{José Correa Haeussler}
-\newcommand{\FechaTesis}{Fecha de presentación: 15 de diciembre de 2025}
+\newcommand{\FechaTesis}{Fecha de presentación: 20 de diciembre de 2025}
 
 % Tablas
 \usepackage{booktabs}
@@ -35,11 +53,11 @@
 % Bibliografía
 \usepackage[
     backend=biber,
-    style=numeric,
-    citestyle=numeric-comp,
-    sorting=none
+    style=alphabetic,
+    citestyle=alphabetic,
+    sorting=nyt
 ]{biblatex}
 \addbibresource{referencias.bib}
 
 % Nuevo comando para citar autor + número
-\newcommand{\cita}[1]{\citeauthor{#1}~\cite{#1}}
+\newcommand{\cita}[1]{\parencite{#1}}
