@@ -1,0 +1,111 @@
+\section{Paradojas y falencias de los métodos típicos}
+
+El término "paradoja" para caracterizar aspectos de los métodos de \textit{apportionment} se utiliza no en un sentido lógico,
+describiendo una proposición contradictoria en términos lógicos, sino en relación al "sentido común", describiendo
+resultados que contradicen "lo que uno esperaría" de un sistema para distribuir bancas.
+
+\subsection{Paradoja de Alabama}
+Si bien el \textit{método de Hamilton} presenta una simpleza remarcable, esta simpleza lleva a resultados que pueden resultar insatisfactorios.
+Luego del censo de 1880 en los Estados Unidos, el encargado de computar la asignación de bancas a cada estado realizó las cuentas para todos los 
+congresos de entre 275 y 350 bancas, llegando a la conclusión de que si se repartían 299 bancas, Alabama recibiría 8, mientras que
+repartiendo 300 bancas le corresponderían 7. Este escenario fue el primer ejemplo registrado en el cual se violó el axioma de 
+\textit{House Monotonicity} \cite{caulfield2010apportioning}.
+
+En general, la \textit{paradoja de Alabama} consiste en el no cumplimiento de la propiedad de \textit{House Monotonicity}.
+
+A continuación, se muestra un ejemplo concreto de esta paradoja:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcccccc}
+    \hline
+    \textit{Estado} & \textit{Población} &
+    \multicolumn{2}{c}{\textit{Con 10 bancas}} &
+    \multicolumn{2}{c}{\textit{Con 11 bancas}} \\
+    \cline{3-6}
+     & & \textit{Quota justa} & \textit{Bancas} &
+         \textit{Quota justa} & \textit{Bancas} \\
+    \hline
+    A & 6 & 4.286 & 4 & 4.714 & 5 \\
+    B & 6 & 4.286 & 4 & 4.714 & 5 \\
+    C & 2 & 1.429 & 2 & 1.571 & 1 \\
+    \hline
+    \end{tabular}
+    \caption{Distribución de bancas para diferentes tamaños de cámara extraído de \href{https://en.wikipedia.org/wiki/Apportionment_paradox#Alabama_paradox}{Wikipedia}.}
+\end{table}
+    
+
+\vspace{0.25cm}
+
+Un aspecto llamativo del \textit{método de Hamilton} es que no garantiza que si un partido recibe mayoría absoluta de los votos
+entonces vaya a tener la mayoría absoluta de las bancas. Para ver esto, alcanza con tomar un escenario de 100 bancas a repartise entre 
+3 partidos con el vector de votos $\vec{v} = (501,250,249)$. Las proporciones de votos obtenidas para este escenario resultan
+
+$$\vec{q} = (0.501, 0.25, 0.249),$$
+
+lo cual manifiesta la mayoría absoluta de votos para el partido $1$. 
+Sin embargo, al utilizar el \textit{método de Hamilton} para repartir las bancas, en primer lugar se asignan:
+
+\begin{itemize}[itemsep=0.6em]
+    \item \( \lfloor 50.1 \rfloor = 50 \) bancas al partido 1,
+
+    \item \( \lfloor 25 \rfloor = 25 \) bancas al partido 2,
+
+    \item \( \lfloor 24.9 \rfloor = 24 \) bancas al partido 3.
+\end{itemize}
+
+La banca pendiente de ser repartida es asignada al partido 3, por tener un resto de $0.9$. Se observa entonces que el partido 1 no obtiene
+la mayoría absoluta de las bancas a pesar de tener la mayoría absoluta de los votos.
+
+%---------------------------------------------------------
+\subsection{Paradoja de nuevos estados}
+En la literatura hay diversos enunciados de esta paradoja, pero nos quedaremos con el de 
+\cita{balinski1982fair}, que la relata de la siguiente forma:
+
+Esta paradoja se produjo cuando, en 1907, Oklahoma se convirtió en un nuevo estado de los Estados Unidos.
+Previamente, el congreso constaba de 386 bancas, asignadas a una población total de 74.562.608 habitantes, por lo que 
+cada banca representaba aproximadamente 193.167 individuos. Como la población de Oklahoma era de alrededor de 1 millón
+de habitantes, le corresponderían al menos 5 bancas. Por este motivo, se amplió la cantidad total de bancas a 391, de manera 
+tal que Oklahoma obtuviese sus 5 bancas. 
+
+Ante este escenario, lo esperable era que, al haber agregado las 5 bancas nuevas, el resto de los estados conserven las bancas que tenían.
+No obstante, el método de Hamilton produjo la denominada \textit{paradoja de nuevos estados}: aplicándose con 391 bancas, 
+le asignó 5 a Oklahoma, 4 a Maine y 37 a Nueva York; mientras que en el contexto anterior, sin la presencia de Oklahoma y con
+un total de 386 bancas, le asignaba 38 bancas a Nueva York y 3 a Maine.
+Esencialmente, al incorporarse Oklahoma agregando sus correspondientes bancas, Nueva York perdió una banca ante Maine. 
+
+En resumen, la \textit{paradoja de nuevos estados} se produce cuando la incorporación de un estado nuevo, incorporando también
+las respectivas bancas correspondientes, provoca alteraciones en la distribución de las bancas de los demás partidos.
+
+%---------------------------------------------------------
+\subsection{Paradoja de población}
+En 1901, teniendo en cuenta la situación poblacional de Maine y Virginia, se calcularon las asignaciones
+para estos estados: 9 bancas para Virginia y 4 para Maine; mientras que en 1900 las asignaciones eran de 10 bancas
+para Virginia y 3 para Maine. Mirando un poco más en detalle la evolución de las poblaciones de estos estados en relación
+a la evolución general del país, se observó que ambos estados habían aumentado sus poblaciones, y a pesar de que Virginia estaba 
+creciendo más rápido que Maine, había perdido una banca frente a este estado.
+
+Se analizaron las quotas, observándose que en 1900 eran de 9.599 para Virginia (redondeada hacia arriba por el método de Hamilton)
+y de 3.595 para Maine (redondeada para abajo). La tasa de crecimiento de estos estados era de 1.07\% anual para Virginia y de 
+0.67\% para Maine, contra una tasa general de 2.02\% del país entero. Con estos números, las quotas de estos estados en 1901 
+habían decrecido a 9.509 para Virginia y 3.595\%, resultando en asignaciones de 9 y 4 bancas respectivamente \cita{balinski1982fair}.
+
+El motivo por el cual se produjo esta paradoja está vinculado a que, a pesar de que el crecimiento de Virginia respecto a Maine
+era mayor, como ambos estados tenían tasas de crecimiento que no llegaban a alcanzar la tasa de crecimiento del país, naturalmente
+perderían bancas. Por ser Virginia un estado más grande, la diferencia entre su tasa de crecimiento y la tasa de crecimiento nacional
+representaba, en términos absolutos, una cantidad más grande, que repercutió provocando que Virginia quede detrás de Maine en
+términos de restos.
+
+%-------------------------------------------------------------------
+\subsection{Reflexiones acerca de los métodos típicos}
+Recorriendo los ejemplos de métodos enunciados anteriormente vemos que la variedad de enfoques que se puede utilizar
+para encarar la resolución de este problema es amplia, y no hay ninguna forma que resulte 
+evidentemente más "justa" que las otras. Asimismo, la existencia de estas paradojas genera la sensación de que 
+es necesario buscar métodos nuevos que puedan evitarlas sistemáticamente.
+La pregunta es ¿cómo definir métodos nuevos?
+Considerando las quotas, vemos que hay muchas formas según las cuales se las puede redondear 
+para obtener una asignación de bancas: redondeando hacia arriba, hacia abajo, con redondeo tradicional, etc.
+A su vez, no es trivial la forma en la que se definen las quotas. Si bien lo más intuitivo es 
+dividir la cantidad de votos/habitantes por la \textit{Hare Quota}, esto no siempre redunda en
+asignaciones satisfactorias. Estas dos observaciones nos alientan a considerar formas más generales
+de definir métodos.

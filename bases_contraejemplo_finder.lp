@@ -1,6 +1,6 @@
 \ Model contraejemplo_finder
 \ LP format - for model browsing. Use MPS format to capture full model detail.
-\ Signature: 0x48f2e18697426037
+\ Signature: 0x8bd5eb3276e07055
 Maximize
   alpha[0] + alpha[4]
 Subject To
@@ -38,22 +38,22 @@ Subject To
    - 0.5 p[2] + 0.5 p[3] + 0.5 p[4] <= 1
  feasibility_p_geq_0_row_2: p[3] >= 0
  feasibility_p_leq_1_row_2: p[3] <= 1
- feasibility_p_prime_geq_0_row_2: - alpha[3] + p[3] >= 0
- feasibility_p_prime_leq_1_row_2: - alpha[3] + p[3] <= 1
+ feasibility_p_prime_geq_0_row_2: - 0.5 alpha[0] - 0.5 alpha[1]
+   + 0.5 alpha[2] - 0.5 alpha[3] + 0.5 alpha[4] - 0.5 p[0] + 0.5 p[1]
+   - 0.5 p[2] + 0.5 p[3] + 0.5 p[4] >= 0
+ feasibility_p_prime_leq_1_row_2: - 0.5 alpha[0] - 0.5 alpha[1]
+   + 0.5 alpha[2] - 0.5 alpha[3] + 0.5 alpha[4] - 0.5 p[0] + 0.5 p[1]
+   - 0.5 p[2] + 0.5 p[3] + 0.5 p[4] <= 1
  feasibility_p_geq_0_row_3: p[4] >= 0
  feasibility_p_leq_1_row_3: p[4] <= 1
- feasibility_p_prime_geq_0_row_3: - 0.5 alpha[0] - 0.5 alpha[1]
-   + 0.5 alpha[2] + 0.5 alpha[3] + 0.5 alpha[4] - 0.5 p[0] + 0.5 p[1]
-   - 0.5 p[2] - 0.5 p[3] + 0.5 p[4] >= 0
- feasibility_p_prime_leq_1_row_3: - 0.5 alpha[0] - 0.5 alpha[1]
-   + 0.5 alpha[2] + 0.5 alpha[3] + 0.5 alpha[4] - 0.5 p[0] + 0.5 p[1]
-   - 0.5 p[2] - 0.5 p[3] + 0.5 p[4] <= 1
+ feasibility_p_prime_geq_0_row_3: - alpha[3] + p[3] >= 0
+ feasibility_p_prime_leq_1_row_3: - alpha[3] + p[3] <= 1
  feasibility_p_geq_0_row_4: - 0.5 p[0] + 0.5 p[1] + 0.5 p[2] + 0.5 p[3]
    + 0.5 p[4] >= 0
  feasibility_p_leq_1_row_4: - 0.5 p[0] + 0.5 p[1] + 0.5 p[2] + 0.5 p[3]
    + 0.5 p[4] <= 1
- feasibility_p_prime_geq_0_row_4: - alpha[2] + p[2] >= 0
- feasibility_p_prime_leq_1_row_4: - alpha[2] + p[2] <= 1
+ feasibility_p_prime_geq_0_row_4: - alpha[2] + alpha[3] + p[2] - p[3] >= 0
+ feasibility_p_prime_leq_1_row_4: - alpha[2] + alpha[3] + p[2] - p[3] <= 1
  infeasibility_p_base_1_at_least_one_violated: z_p_base_1[0]
    + z_p_base_1[1] + z_p_base_1[2] + z_p_base_1[3] + z_p_base_1[4] = 1
  infeasibility_p_prime_base_1_at_least_one_violated: z_p_prime_base_1[0]
@@ -364,16 +364,16 @@ Subject To
  infeasibility_p_prime_base_62_at_least_one_violated: z_p_prime_base_62[0]
    + z_p_prime_base_62[1] + z_p_prime_base_62[2] + z_p_prime_base_62[3]
    + z_p_prime_base_62[4] = 1
+ infeasibility_p_base_63_at_least_one_violated: z_p_base_63[0]
+   + z_p_base_63[1] + z_p_base_63[2] + z_p_base_63[3] + z_p_base_63[4] = 1
+ infeasibility_p_prime_base_63_at_least_one_violated: z_p_prime_base_63[0]
+   + z_p_prime_base_63[1] + z_p_prime_base_63[2] + z_p_prime_base_63[3]
+   + z_p_prime_base_63[4] = 1
  infeasibility_p_base_64_at_least_one_violated: z_p_base_64[0]
    + z_p_base_64[1] + z_p_base_64[2] + z_p_base_64[3] + z_p_base_64[4] = 1
  infeasibility_p_prime_base_64_at_least_one_violated: z_p_prime_base_64[0]
    + z_p_prime_base_64[1] + z_p_prime_base_64[2] + z_p_prime_base_64[3]
    + z_p_prime_base_64[4] = 1
- infeasibility_p_base_65_at_least_one_violated: z_p_base_65[0]
-   + z_p_base_65[1] + z_p_base_65[2] + z_p_base_65[3] + z_p_base_65[4] = 1
- infeasibility_p_prime_base_65_at_least_one_violated: z_p_prime_base_65[0]
-   + z_p_prime_base_65[1] + z_p_prime_base_65[2] + z_p_prime_base_65[3]
-   + z_p_prime_base_65[4] = 1
  infeasibility_p_base_66_at_least_one_violated: z_p_base_66[0]
    + z_p_base_66[1] + z_p_base_66[2] + z_p_base_66[3] + z_p_base_66[4] = 1
  infeasibility_p_prime_base_66_at_least_one_violated: z_p_prime_base_66[0]
@@ -3935,6 +3935,53 @@ Subject To
    <= 0
  infeasibility_p_prime_base_62_row_4_leq_0: 5e-06 z_p_prime_base_62[4] + [
    - alpha[2] * z_p_prime_base_62[4] + p[2] * z_p_prime_base_62[4] ] <= 0
+ infeasibility_p_base_63_row_0_leq_0: 5e-06 z_p_base_63[0] + [
+   0.5 p[0] * z_p_base_63[0] + 0.5 p[1] * z_p_base_63[0]
+   + 0.5 p[2] * z_p_base_63[0] - 0.5 p[3] * z_p_base_63[0]
+   - 0.5 p[4] * z_p_base_63[0] ] <= 0
+ infeasibility_p_base_63_row_1_leq_0: 5e-06 z_p_base_63[1] + [
+   0.5 p[0] * z_p_base_63[1] - 0.5 p[1] * z_p_base_63[1]
+   - 0.5 p[2] * z_p_base_63[1] + 0.5 p[3] * z_p_base_63[1]
+   + 0.5 p[4] * z_p_base_63[1] ] <= 0
+ infeasibility_p_base_63_row_2_leq_0: 5e-06 z_p_base_63[2] + [
+   p[3] * z_p_base_63[2] ] <= 0
+ infeasibility_p_base_63_row_3_leq_0: 5e-06 z_p_base_63[3] + [
+   - 0.5 p[0] * z_p_base_63[3] + 0.5 p[1] * z_p_base_63[3]
+   - 0.5 p[2] * z_p_base_63[3] - 0.5 p[3] * z_p_base_63[3]
+   + 0.5 p[4] * z_p_base_63[3] ] <= 0
+ infeasibility_p_base_63_row_4_leq_0: 5e-06 z_p_base_63[4] + [
+   p[2] * z_p_base_63[4] ] <= 0
+ infeasibility_p_prime_base_63_row_0_leq_0: 5e-06 z_p_prime_base_63[0] + [
+   0.5 alpha[0] * z_p_prime_base_63[0]
+   - 0.5 alpha[1] * z_p_prime_base_63[0]
+   - 0.5 alpha[2] * z_p_prime_base_63[0]
+   + 0.5 alpha[3] * z_p_prime_base_63[0]
+   - 0.5 alpha[4] * z_p_prime_base_63[0] + 0.5 p[0] * z_p_prime_base_63[0]
+   + 0.5 p[1] * z_p_prime_base_63[0] + 0.5 p[2] * z_p_prime_base_63[0]
+   - 0.5 p[3] * z_p_prime_base_63[0] - 0.5 p[4] * z_p_prime_base_63[0] ]
+   <= 0
+ infeasibility_p_prime_base_63_row_1_leq_0: 5e-06 z_p_prime_base_63[1] + [
+   0.5 alpha[0] * z_p_prime_base_63[1]
+   + 0.5 alpha[1] * z_p_prime_base_63[1]
+   + 0.5 alpha[2] * z_p_prime_base_63[1]
+   - 0.5 alpha[3] * z_p_prime_base_63[1]
+   + 0.5 alpha[4] * z_p_prime_base_63[1] + 0.5 p[0] * z_p_prime_base_63[1]
+   - 0.5 p[1] * z_p_prime_base_63[1] - 0.5 p[2] * z_p_prime_base_63[1]
+   + 0.5 p[3] * z_p_prime_base_63[1] + 0.5 p[4] * z_p_prime_base_63[1] ]
+   <= 0
+ infeasibility_p_prime_base_63_row_2_leq_0: 5e-06 z_p_prime_base_63[2] + [
+   - alpha[3] * z_p_prime_base_63[2] + p[3] * z_p_prime_base_63[2] ] <= 0
+ infeasibility_p_prime_base_63_row_3_leq_0: 5e-06 z_p_prime_base_63[3] + [
+   - 0.5 alpha[0] * z_p_prime_base_63[3]
+   - 0.5 alpha[1] * z_p_prime_base_63[3]
+   + 0.5 alpha[2] * z_p_prime_base_63[3]
+   + 0.5 alpha[3] * z_p_prime_base_63[3]
+   + 0.5 alpha[4] * z_p_prime_base_63[3] - 0.5 p[0] * z_p_prime_base_63[3]
+   + 0.5 p[1] * z_p_prime_base_63[3] - 0.5 p[2] * z_p_prime_base_63[3]
+   - 0.5 p[3] * z_p_prime_base_63[3] + 0.5 p[4] * z_p_prime_base_63[3] ]
+   <= 0
+ infeasibility_p_prime_base_63_row_4_leq_0: 5e-06 z_p_prime_base_63[4] + [
+   - alpha[2] * z_p_prime_base_63[4] + p[2] * z_p_prime_base_63[4] ] <= 0
  infeasibility_p_base_64_row_0_leq_0: 5e-06 z_p_base_64[0] + [
    0.5 p[0] * z_p_base_64[0] + 0.5 p[1] * z_p_base_64[0]
    + 0.5 p[2] * z_p_base_64[0] - 0.5 p[3] * z_p_base_64[0]
@@ -4000,54 +4047,6 @@ Subject To
    + 0.5 p[1] * z_p_prime_base_64[4] + 0.5 p[2] * z_p_prime_base_64[4]
    - 0.5 p[3] * z_p_prime_base_64[4] + 0.5 p[4] * z_p_prime_base_64[4] ]
    <= 0
- infeasibility_p_base_65_row_0_leq_0: 5e-06 z_p_base_65[0] + [
-   0.5 p[0] * z_p_base_65[0] + 0.5 p[1] * z_p_base_65[0]
-   + 0.5 p[2] * z_p_base_65[0] - 0.5 p[3] * z_p_base_65[0]
-   - 0.5 p[4] * z_p_base_65[0] ] <= 0
- infeasibility_p_base_65_row_1_leq_0: 5e-06 z_p_base_65[1] + [
-   0.5 p[0] * z_p_base_65[1] - 0.5 p[1] * z_p_base_65[1]
-   - 0.5 p[2] * z_p_base_65[1] + 0.5 p[3] * z_p_base_65[1]
-   + 0.5 p[4] * z_p_base_65[1] ] <= 0
- infeasibility_p_base_65_row_2_leq_0: 5e-06 z_p_base_65[2] + [
-   - 0.5 p[0] * z_p_base_65[2] + 0.5 p[1] * z_p_base_65[2]
-   - 0.5 p[2] * z_p_base_65[2] + 0.5 p[3] * z_p_base_65[2]
-   + 0.5 p[4] * z_p_base_65[2] ] <= 0
- infeasibility_p_base_65_row_3_leq_0: 5e-06 z_p_base_65[3] + [
-   p[3] * z_p_base_65[3] ] <= 0
- infeasibility_p_base_65_row_4_leq_0: 5e-06 z_p_base_65[4] + [
-   p[2] * z_p_base_65[4] - p[3] * z_p_base_65[4] ] <= 0
- infeasibility_p_prime_base_65_row_0_leq_0: 5e-06 z_p_prime_base_65[0] + [
-   0.5 alpha[0] * z_p_prime_base_65[0]
-   - 0.5 alpha[1] * z_p_prime_base_65[0]
-   - 0.5 alpha[2] * z_p_prime_base_65[0]
-   + 0.5 alpha[3] * z_p_prime_base_65[0]
-   - 0.5 alpha[4] * z_p_prime_base_65[0] + 0.5 p[0] * z_p_prime_base_65[0]
-   + 0.5 p[1] * z_p_prime_base_65[0] + 0.5 p[2] * z_p_prime_base_65[0]
-   - 0.5 p[3] * z_p_prime_base_65[0] - 0.5 p[4] * z_p_prime_base_65[0] ]
-   <= 0
- infeasibility_p_prime_base_65_row_1_leq_0: 5e-06 z_p_prime_base_65[1] + [
-   0.5 alpha[0] * z_p_prime_base_65[1]
-   + 0.5 alpha[1] * z_p_prime_base_65[1]
-   + 0.5 alpha[2] * z_p_prime_base_65[1]
-   - 0.5 alpha[3] * z_p_prime_base_65[1]
-   + 0.5 alpha[4] * z_p_prime_base_65[1] + 0.5 p[0] * z_p_prime_base_65[1]
-   - 0.5 p[1] * z_p_prime_base_65[1] - 0.5 p[2] * z_p_prime_base_65[1]
-   + 0.5 p[3] * z_p_prime_base_65[1] + 0.5 p[4] * z_p_prime_base_65[1] ]
-   <= 0
- infeasibility_p_prime_base_65_row_2_leq_0: 5e-06 z_p_prime_base_65[2] + [
-   - 0.5 alpha[0] * z_p_prime_base_65[2]
-   - 0.5 alpha[1] * z_p_prime_base_65[2]
-   + 0.5 alpha[2] * z_p_prime_base_65[2]
-   - 0.5 alpha[3] * z_p_prime_base_65[2]
-   + 0.5 alpha[4] * z_p_prime_base_65[2] - 0.5 p[0] * z_p_prime_base_65[2]
-   + 0.5 p[1] * z_p_prime_base_65[2] - 0.5 p[2] * z_p_prime_base_65[2]
-   + 0.5 p[3] * z_p_prime_base_65[2] + 0.5 p[4] * z_p_prime_base_65[2] ]
-   <= 0
- infeasibility_p_prime_base_65_row_3_leq_0: 5e-06 z_p_prime_base_65[3] + [
-   - alpha[3] * z_p_prime_base_65[3] + p[3] * z_p_prime_base_65[3] ] <= 0
- infeasibility_p_prime_base_65_row_4_leq_0: 5e-06 z_p_prime_base_65[4] + [
-   - alpha[2] * z_p_prime_base_65[4] + alpha[3] * z_p_prime_base_65[4]
-   + p[2] * z_p_prime_base_65[4] - p[3] * z_p_prime_base_65[4] ] <= 0
  infeasibility_p_base_66_row_0_leq_0: 5e-06 z_p_base_66[0] + [
    0.5 p[0] * z_p_base_66[0] + 0.5 p[1] * z_p_base_66[0]
    - 0.5 p[2] * z_p_base_66[0] + 0.5 p[3] * z_p_base_66[0]
@@ -8818,13 +8817,13 @@ Subject To
    - 0.5 p[2] * z_p_base_B_prime[1] + 0.5 p[3] * z_p_base_B_prime[1]
    + 0.5 p[4] * z_p_base_B_prime[1] ] <= 0
  infeasibility_p_base_B_prime_row_2_leq_0: 5e-06 z_p_base_B_prime[2] + [
-   p[3] * z_p_base_B_prime[2] ] <= 0
+   - 0.5 p[0] * z_p_base_B_prime[2] + 0.5 p[1] * z_p_base_B_prime[2]
+   - 0.5 p[2] * z_p_base_B_prime[2] + 0.5 p[3] * z_p_base_B_prime[2]
+   + 0.5 p[4] * z_p_base_B_prime[2] ] <= 0
  infeasibility_p_base_B_prime_row_3_leq_0: 5e-06 z_p_base_B_prime[3] + [
-   - 0.5 p[0] * z_p_base_B_prime[3] + 0.5 p[1] * z_p_base_B_prime[3]
-   - 0.5 p[2] * z_p_base_B_prime[3] - 0.5 p[3] * z_p_base_B_prime[3]
-   + 0.5 p[4] * z_p_base_B_prime[3] ] <= 0
+   p[3] * z_p_base_B_prime[3] ] <= 0
  infeasibility_p_base_B_prime_row_4_leq_0: 5e-06 z_p_base_B_prime[4] + [
-   p[2] * z_p_base_B_prime[4] ] <= 0
+   p[2] * z_p_base_B_prime[4] - p[3] * z_p_base_B_prime[4] ] <= 0
  infeasibility_p_prime_base_B_row_0_leq_0: 5e-06 z_p_prime_base_B[0] + [
    0.5 alpha[0] * z_p_prime_base_B[0] - 0.5 alpha[1] * z_p_prime_base_B[0]
    + 0.5 alpha[2] * z_p_prime_base_B[0]
@@ -9031,12 +9030,12 @@ Binaries
  z_p_prime_base_61[3] z_p_prime_base_61[4] z_p_base_62[0] z_p_base_62[1]
  z_p_base_62[2] z_p_base_62[3] z_p_base_62[4] z_p_prime_base_62[0]
  z_p_prime_base_62[1] z_p_prime_base_62[2] z_p_prime_base_62[3]
- z_p_prime_base_62[4] z_p_base_64[0] z_p_base_64[1] z_p_base_64[2]
- z_p_base_64[3] z_p_base_64[4] z_p_prime_base_64[0] z_p_prime_base_64[1]
- z_p_prime_base_64[2] z_p_prime_base_64[3] z_p_prime_base_64[4]
- z_p_base_65[0] z_p_base_65[1] z_p_base_65[2] z_p_base_65[3] z_p_base_65[4]
- z_p_prime_base_65[0] z_p_prime_base_65[1] z_p_prime_base_65[2]
- z_p_prime_base_65[3] z_p_prime_base_65[4] z_p_base_66[0] z_p_base_66[1]
+ z_p_prime_base_62[4] z_p_base_63[0] z_p_base_63[1] z_p_base_63[2]
+ z_p_base_63[3] z_p_base_63[4] z_p_prime_base_63[0] z_p_prime_base_63[1]
+ z_p_prime_base_63[2] z_p_prime_base_63[3] z_p_prime_base_63[4]
+ z_p_base_64[0] z_p_base_64[1] z_p_base_64[2] z_p_base_64[3] z_p_base_64[4]
+ z_p_prime_base_64[0] z_p_prime_base_64[1] z_p_prime_base_64[2]
+ z_p_prime_base_64[3] z_p_prime_base_64[4] z_p_base_66[0] z_p_base_66[1]
  z_p_base_66[2] z_p_base_66[3] z_p_base_66[4] z_p_prime_base_66[0]
  z_p_prime_base_66[1] z_p_prime_base_66[2] z_p_prime_base_66[3]
  z_p_prime_base_66[4] z_p_base_67[0] z_p_base_67[1] z_p_base_67[2]

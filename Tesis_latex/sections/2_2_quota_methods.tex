@@ -1,0 +1,98 @@
+\section{Métodos de quota}
+
+"In a way quota methods may be viewed as procedures complementary to
+divisor methods. Divisor methods fix the rounding rule and adjust the divisor. Quota
+methods fix the divisor and adjust the rounding rule." \cita{pukkelsheim2017}
+
+Los métodos de quota se caracterizan por tener un divisor $Q > 0$ prefijado (típicamente la \textit{Hare-Quota}),
+elegido por tener alguna característica persuasiva. Posteriormente, lo que se modifica es la regla de redondeo utilizada
+para ajustar los cocientes resultantes al dividir los votos por $Q$.
+
+Estos métodos constan de dos etapas:
+
+\begin{itemize}
+    \item En primer lugar se dividen las cantidades de votos de cada partido por el divisor prefijado $Q$, 
+    y se asigna a cada partido la parte entera de su respectivo cociente, denominado \textit{quota inferior}: 
+    $\lfloor \frac{v_i}{Q} \rfloor =\vcentcolon y_i$. De esta forma, se asignan $m \vcentcolon= y_+ = \sum_{i=1}^{n}{y_i}$ bancas.
+    Cabe aclarar que el divisor $Q$ elegido debe ser tal que en esta primera etapa no se asignen más bancas de las que hay, $m \leq H$, 
+    y que no falte asignar más de una banca por partido, $H - m \leq n$.
+    
+    \item Dado que en la primera etapa se asignaron $m$ bancas, resta asignar
+    $H - m \in \{ 0, \dots , n \}$ bancas. Para esto, se establece un ordenamiento de los partidos de acuerdo a algún criterio que depende de
+    los restos $\frac{v_i}{Q} - \lfloor \frac{v_i}{Q} \rfloor$, y se asignan las bancas restantes a los primeros $H-m$ partidos de este ordenamiento.
+\end{itemize}
+
+El método de quota más típico es el de Hamilton, enunciado en la sección 1.3, que utiliza como divisor $Q$ la \textit{Hare-Quota} $HQ(\vec{v}, H)$ 
+definida anteriormente. Asigna las partes enteras de los cocientes resultantes, y luego simplemente ordena decrecientemente los restos 
+$\frac{v_i}{Q} - \lfloor \frac{v_i}{Q} \rfloor$, asignando las $H-m$ bancas restantes a los $H-m$ partidos que tengan los restos más grandes.
+
+Existe la posibilidad de que este método no entre en la segunda etapa de los métodos de quota. Para que ocurra esto, la primera etapa debe asignar
+todas las bancas disponibles, lo cual sucede únicamente si los restos resultantes luego de la primera asignación son todos 0, ie 
+$\lfloor \frac{v_i}{Q} \rfloor = \frac{v_i}{Q} \ \forall i \in [n]$. Esta última condición dice que las cantidades de votos de los partidos deben
+ser todas múltiplos enteros de la \textit{Hare-Quota}, lo cual es sumamente improbable.
+
+\subsection{Métodos shift-quota}
+
+Los métodos shift-quota surgen a partir de pensar en que utilizando un divisor $d$ distinto de $HQ(\vec{v}, H)$ se puede llegar a 
+un método de quota con mejores propiedades que el de Hamilton.
+Se define la shift-quota con shift $s \in [-1; 1)$ como el divisor
+\[
+    d = Q(s) \vcentcolon= \frac{v_+}{H + s}
+\]
+
+La utilidad de usar shifts $s \in [-1; 1)$ tiene que ver con buscar que, al utilizar la shift-quota y luego ajustar los residuos
+con el criterio de "residuos más grandes", el método resultante sea válido. 
+
+En efecto, la asignación de la primera etapa otorga 
+$y_j = \lfloor \frac{v_j}{Q(s)} \rfloor = \lfloor \frac{v_j}{v_+} \cdot (H+s) \rfloor$ bancas al partido $j \in [n]$. De esta forma,
+
+\begin{align*}
+    y_+ &= \sum_{i=1}^{n}{\lfloor \frac{v_j}{v_+} \cdot (H+s) \rfloor} \\
+        &\leq \sum_{i=1}^{n}{\frac{v_j}{v_+} \cdot (H+s)} \\
+        &= H + s \\
+        &< H + 1 \quad \text{pues s < 1}
+\end{align*}
+
+y por la integralidad de $y_+$ resulta $y_+ \leq H$.
+
+Para la cota inferior, 
+\begin{align*}
+    y_+ &> \sum_{i=1}^{n}{\left[ \frac{v_j}{v_+} \cdot (H+s) - 1 \right]} \\
+        &= (H + s) - n \\
+        &\geq H - n - 1 \quad \text{pues s } \geq -1
+\end{align*}
+
+
+\begin{proposition}
+    (\textbf{Desigualdad max-min para métodos shift-quota})
+    Consideremos un método shift-quota con ajuste por residuos más grandes y 
+    shift $s \in [-1; 1)$ $A_s(\cdot, H)$. Entonces un vector de asignaciones
+    $x \in \mathbb{N}^{n}_0(H) \in A_s(\vec{v}, H)$ si y solo si
+    \[
+        \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \leq \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right)
+    \]
+\end{proposition}
+
+Esta desigualdad permite definir el intervalo de \textit{splits}
+
+\[
+    R(\vec{v}, x) \vcentcolon= \left[  \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \ ; \ \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right) \right]
+\]
+
+Este intervalo tiene los valores $r \in [0;1]$ que sirven como umbral, al considerar los restos,
+para separar las partes fraccionarias de los partidos que reciben bancas extra
+de los que no.
+
+
+\begin{corollary}
+    (\textbf{Métodos shift-quota y métodos de divisor estacionarios})
+    Llamemos \textit{shQgrR}$_s$ al método shift-quota con shift $s \in [-1; 1)$
+    y ajuste por residuos más grandes. Para todo $H \in \mathbb{N}$ y 
+    $\vec{v} \in (0; \infty)^n$ existe $r^{*} \in [0;1]$ -- dependiente de 
+    $s, H \text{ y } \vec{v}$ -- tal que \textit{shQgrR}$_s$ y el método de 
+    divisor con regla de redondeo estacionario de parámetro $r^{*}$ tienen
+    el mismo conjunto de asignaciones,
+    \[
+        shQgrR_s(\vec{v}, H) = DivSta_{r^{*}}(\vec{v}, H)
+    \]  
+\end{corollary}

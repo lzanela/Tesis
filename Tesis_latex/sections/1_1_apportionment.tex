@@ -1,11 +1,39 @@
-\section{Introducción al problema de apportionment (\textit{prorateo})}
+\section{Introducción al problema de apportionment (\textit{prorrateo})}
 
-El problema de \textit{apportionment} (o \textit{prorateo} en español, pero es una palabra un poco
+El problema de \textit{apportionment} (o \textit{prorrateo} en español, pero es una palabra un poco
 fea así que usaremos su versión en inglés) trata sobre cómo repartir de 
-forma "justa" las bancas de un congreso o parlamento según la proporción de votos obtenidos
+forma "justa" una cantidad finita de objetos indivisibles entre los miembros de un grupo, de acuerdo
+a ciertas proporciones. Tipicamente, el intento de respetar estas proporciones provoca que las asignaciones
+ideales de objetos requieran dividirlos en partes fraccionarias, lo cual no está permitido por las condiciones
+del problema. El conflicto surge a la hora de intentar "redondear" esas partes fraccionarias de los objetos a 
+repartir, de forma tal que al final se termine asignando cantidades enteras a cada individuo, y no falten ni 
+sobren objetos por asignar. 
+
+Para ejemplificar este escenario, se puede pensar en el problema de repartir 5 cabras entre 3 hermanos de forma
+proporcional de acuerdo a sus edades.
+
+No obstante, el escenario que más ha alentado y motivado el desarrollo teórico y el estudio de este problema viene del
+mundo de la "Teoría de Elección Social" (\textit{"Social Choice"}), que se encarga, en términos generales, de estudiar cómo 
+hacer una agregación de preferencias individuales en un único perfil de preferencias colectivo. Con esta motivación, 
+en el contexto del \textit{apportionment} esta disciplina busca entender cómo repartir las bancas de un 
+congreso o parlamento según la proporción de votos obtenidos
 por distintos partidos políticos, o según la proporción de poblaciones de los distintos estados
 o provincias. La definición de qué significa que un sistema sea "justo" tendrá que ver con 
-qué tan cercano es a la proporcionalidad exacta, y la definiremos con precisión en la próxima sección.
+qué tan cercana es la asignación que provee dicho sistema a la proporcionalidad exacta, y la definiremos con precisión en la próxima sección.
+
+CITA DE QUE EL CONGRESO ES UNA REPRESENTACIÓN DE LA SOCIEDAD EN PEQUEÑA ESCALA.
+
+Las formas y metodologías de encarar la resolución de esta problemática han ido variando en gran medida a lo largo de la 
+historia. Algunas preguntas orientadoras a la hora de pensar distintos esquemas bajo los cuales intentar resolver el 
+problema pueden ser:
+
+\begin{itemize}[itemsep=0.6em]
+    \item ¿Debe estar fijada de antemano la cantidad de bancas?
+
+    \item ¿Debe estar fijada de antemano la cantidad de individuos representados por cada miembro del parlamento?
+
+    \item ¿Se debe intentar encontrar un sistema que optimice alguna métrica como la cantidad de gente no representada?
+\end{itemize}
 
 A un nivel un poco más general, el problema consiste en repartir cierta cantidad predeterminada de objetos discretos, indivisibles,
 entre ciertos agentes de acuerdo a proporciones de correspondencia dadas: a cada agente $i$ le corresponde una proporción 
@@ -23,9 +51,9 @@ Más allá de la definición que se brinde
 del término \textit{justicia} - siempre y cuando no haya preferencia particular por ninguno de los partidos- cualquiera de los candidatos
 merecería la banca en igual proporción, y por ende cualquiera de las asignaciones sería igual de justa o injusta.
 
-Otro ejemplo, ubicado en las antípodas, sería el caso en el que la cantidad de bancas a repartir es
-exactamente igual a la cantidad de votantes: podría ser el caso de un consejo barrial, por ejemplo, en donde cada miembro tiene representatividad 
-total, como ejemplifican \cita{balinski1982fair}.
+Otro escenario pedagógico, ubicado en las antípodas, sería el caso en el que la cantidad de bancas a repartir es
+exactamente igual a la cantidad de votantes. : podría ser el caso de un consejo barrial, por ejemplo, en donde cada miembro tiene representatividad 
+total.
 
 Haremos un recorrido por la historia de este problema, enunciando su definición
 formal, los axiomas solicitados para considerar que un sistema es deseable, coherente o "justo", 
@@ -33,10 +61,11 @@ los desarrollos teóricos que se fueron produciendo alrededor de esto (principal
 Pukhelsheim \cita{balinski1980theory}, \cita{balinski1982fair}, \cita{pukkelsheim2017}). Enunciaremos la definición de los llamados "\textit{métodos de divisor}", junto 
 con sus propiedades fundamentales, para luego enunciar y demostrar el teorema de imposibilidad de Balinski-Young.
 Esto nos servirá como motivación para definir métodos aleatorizados junto con sus respectivos axiomas deseables. 
-Atravesaremos algunos ejemplos de métodos aleatorizados,
+Atravesaremos algunos ejemplos de métodos aleatorizados, analizaremos sus características y propiedades,
+presentando el trabajo de \cita{correa2024monotonerandomizedapportionment}.
 
-Si los métodos aleatorizados son factibles de ser usados en escenarios electorales reales es una 
-inquietud que queda para el lector.
+Si los métodos aleatorizados son factibles de ser usados o no en escenarios electorales reales, es una 
+cuestión/inquietud que queda para el lector.
 
 %Another category of methods may appeal to the gambling man. As one example, 
 %construct a roulette wheel divided into fifty slots, one for each state, the 

@@ -1,0 +1,114 @@
+\section{Introducción a métodos aleatorizados}
+
+A grandes rasgos, se puede definir a los métodos de \textit{apportionment} aleatorizados de la siguiente forma general:
+
+\begin{definition} Un método de \textit{apportionment} aleatorizado $A$ es una función que toma un 
+    vector de votos $\vec{v} \in \mathbb{R}_{>0}^n$ y una cantidad de bancas $H \in \mathbb{N}$ y retorna un vector aleatorio $A(\vec{v}, H) \in \mathbb{N}^n$ que suma $H$, 
+    e indica la cantidad de bancas asignadas a cada partido.
+\end{definition}
+
+Dado que nos interesará particularmente buscar métodos que satisfagan la propiedad quota, 
+consideraremos una familia específica de métodos aleatorizados: los \textit{quota-compliant}. 
+Para definirlos, consideramos un escenario análogo al del comienzo: $n \in \mathbb{N}$ partidos,
+$H \in \mathbb{N}$ bancas,
+$\vec{v} \in \mathbb{R}_{>0}^{n}$ vector de votos y 
+$\vec{q} \in (0, H]^n$ vector de quotas (calculado a partir de la \textit{Hare-Quota}, con $q_i = \frac{v_i}{HQ(\vec{v}, H)}$). 
+Introducimos ahora 
+
+\begin{itemize}
+\item $\vec{p} = (p_1, \dots, p_n)$ vector de restos, con $p_i = q_i - \lfloor q_i \rfloor$.
+Observamos que $ 0 \leq p_i < 1 \ \forall \ 1 \leq i \leq n$
+\item Para un conjunto $S$ y $k \in \mathbb{N}$, definimos $ \binom{S}{k} := \{ T \subseteq S \ / \ |T| = k \}$
+\end{itemize}
+
+Los métodos aleatorizados \textit{quota-compliant} serán aquellos que asignen, en primer lugar, $\lfloor q_i \rfloor$ bancas 
+a cada partido $i \in [n]$ (al igual que los métodos de quota), y luego utilicen los restos 
+$p_i \in [0, 1)$ como probablilidades de asignación (los llamaremos también probabilidades marginales) para determinar a 
+qué partidos asignarles las bancas remanentes.
+
+Como en la primera etapa se asignan $\sum_{i=1}^{n}{\lfloor q_i \rfloor}$ bancas, denominamos 
+$$k = \sum_{i = 1}^{n}{p_i} = H - \sum_{i=1}^{n}{\lfloor q_i \rfloor} \in {0, \dots, n-1}$$ 
+a la cantidad de bancas pendientes de ser repartidas. 
+De esta forma, los métodos aleatorizados \textit{quota-compliant} buscarán elegir de forma aleatoria
+un conjunto $S \in \binom{[n]}{k}$ de los partidos a los que se les asignarán las bancas remanentes. Esta elección deberá
+respetar, de alguna forma, las probabilidades $p_i$. El primer requisito con el cual impondremos la condición de que se
+respeten estas probabilidades es una condición definida por Grimmet en \cita{Grimmett01042004}:
+la \textit{proporcionalidad Ex-Ante}, que establece que la cantidad esperada de bancas que recibe un partido debe ser $q_i$.
+
+Consideraremos las funciones de redondeo aleatorizado que definiremos
+a continuación, introduciendo primero la siguiente definición para simplificar notación:
+
+\begin{definition}
+    (\textbf{Simplex de probabilidades})
+
+    Sean $n \in \mathbb{N}$, $k \in \mathbb{N}_{\leq n}$.
+    El \textit{simplex de probabilidades} $n-$dimensional es
+
+    \[
+        \Omega_n \vcentcolon= \left\{ \vec{w} \in [0;1)^n : w_+ = 1 \right\}
+    \]
+    
+    Su reescalamiento por $k$ es
+
+    \[
+        \Omega_{n}^{k} \vcentcolon= \left\{ \vec{w} \in (0;1)^n : w_+ = k \right\}
+    \]
+\end{definition}
+
+Con esta notación, los vectores de restos $\vec{p}$ que consideraremos serán los pertenecientes al simplex de probabilidades reescalado 
+$\Omega_{n}^{k}$.
+
+\begin{definition}
+    Una regla de \textit{redondeo} aleatorio $r$ es una función que toma un vector de residuos $\vec{p} \in \Omega_{n}^{k}$, 
+    y le asigna un conjunto aleatorio $r(\vec{p}) \in \binom{[n]}{k}$
+    que representa el conjunto de los $k$ partidos seleccionados. Además, la probabilidad de que el partido $i$ esté 
+    en el conjunto seleccionado $r(\vec{p})$ debe ser igual a $p_i \ \forall \ i \in [n]$.         
+\end{definition}
+
+\noindent Una manera de reformular el problema es pensar en buscar $X_i \in \{ 0,1 \} \ / \ \sum_{i=1}^{n}{X_i} = K \ \wedge \ \mathbb{E}[X_i] = p_i$. 
+La distribución del vector $X = (X_1, \dots, X_n)$ estará dada por algún algoritmo aleatorizado, es decir, $r(\vec{p}) = \{ i \in [n]: X_i = 1 \}$. 
+para algún método $r$.
+
+Existe una correspondencia biunívoca entre métodos de \textit{apportionment} \textit{quota-compliant} y proporcionales \textit{ex-ante}
+y reglas de redondeo aleatorio: en efecto, dado $\vec{p} \in \Omega_n^k$, un método $a$ asignará un vector $a(\vec{p}, k) \in \{0,1\}^n$ que
+suma $k$ (por ser \textit{quota-compliant} las coordenadas del vector están en $\{0,1\}$)
+que se puede interpretar como el subconjunto de $k$ elementos seleccionados de entre $\{1, \dots, n\}$. Por ser \textit{ex-ante}, 
+se verifica la condición de las probabilidades marginales: $\mathbb{E}[a(\vec{p},k)_i] = p_i$.
+De igual forma, dado un vector de votos $\vec{v}$ y una cantidad de bancas $H \in \mathbb{N}$, siguiendo la idea enunciada
+anteriormente, se puede asignar inicialmente $\lfloor q_i \rfloor$ bancas a cada partido $i \in [n]$, y luego utilizar un método 
+de redondeo $r$ para asignar las $k$ bancas restantes de acuerdo al vector de restos $\vec{p}$. De esta forma, el método
+de \textit{apportionment} resultante verifica \textit{quota} y \textit{ex-ante}. 
+
+Esta correspondencia permite conectar al problema de \textit{apportionment} con un problema propio del
+mundo de la matemática estadística, conocido como $\pi ps$ (\textit{"probability proportional to size"})
+sampling sin reposición, de donde \cita{correa2024monotonerandomizedapportionment} extrae algunos 
+métodos para analizar. Esencialmente, este área trata el mismo problema que intentamos abarcar ahora:
+samplear un conjunto $S \in \binom{[n]}{k}$ respetando las probabilidades marginales dadas por $p_i$.
+
+\subsection{Propiedades fundamentales para métodos aleatorizados}
+
+\begin{definition}
+(\textbf{Proporcionalidad Ex-ante})
+Reformulamos esta propiedad para métodos de \textit{redondeo}:
+
+Una regla de \textit{redondeo} $r$ se dice \textit{proporcional \textbf{Ex-ante}} si $\forall \vec{p} \in \Omega_n^k$, 
+se tiene que $\mathbb{E}[\mathbbm{1}_{\{ i \in r(\vec{p})\}}] = p_i \ \forall \ i \in [n]$. Es decir, la cantidad esperada de bancas 
+extra asignadas a cada partido se corresponde con su resto $p_i$.
+\end{definition}
+
+
+\begin{definition}
+(\textbf{Monotonía de selección})
+
+Una regla de \textit{redondeo} $r$ verifica la propiedad de \textit{\textbf{monotonía de selección}} si dados $T \in \binom{[n]}{k}$ un conjunto de $k$ partidos, y $\ p,p' \in [0,1)^{n}$ dos vectores de residuos que suman $k$ tales que $p_i' \geq p_i \ \forall i \in T \ \wedge \ p_i' \leq p_i \ \forall i \notin T$,
+se tiene que 
+$$ \mathbb{P}_{S \sim r(\vec{p'})}[S=T] \geq \mathbb{P}_{S \sim r(\vec{p})}[S=T] $$
+\end{definition}
+
+
+\begin{definition}
+(\textbf{Monotonía fuerte de selección})
+
+Una regla de \textit{redondeo} $r$ verifica la propiedad de \textit{\textbf{monotonía de selección}} si dados $T \subseteq [n]$ tal que $|T| \leq k$, y $\ p,p' \in [0,1)^{n}$ dos vectores de residuos que suman $k$ tales que $p_i' \geq p_i \ \forall i \in T \ \wedge \ p_i' \leq p_i \ \forall i \notin T$. Entonces
+$$ \mathbb{P}_{S \sim r(\vec{p'})}[T \subseteq S] \geq \mathbb{P}_{S \sim r(\vec{p})}[T \subseteq S] $$
+\end{definition}

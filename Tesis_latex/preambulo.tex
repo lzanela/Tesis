@@ -2,17 +2,36 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish,es-noquoting,es-noshorthands]{babel}
+\usepackage{stmaryrd}
 
+% Notación para algoritmos
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\renewcommand{\algorithmcfname}{Algoritmo}           % Caption "Algorithm"
+\renewcommand{\listalgorithmcfname}{Lista de Algoritmos} % "List of Algorithms"
+\SetKwInput{KwReturn}{Retornar}   % instead of "Return"
+\SetKwIF{If}{ElseIf}{Else}{Si}{entonces}{Sino si}{Sino}{fin}
+\SetKwFor{For}{Para}{hacer}{fin}
+\SetKwFor{While}{Mientras}{hacer}{fin}
+\SetKwInput{KwData}{Datos}
+\SetKwInput{KwResult}{Resultado}
+\SetKwInput{KwInput}{Entrada}
+\SetKwInput{KwOutput}{Salida}
 
 % Matemática
 \usepackage{amsmath, amssymb, amsthm, mathtools}
+\usepackage{bbm}
+\usepackage{relsize}
 
-% Gráficos e imágenes
+% Gráficos, imágenes e ilustraciones
 \usepackage{graphicx}
+\usepackage{tikz}
 \graphicspath{{imagenes/}}
+\usetikzlibrary{decorations.pathreplacing,positioning}
+\usepackage{placeins}
 
 % Nombres en español
-\addto\captionsspanish{\renewcommand{\proofname}{Prueba}}
+\addto\captionsspanish{\renewcommand{\proofname}{\textbf{Prueba:}}}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}
 
 % Estilo de teoremas (numerados por capítulo; cambia [chapter] por [section] si prefieres)
 \theoremstyle{plain}
@@ -28,11 +47,14 @@
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Observación}
 
+% --- Anexo ---
+\renewcommand{\appendixname}{Anexo}
+
 % --- Datos de la portada ---
-\newcommand{\TituloTesis}{TITULO DE LA TESIS}
+\newcommand{\TituloTesis}{Una aproximación al problema de \textit{apportionment}: métodos aleatorizados}
 \newcommand{\AutorTesis}{Luca Zanela}
 \newcommand{\DirectorTesis}{José Correa Haeussler}
-\newcommand{\FechaTesis}{Fecha de presentación: 20 de diciembre de 2025}
+\newcommand{\FechaTesis}{Fecha de presentación: 19 de diciembre de 2025}
 
 % Tablas
 \usepackage{booktabs}
@@ -40,7 +62,20 @@
 \usepackage{multirow}
 
 % Hipervínculos
-\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}     % permite definir colores
+\definecolor{azulPetroleo}{RGB}{40,80,120}
+\definecolor{verdeGrisaceo}{RGB}{30,100,90}
+\definecolor{azulAcero}{RGB}{50,90,150}
+\definecolor{rojoOscuro}{RGB}{170,60,40}
+\newcommand{\chgpos}[1]{\textcolor{green!40!black}{(#1)}}
+\newcommand{\chgneg}[1]{\textcolor{red!70!black}{(#1)}}
+
+\usepackage[
+    colorlinks=true,
+    linkcolor=azulPetroleo,
+    citecolor=verdeGrisaceo,
+    urlcolor=azulAcero
+]{hyperref}
 
 % Márgenes
 \usepackage{geometry}

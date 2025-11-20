@@ -1,0 +1,206 @@
+\section{Resultados}
+
+% ----------------
+\subsection{Idea de distribución con orden lexicográfico sobre subconjuntos de cardinal k}
+
+Pensando en el problema de optimización de medidas, se podría poner como función objetivo una función que, dados los partidos ordenados decrecientemente por remainders, le asigne mayor peso a los subconjuntos de k elementos que aparecen antes en orden lexicográfico.
+Es decir, dados $\{A_1, \dots, A_{\binom{n}{k}} \}$ ordenados lexicográficamente, buscamos $\mu$ solución de:
+\[
+\begin{aligned}
+\max\limits_{\mu} \sum_{j=1}^{\binom{n}{k}}{2^{\binom{n}{k} - j + 1} \mu(A_j)}\ & & \\
+\text{s.a.}\
+\left\{
+\begin{aligned}
+\sum_{B \in \binom{[n]}{k}}{\mu(B)} = 1 & &\\
+\sum_{\substack{B \in \binom{[n]}{k} \\ B \ \ni \ i}}{\mu(B)} = p_i & \quad \forall i \in [n] &
+\end{aligned}
+\right.
+\end{aligned}
+\]
+
+Este método no satisface \textit{monotonía de selección}. Basta ver el siguiente contraejemplo para $n = 5$ y $k = 2$:
+
+\[
+\begin{aligned}
+p  &= (0.5, 0.5, 0.5, 0.25, 0.25)\\
+p' &= (0.5, 0.25, 0.5, 0.25, 0.5)
+\end{aligned}
+\]
+
+En este escenario, la distribución por orden lexicográfico para $p$ asigna probabilidades dadas por:
+
+\[
+\begin{aligned}
+\mathbb{P}_p(S=\{1,2\})  &= 0.5\\
+\mathbb{P}_p(S=\{3,4\})  &= 0.25\\
+\mathbb{P}_p(S=\{3,5\})  &= 0.25\\
+\end{aligned}
+\]
+
+Al modificar las probabilidades marginales según $p'$, observamos que $p_5$ aumenta y $p_2$ disminuye, provocando que $p'$ tenga los mismos valores que $p$ pero desordenados. Como la probabilidad de selección de cada conjunto de partidos depende de la posición de las probabilidades de dichos partidos en el vector de probabilidades marginales. Al ordenar decrecientemente $p'$ según los residuos, los valores quedan ordenados exactamente igual que los de $p$, por lo que se le asignará probabilidad de 0 al conjunto $\{ 3, 5\}$ (puesto que en el caso de $p$ se le asignaba probabilidad 0 al conjunto de los partidos 2 y 3) si se ubica la probabilidad del partido 5 en la posición 2. Como hay empate entre los partidos correspondientes a las primeras tres coordenadas (los partidos 1, 5 y 3) con probabilidad 0.5, algo que se podría hacer es sortear aleatoriamente la forma de ordenarlos, entre todas las permutaciones posibles. En ese caso, con probabilidad 1/3 los partidos 3 y 5 quedarían en las primeras dos posiciones, y en ese caso tendrían probabilidad 0.5 de ser seleccionados (cualquier otra permutación le asignaría probabilidad 0 a dicho conjunto). En cualquier caso, la probabilidad de seleccionar al conjunto $\{ 3, 5\}$ partiendo de las probabilidades dadas por $p'$ resulta 0 ó 1/6, en ambos casos menor que 0.25, que era la probabilidad de selección de acuerdo a $p$.
+
+Una de las características principales de esta formulación es que busca encontrar una distribución como solución de un problema de optimización lineal. Sabemos que esta formulación no lleva a una solución que verifique \textit{selection monotonicity}, pero quizás esto es ocasionado por la elección de coeficientes $2^{\binom{n}{k} - j +1}$, lo que nos lleva a preguntarnos: ¿existirán coeficientes $c_i$ tales que la solución del problema de función objetivo $max \sum_{i=1}^{\binom{n}{k}}{c_i \ \mu(A_i)}$ verifique \textit{selection monotonicity}?
+
+% ----------------
+\subsection{Soluciones del problema lineal no satisfacen selection monotonicity}
+A partir del razonamiento anterior, tratamos de demostrar que ninguna distribución de probabilidad sobre los conjuntos de $\binom{[n]}{k}$ obtenida como solución de un problema lineal verifica selection monotonicity. El problema concreto es el siguiente:
+Dada una indexación $\{ A_1, \dots, A_n \}$ sobre el conjunto $\binom{[n]}{k}$, y $\vec{c}=(c_1, \dots, c_n) \in \mathbb{R}^n$ vector de coeficientes, resolver
+
+\[
+\begin{aligned}
+\max\limits_{\mu} \sum_{j=1}^{\binom{n}{k}}{c_j \ \mu(A_j)}\ & & \\
+\text{s.a.}\
+\left\{
+\begin{aligned}
+\sum_{B \in \binom{[n]}{k}}{\mu(B)} = 1 & &\\
+\sum_{\substack{B \in \binom{[n]}{k} \\ B \ \ni \ i}}{\mu(B)} = p_i & \quad \forall i \in [n] &
+\end{aligned}
+\right.
+\end{aligned}
+\]
+
+% ----------------
+\subsection{Definir medida sobre $[n]$}
+
+La idea es, en lugar de definir una medida de probabilidad sobre $\binom{[n]}{k}$, definir una medida genérica (incluso puede ser signada) sobre $[n]$. Si llamamos $\mu$ a dicha medida, y $\mu_i := \mu(i) \quad \forall i \in [n]$, se debe cumplir:
+
+\[
+\begin{aligned}
+\mu(A) &= \sum_{i \in A} \mu_i \\[4pt]
+\sum_{\substack{A \in \binom{[n]}{k} \\ i \in A}} \mu(A) &= p_i \quad \forall i \in [n]
+\end{aligned}
+\]
+
+Sumando la segunda condición sobre $i \in [n],$
+
+\[
+\begin{aligned}
+\sum_{i=1}^{n}{p_i} &= \sum_{i=1}^{n}\sum_{\substack{A \in \binom{[n]}{k} \\ i \in A}} \mu(A) \\
+k &= \sum_{i=1}^{n}\sum_{\substack{A \in \binom{[n]}{k} \\ i \in A}} \sum_{i \in A} \mu_i \\
+k &= k \sum_{A \in \binom{[n]}{k}} \sum_{i \in A} \mu_i \\
+1 &= \binom{n-1}{k-1} \sum_{i = 1}^{n} \mu_i \\
+\implies \mu([n]) &= \sum_{i = 1}^{n} \mu_i = \frac{1}{\binom{n-1}{k-1}} \\
+\end{aligned}
+\]
+
+
+
+Partiendo de esta condición y operando, vemos que
+
+\[
+\begin{aligned}
+p_i &= \sum_{\substack{A \in \binom{[n]}{k} \\ i \in A}} \mu(A) \\
+    &= \sum_{\substack{A \in \binom{[n]}{k} \\ i \in A}} \sum_{i \in A} \mu_i \\
+    &= \binom{n-1}{k-1} * \mu_i + \binom{n-2}{k-2} \sum_{\substack{j=1 \\ j \neq i}}^{n}{\mu_j} \\
+    &= \binom{n-1}{k-1} * \mu_i + \binom{n-2}{k-2} (\mu([n]) - \mu_i) \\
+    &= \mu_i * (\binom{n-1}{k-1} - \binom{n-2}{k-2}) + \binom{n-2}{k-2} * \mu([n]) \\
+    &= \mu_i * (\binom{n-1}{k-1} - \binom{n-2}{k-2}) + \binom{n-2}{k-2} * \frac{1}{\binom{n-1}{k-1}} \\
+    &= \mu_i * \frac{n-k}{n-1} \binom{n-1}{k-1} + \frac{k-1}{n-1} \\
+\implies \mu_i &= \frac{p_i - \frac{k-1}{n-1}}{\frac{n-k}{n-1} \binom{n-1}{k-1}}
+\end{aligned}
+\]
+
+
+Para que esta distribución resulte una medida (y no una medida con signo), requerimos que 
+
+\begin{equation}
+p_i \ge \frac{k-1}{n-1} \quad \forall i \in [n]
+\label{eq:pi-lb}
+\end{equation}
+
+Resulta una condición muy restrictiva. Para corroborar que igualmente la condición es posible, sumándola sobre $n$ vemos que
+
+\[
+\begin{aligned}
+    \sum_{i=1}^{n}p_i &\geq n \frac{k-1}{n-1} \\
+ \iff   k (n-1) &\geq n(k-1) \\
+ \iff   n &\geq k \quad \checkmark
+\end{aligned}
+\]
+
+Si \eqref{eq:pi-lb} no se cumpliera, $\mu$ resultaría una medida con signo en lugar de una medida. Para que su restricción a $\binom{[n]}{k}$ resulte medida, se debe verificar que 
+$$ \sum_{i \in A} \mu_i \geq 0 \quad \forall A \in \binom{[n]}{k}$$
+
+Fácilmente se puede ver que, por ejemplo, tomando $p=(\frac{1}{6}, \frac{1}{6}, \frac{5}{6}, \frac{5}{6})$, resulta $\mu(\{1,2 \}) = - \frac{1}{18} \leq 0$, y la medida resulta inútil.
+
+La ventaja que tiene esta forma de definir $\mu$ es que, al tener linealidad sobre $p_i$ (pues cada $\mu_i$ es lineal sobre $p_i$), las propiedades de \textit{selection monotonicity} y \textit{strong selection monotonicity} se verifican trivialmente.
+
+% ----------------
+\subsection{Prueba exhaustiva de factibilidad de bases para el método de programación lineal}
+
+A la hora de encontrar un contraejemplo de selection monotonicity para el método de programación lineal con $n=4$ y $k=2$, hemos visto que si la base óptima no cambia, la solución óptima verifica selection monotonicity (demostrar esto). Por lo tanto, en esencia buscamos encontrar un vector $p$ de probabilidades y un vector $\alpha$ de perturbaciones tales que, para dos bases $B_1$ y $B_2$ y cierto conjunto $S \in B_1 \cap B_2$ ($S$ es un conjunto de partidos que está en ambas bases), se verifiquen las siguientes condiciones, definiendo previamente $p' = p + \sum_{j \in S}{\alpha_j} - \sum_{j \notin S}{\alpha_j}$ y $s_1$ y $s_2$ los índices del cjto. $S$ en las bases $B_1$ y $B_2$ resp.: 
+
+\begin{align*}
+    \begin{alignedat}{3}
+        B_1^{-1} p \ge 0 
+        &\quad\wedge\quad 
+        B_2^{-1} p' \ge 0   
+        &\qquad& \text{(factibilidad)} \\[0.4em]
+        B^{-1} p \ngeq 0 \;\forall B\neq B_1 
+        &\quad\wedge\quad 
+        B^{-1} p' \ngeq 0 \;\forall B\neq B_2
+        &\qquad& \text{(infactibilidad para otras bases)} \\[0.4em]
+        \sum_{i\in[n]} p_i = k 
+        &\quad\wedge\quad 
+        \sum_{i\in[n]} p'_i = k
+        &\qquad& \text{(buena definición de $p$ y $p'$)} \\[0.4em]
+        &0 \le p_i,\, p'_i \le 1\;\forall i\in[n] 
+        &\qquad& \text{(buena definición de $p$ y $p'$)} \\[0.4em]
+        (B_1^{-1}p)_{s_1} 
+        &> (B_2^{-1}p')_{s_2}
+        &\qquad& \text{($p$ y $p'$ rompen sel. mon.)}
+    \end{alignedat}
+\end{align*}
+
+La condición de infactibilidad para otras bases establece que alguna de las coordenadas de $B^{-1} \cdot p$ debe ser negativa. Definiendo $s_i^{B} := (B^{-1} \cdot p)_i$, para una base $B \neq B_1$ requerimos:
+
+\begin{align*}
+    \bigvee_{i \in [n]} &\left( s_i^{B} < 0 \right) \\
+\iff \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B} < 0 \quad (\leq -\epsilon < 0), \quad \text{donde } y_i^B \in \{ 0, 1\}
+\end{align*}
+
+Las variables $y_i^B$ nos indican cuáles de las coordenadas $s_i^B$ verifican la condición buscada. Si el mínimo expresado arriba es efectivamente menor que 0, significa que alguna de las coordenadas $s_i^B = (B^{-1} \cdot p)_i$ es menor que 0.
+
+Ahora, como requerimos que esta condición se verifique para toda base $B \neq B_1$, debemos verificar que se cumpla la siguiente condición:
+
+\begin{align*}
+    \bigwedge_{B \neq B_1} ( \bigvee_{i \in [n]} &(s_i^{B} < 0) ) \\
+\iff \bigwedge_{B \neq B_1} ( \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B} \leq -\epsilon) \\
+\iff \underset{B \neq B_1}{max} \hspace{0.2em} ( \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B}) \leq -\epsilon
+\end{align*}
+
+Esta expresión no pareciera ser directamente representable a partir de un conjunto de restricciones lineales/cuadráticas procesables por Gurobi. Planteamos una forma alternativa de representar la condición de infactibilidad para otras bases:
+
+Para una base $B \neq B_1$, introducimos las variables $y_i^B \in \{0, 1\}, i\in [n]$, que van a funcionar como indicadoras de cuál coordenada de $B^{-1} \cdot p = s_i^B$ es la que toma un valor negativo. Introduciendo estas variables, junto con la restricción $\sum_{i\in [n]}{y_i^B}=1$ para garantizar que se active solo una variable, se tiene que:
+
+\begin{align}
+    \bigvee_{i \in [n]} & (s_i^{B} + \epsilon \leq 0) \\
+\iff (s_i^B + \epsilon ) \cdot & y_i^B \leq 0 \hspace{1.5em} \forall i \in [n]
+\end{align}
+
+De esta forma, la restricción se satisfará trivialmente para aquellos $i\in[n]$ para los cuales $y_i^B=0$, y por la restricción extra introducida, habrá un único $j \in [n]$ tal que $y_j^B=1$. Para dicho $j$, se deberá satisfacer $(s_j^{B} + \epsilon) \leq 0$.
+
+En definitiva, para cada base $B \neq B_1$ se introducirán las restricciones:
+
+\begin{align*}
+    (s_i^B + \epsilon ) \cdot y_i^B \leq 0 \hspace{1.5em} & \forall i \in [n] \\
+    \sum_{i\in [n]}{y_i^B} \geq1& \\
+    y_i^B \in \{0,1\} \hspace{1.5em} & \forall i \in [n]
+\end{align*}
+
+Algunos resultados corriendo esto en Gurobi para $n=4$ y $k=2$:
+
+
+% ----------------
+\subsection{Preguntas}
+
+\textbullet ¿Existe método de apportionment que verifique quota e incentive coaliciones? No existe. Basta tomar 5 partidos y 2 bancas, con remainders de 2/5 para todos los partidos. Si un método incentiva coaliciones, al considerar la coalición de los dos partidos que efectivamente obtienen las bancas, dicha coalición debería obtener una cantidad de bancas mayor o igual a 2 (la suma de las bancas obtenidas por cada partido). A la vez, como la suma de los remainders es 4/5 < 1, por quota, dicha coalición puede obtener a lo sumo 1 banca.\\
+\textbullet \ ¿Todos los divisor methods violan quota? Por Balinski-Young, sí. \\
+\textbullet \ Probar que \textit{Ex-ante} implica que $\forall (A,B)$ par de partidos, $$\mathbb{P}(AB \geq 1 + q_A + q_B) \geq \mathbb{P}(A + B \geq 1 + q_A + q_B)$$
+$$\mathbb{P}(AB \geq 2 + q_A + q_B) \geq \mathbb{P}(A + B \geq 2 + q_A + q_B)$$
+
+Sabemos que \textit{Ex-ante} implica $\mathbb{E}[AB] = \mathbb{E}[A] + \mathbb{E}[B]$
+
+\textbullet \ Encontrar un método que verifique \textit{Ex-ante} y \textit{quota} tal que al 
+hacer merge de dos partidos retorne una distribución de probabilidad lo más concentrada posible 
+(minimizar varianza/entropía, o quizás minimizar el soporte de la distribución, es decir, la norma $\parallel \cdot \parallel_{0} $) \\
