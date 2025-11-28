@@ -2,18 +2,18 @@
 
 Como ya hemos mencionado al comienzo de la sección anterior, la conjunción del \textit{Teorema de Coherencia} y 
 la propiedad de que los métodos de divisor no satisfacen \textit{quota} funcionan, de alguna forma, como un resultado de 
-imposibilidad: no existe método determinístico de \textit{apportionment} que sea coherente (en particular, que verifique 
-las propiedades implicadas por coherencia) y verifique la propiedad \textit{quota} simultáneamente.
+imposibilidad: no existe método determinístico de \textit{apportionment} que sea coherente y verifique la propiedad 
+\textit{quota} simultáneamente; no existe método determinístico verdaderamente satisfactorio.
 
 El término "determinístico" en la frase anterior no es en vano: esta suerte de "Teorema de imposibilidad" no
-extraer conclusiones sobre métodos aleatorizados. Si bien las propiedades deseables que enunciamos en la subsección 
+permite extraer conclusiones sobre métodos aleatorizados. Si bien las propiedades deseables que enunciamos en la subsección 
 \ref{subsec:props_deseables} no hacen referencia a métodos que contemplen algún factor de aleatoriedad, veremos 
 cómo definir formalmente esta familia de métodos, junto con propiedades análogas, para poder realizar un análisis
 sistemático de esta familia de métodos.
 No obstante, antes de analizar este universo de métodos, revisamos algunos conceptos y resultados extra sobre 
-los métodos determinísticos.
+los métodos determinísticos que pueden resultar interesantes.
 
-Uno de los conceptos interesantes que introduce \cita{pukkelsheim2017} es el de \textit{mayoración},
+Uno de los conceptos interesantes que introduce \cita{pukelsheim2017} es el de \textit{mayoración},
 que permite entender la relación entre distintos métodos de \textit{apportionment} a la hora de 
 favorecer o perjudicar a los partidos más grandes. Se basa, esencialmente, en establecer una relación
 de orden entre métodos, definiendo que un método $A$ mayora ($\succeq$) a otro método $B$ si, al 
@@ -21,15 +21,41 @@ considerar a los partidos ordenados decrecientemente por proporción de votos ($
 el método $A$ asigna un total de bancas mayor que $B$ a cualquier subconjunto $I$ de $k$ partidos más grandes
 ($I = \{ 1, \dots, k\} \ \wedge x \in A(\vec{w}, H), y \in B(\vec{w}, H) \ \implies x_1 + \dots + x_k \geq y_1 + \dots + y_k$).
 
-Otra cuestión interesante que analiza \cita{pukkelsheim2017} es cómo extender de forma coherente el método de apportionment natural para
+En relación a este concepto, se tiene la siguiente propiedad, sobre la cual daremos una intuición desarrollada por \cita{balinski1982fair}.
+
+\begin{proposition}
+    El método de \textsf{Webster - Saint-Laguë} es el único método de divisor insesgado, en el sentido de que no favorece
+    particularmente a los partidos grandes ni a los partidos chicos.
+    \begin{proof}
+        La intuición sobre esta idea es que, a priori, si los restos se distribuyen de manera uniforme,
+        la probabilidad de que el resto de un partido específico esté por encima de 
+        $\frac{1}{2}$ es igual que la probabilidad de que esté por debajo, y esto sucede para cualquier partido independientemente
+        de su tamaño. Por ende, como el método de Webster redondea hacia arriba los restos que se encuentran por encima de $\frac{1}{2}$
+        y hacia abajo los que se encuentran por debajo, cada partido debería ser beneficiado o perjudicado con la misma frecuencia,
+        sin dependencia de su tamaño.
+    \end{proof}
+\end{proposition}
+
+Otra cuestión interesante que analiza \cita{pukelsheim2017} es cómo extender de forma coherente el método de apportionment natural para
 2 partidos: utilizar redondeo estándar $\llbracket \cdot \rrbracket$ (recordamos que, en caso de que la parte fraccionaria del número a redondear fuese igual a $\frac{1}{2}$, 
 el redondeo estándar retornaba las dos opciones posibles:
 redondeo hacia arriba o hacia abajo). Es decir, si se tienen dos partidos con cantidades de votos dadas por $(v_1, v_2) \in \mathbb{R}_{> 0}$ y 
 $H$ bancas a repartir, asignarles $(x_1, x_2)$ bancas respectivamente, con 
 
 \[
-    x_1 \in \left\llbracket \frac{v_1}{v_1 + v_2} H \right\rrbracket \quad \wedge \quad x_2 \in \left\llbracket \frac{v_2}{v_1 + v_2} H \right\rrbracket
+    x_1 \in \left\llbracket \frac{v_1}{v_1 + v_2} H \right\rrbracket \quad \wedge \quad x_2 \in \left\llbracket \frac{v_2}{v_1 + v_2} H \right\rrbracket.
 \]
 
 El análisis de esta situación llega a la conclusión de que el único método que extiende esta asignación de 2 partidos en forma coherente es el método
 de divisor con redondeo estándar: el de Webster/Saint-Laguë.
+
+Otros resultados interesantes que puede valer la pena mencionar, relacionado con métricas de optimización, es el siguiente:
+
+El método de Webster es el que minimiza $\sum_{i=1}^{n} v_i \left( \frac{s_i}{w_i} - 1 \right)^2$, con $s_i$ la fracción de bancas
+y $w_i$ la fracción de votos del partido $i$. Aquí, $\frac{s_i}{w_i}$ refleja el cociente entre la proporción de bancas y la proporción de votos de
+un partido. Al restarle 1 y elevarlo al cuadrado, se calcula "cuánto se aleja" ese cociente del cociente ideal, midiendo el error cuadrático.
+Para conseguir representación igual de todos los votantes, esas cantidades se pesan por $v_i$, la cantidad de votantes del partido $i$.
+Esto es demostrado por \cita{ASENS_1910_3_27__529_0}.
+
+Hay caracterizaciones de algunos otros métodos en términos de cuál es la métrica que optimizan, pero por cuestiones de tiempo
+no serán enunciadas. Se puede revisar más contenido relacionado con esto en \cita{pukelsheim2017}.

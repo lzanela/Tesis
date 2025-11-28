@@ -1,10 +1,27 @@
-\section{Resultados}
-
 % ----------------
-\subsection{Idea de distribución con orden lexicográfico sobre subconjuntos de cardinal k}
+\section{Función objetivo lineal con pesos decrecientes por orden lexicográfico sobre subconjuntos de cardinal k}
 
-Pensando en el problema de optimización de medidas, se podría poner como función objetivo una función que, dados los partidos ordenados decrecientemente por remainders, le asigne mayor peso a los subconjuntos de k elementos que aparecen antes en orden lexicográfico.
-Es decir, dados $\{A_1, \dots, A_{\binom{n}{k}} \}$ ordenados lexicográficamente, buscamos $\mu$ solución de:
+Considerando el planteo de optimización de medidas propuesto en la sección \ref{section:optimizacion_medida}, se podría poner como función objetivo una función que, 
+dados los partidos ordenados decrecientemente por restos, le asigne mayor peso a los subconjuntos de k elementos que aparecen antes en orden lexicográfico.
+La idea de plantear esto surge de pensar en que si $A$ y $A'$ son dos subconjuntos pertenecientes a $\binom{[n]}{k}$ tales que $A$ se encuentra antes que $A'$ según 
+el orden lexicográfico, es porque los partidos que forman parte de $A$ tienen restos mayores. Por este motivo, tendría sentido buscar asignarle mayor probabilidad de 
+selección a $A$ que a $A'$, lo cual se puede intentar asignándole un peso mayor a $\mu(A)$ que a $\mu(A')$ en la función objetivo. Proponemos los coeficientes
+$c_j = 2^{\binom{n}{k} - j + 1}$.
+
+Para aclarar a qué nos referimos con el orden lexicográfico, dados dos conjuntos $A, A' \in \binom{[n]}{k}$, $A = \{ i_1, \dots, i_k \}, A' = \{ j_1, \dots, j_k \}$,
+con $i_1 \leq i_2 \leq \dots \leq i_k$ y $j_1 \leq j_2 \leq \dots \leq j_k$, decimos que $A$ antecede en orden lexicográfico a $A'$ si existe $s \in [k]$ tal que 
+$i_1 = j_1, \dots, i_{s-1} = j_{s-1}, i_{s} < j_{s}$. Indexando $\binom{[n]}{k}$ con este orden, tenemos que
+
+\begin{align}
+    A_1 &= \{ 1, \dots, k \} \nonumber\\
+    A_2 &= \{ 1, \dots, k-1, k+1\} \nonumber\\
+    A_3 &= \{ 1, \dots, k-1, k+2 \} \nonumber\\
+    \vdots \nonumber\\
+    A_{\binom{n}{k}} &= \{ n-k+1, \dots, n \}. \label{ordenamiento_lexicografico}
+\end{align}
+
+De esta forma, teniendo $\vec{p} \in \Omega_N^{k}$ y $(A_1, \dots, A_{\binom{n}{k}})$ el ordenamiento lexicográfico de $\binom{[n]}{k}$, buscamos $\mu: \binom{[n]}{k} \rightarrow [0,1]$ solución de:
+
 \[
 \begin{aligned}
 \max\limits_{\mu} \sum_{j=1}^{\binom{n}{k}}{2^{\binom{n}{k} - j + 1} \mu(A_j)}\ & & \\
@@ -18,33 +35,71 @@ Es decir, dados $\{A_1, \dots, A_{\binom{n}{k}} \}$ ordenados lexicográficament
 \end{aligned}
 \]
 
-Este método no satisface \textit{monotonía de selección}. Basta ver el siguiente contraejemplo para $n = 5$ y $k = 2$:
+Denominamos \textsf{"programa lineal con objetivo decreciente por orden lexicográfico"} a este problema de optimización lineal.
+Lamentablemente, como mostramos en la siguiente proposición, el método obtenido de esta forma no satisface \textit{monotonía de selección}. 
 
-\[
-\begin{aligned}
-p  &= (0.5, 0.5, 0.5, 0.25, 0.25)\\
-p' &= (0.5, 0.25, 0.5, 0.25, 0.5)
-\end{aligned}
-\]
+\begin{proposition}
+    El método obtenido mediante el programa lineal con objetivo decreciente por orden lexicográfico no satisface \textit{monotonía de selección}.
 
-En este escenario, la distribución por orden lexicográfico para $p$ asigna probabilidades dadas por:
+    \begin{proof}
+        
+        Basta ver el siguiente contraejemplo para $n = 4$ y $k = 2$:
 
-\[
-\begin{aligned}
-\mathbb{P}_p(S=\{1,2\})  &= 0.5\\
-\mathbb{P}_p(S=\{3,4\})  &= 0.25\\
-\mathbb{P}_p(S=\{3,5\})  &= 0.25\\
-\end{aligned}
-\]
+        \[
+        \begin{aligned}
+        p  &= (0.75, 0.75, 0.25, 0.25)\\
+        p' &= (0.75, 0.5, 0.5, 0.25)
+        \end{aligned}
+        \]
 
-Al modificar las probabilidades marginales según $p'$, observamos que $p_5$ aumenta y $p_2$ disminuye, provocando que $p'$ tenga los mismos valores que $p$ pero desordenados. Como la probabilidad de selección de cada conjunto de partidos depende de la posición de las probabilidades de dichos partidos en el vector de probabilidades marginales. Al ordenar decrecientemente $p'$ según los residuos, los valores quedan ordenados exactamente igual que los de $p$, por lo que se le asignará probabilidad de 0 al conjunto $\{ 3, 5\}$ (puesto que en el caso de $p$ se le asignaba probabilidad 0 al conjunto de los partidos 2 y 3) si se ubica la probabilidad del partido 5 en la posición 2. Como hay empate entre los partidos correspondientes a las primeras tres coordenadas (los partidos 1, 5 y 3) con probabilidad 0.5, algo que se podría hacer es sortear aleatoriamente la forma de ordenarlos, entre todas las permutaciones posibles. En ese caso, con probabilidad 1/3 los partidos 3 y 5 quedarían en las primeras dos posiciones, y en ese caso tendrían probabilidad 0.5 de ser seleccionados (cualquier otra permutación le asignaría probabilidad 0 a dicho conjunto). En cualquier caso, la probabilidad de seleccionar al conjunto $\{ 3, 5\}$ partiendo de las probabilidades dadas por $p'$ resulta 0 ó 1/6, en ambos casos menor que 0.25, que era la probabilidad de selección de acuerdo a $p$.
+        Llamando $S$ al conjunto seleccionado, en este escenario la distribución obtenido mediante el programa lineal con objetivo decreciente por orden lexicográfico
+        para $p$ asigna probabilidades dadas por:
 
-Una de las características principales de esta formulación es que busca encontrar una distribución como solución de un problema de optimización lineal. Sabemos que esta formulación no lleva a una solución que verifique \textit{selection monotonicity}, pero quizás esto es ocasionado por la elección de coeficientes $2^{\binom{n}{k} - j +1}$, lo que nos lleva a preguntarnos: ¿existirán coeficientes $c_i$ tales que la solución del problema de función objetivo $max \sum_{i=1}^{\binom{n}{k}}{c_i \ \mu(A_i)}$ verifique \textit{selection monotonicity}?
+        \[
+        \begin{aligned}
+        \mathbb{P}_p(S=\{1,2\})  &= 0.75\\
+        \mathbb{P}_p(S=\{3,4\})  &= 0.25
+        \end{aligned}
+        \]
+
+        Mientras que para $p'$ las probabilidades son:
+
+        \[
+        \begin{aligned}
+        \mathbb{P}_p'(S=\{1,2\})  &= 0.25\\
+        \mathbb{P}_p'(S=\{1,3\})  &= 0.25\\
+        \mathbb{P}_p'(S=\{1,4\})  &= 0.25\\
+        \mathbb{P}_p'(S=\{2,3\})  &= 0.25\\
+        \end{aligned}
+        \]
+
+        Observamos que no hay ambigüedad por caso de empate entre probabilidades, dado que reordenar probabilidades empatadas en los vectores $p$ o $p'$ no
+        produciría cambios en las probabilidades asignadas a los conjuntos de $\binom{[n]}{k}$.
+
+        Al modificar las probabilidades marginales según $p'$, observamos que $p_3$ aumenta y $p_2$ disminuye. En particular, tomando el conjunto 
+        $A = \{3 , 4\}$, se tiene que $p_i \leq p'_i \ \forall i \in A, p_i \geq p'_i \ \forall i \notin A$,
+        y sin embargo $0.25 = \mathbb{P}_p(S=\{3,4\}) > \mathbb{P}_p'(S=\{3,4\}) = 0$.
+    \end{proof}
+\end{proposition}
+
+Una de las características principales de esta formulación es que no solo busca encontrar una distribución sobre $\binom{[n]}{k}$ como solución de un problema 
+de optimización, sino que además el problema resulta lineal. 
+Sabemos que esta formulación no lleva a una solución que verifique \textit{selection monotonicity}, pero quizás esto es ocasionado por la elección de 
+los coeficientes $2^{\binom{n}{k} - j +1}$, lo que nos lleva a preguntarnos: ¿existirán coeficientes $c_i$ tales que la solución del problema de función 
+objetivo $max \sum_{A \in \binom{n}{k}}{c_A \cdot \mu(A)}$ verifique \textit{selection monotonicity}?
 
 % ----------------
-\subsection{Soluciones del problema lineal no satisfacen selection monotonicity}
-A partir del razonamiento anterior, tratamos de demostrar que ninguna distribución de probabilidad sobre los conjuntos de $\binom{[n]}{k}$ obtenida como solución de un problema lineal verifica selection monotonicity. El problema concreto es el siguiente:
-Dada una indexación $\{ A_1, \dots, A_n \}$ sobre el conjunto $\binom{[n]}{k}$, y $\vec{c}=(c_1, \dots, c_n) \in \mathbb{R}^n$ vector de coeficientes, resolver
+\section{Funciones objetivo lineales}
+
+A partir del razonamiento anterior, consideramos la familia de métodos construidos a partir de resolver el problema de optimización lineal que tiene
+por función objetivo la función lineal $\sum_{A \in \binom{[n]}{k}}{c_A \ \mu(A)}$, definiendo una distribución de probabilidad sobre los conjuntos de $\binom{[n]}{k}$.
+
+No obstante, basándonos en el caso anterior, donde la función objetivo busca maximizar la probabilidad de los subconjuntos por orden lexicográfico,
+conjeturamos que cualquier distribución de probabilidad sobre los conjuntos de $\binom{[n]}{k}$ obtenida de esta forma -- con algúna función objetivo lineal
+de coeficientes dados por $c \in \mathbb{R}^{\binom{n}{k}}$-- no verifica \textit{monotonía de selección}.
+
+Concretamente, el problema lineal es el siguiente:
+dada una indexación $(A_1, \dots, A_n)$ sobre el conjunto $\binom{[n]}{k}$, y $\vec{c}=(c_1, \dots, c_{\binom{n}{k}}) \in \mathbb{R}^{\binom{n}{k}}$ vector de coeficientes, resolver
 
 \[
 \begin{aligned}
@@ -52,15 +107,398 @@ Dada una indexación $\{ A_1, \dots, A_n \}$ sobre el conjunto $\binom{[n]}{k}$,
 \text{s.a.}\
 \left\{
 \begin{aligned}
-\sum_{B \in \binom{[n]}{k}}{\mu(B)} = 1 & &\\
-\sum_{\substack{B \in \binom{[n]}{k} \\ B \ \ni \ i}}{\mu(B)} = p_i & \quad \forall i \in [n] &
+\sum_{\substack{B \in \binom{[n]}{k} \\ B \ \ni \ i}}{\mu(B)} = p_i & \quad \forall i \in [n] & \\
+\mu(B) \geq 0 & \quad \forall B \in \binom{[n]}{k} & \\
 \end{aligned}
 \right.
 \end{aligned}
 \]
 
+\vspace{2em}
+
+Veamos qué condiciones se tienen que dar para verificar que no se cumple \textsl{monotonía de selección}:
+
+Dado $\vec{c}=(c_1, \dots, c_{\binom{n}{k}}) \in \mathbb{R}^{\binom{n}{k}}$ vector de coeficientes, 
+llamemos $\mu^{*}_{\vec{c}}:\Omega_n^{k} \times \binom{[n]}{k} \rightarrow [0,1]$ a la solución óptima del problema lineal con función
+objetivo $\vec{c}^{\ t} \cdot \mu$ (pensamos en que esta solución óptima es una función que toma como parámetros un vector de restos $\vec{p} \in \Omega_n^{k}$ 
+y un conjunto $A \in \binom{[n]}{k}$, y retorna
+la probabilidad de seleccionar al conjunto $A$ si los restos vienen dados por $\vec{p}$). Para que no se cumpla \textsl{monotonía de selección}, deben existir
+dos vectores de restos $\vec{p}, \vec{p'} \in \Omega_n^{k}$ y un conjunto $A \in \binom{[n]}{k}$ tales que $p_i \leq p'_i \ \forall i \in A$, 
+$p_i \geq p'_i \ \forall i \notin A$, y $\mu^{*}_{\vec{c}}(\vec{p}, A) > \mu^{*}_{\vec{c}}(\vec{p'}, A)$.
+
+Buscaremos entender cómo utilizar la base óptima de la solución a este problema para construir, dado $\vec{c}$, dos vectores
+$\vec{p}$ y $\vec{p'}$ que sirvan de contraejemplo para \textsl{monotonía de selección}.
+
+% ---------------------
+\subsection{Análisis con base fija}
+
+Considerando la utilización del método Simplex para, dados $\vec{c}$ y $\vec{p}$, encontrar $\mu^{*}_{\vec{c}}(\vec{p}, \cdot)$, 
+sabemos que esta solución óptima se calcula 
+a partir de una base $B^{*} \in \{0,1\}^{n \times n}$ obtenida seleccionando $n$ subconjuntos $A_{B(1)}, \dots, A_{B(n)} \in \binom{[n]}{k}$.
+Equivalentemente, la base óptima se puede obtener seleccionando $n$ columnas de la matriz de restricciones, a la que llamaremos $A \in \{0,1\}^{n \times \binom{n}{k}}$.
+
+%Al vector $\vec{c}$ lo supondremos ordenado decrecientemente sin pérdida de generalidad. También redefiniremos el orden de los partidos
+%de manera que el conjunto $\{1, \dots, k \}$ sea $A_1$. Es decir, ahora tenemos al conjunto $\binom{[n]}{k}$ ordenado de forma que $A_1 = \{1, \dots, k \}$
+%y el orden del resto de los subconjuntos queda ordenado de acuerdo al vector $\vec{c}$. Estas suposiciones no alteran en absoluto el desarrollo del problema.
+%Llamaremos $\mathcal{A} = (A_1, \dots, A_{\binom{n}{k}})$ a dicho ordenamiento.
+
+Para expresar de forma clara la formulación matricial del problema que estamos abordando, tomaremos el orden lexicográfico para 
+ordenar $\binom{[n]}{k}$. De esta forma, la restricción
+
+$$\sum_{\substack{B \in \binom{[n]}{k} \\ B \ \ni \ i}}{\mu(B)} = p_i \quad \forall i \in [n] $$
+
+queda expresada como 
+
+$$ A \vec{\mu} = \vec{p},$$
+
+en donde la matriz A tiene como columnas los vectores indicadores de los conjuntos $\binom{[n]}{k}$ ordenados lexicográficamente,
+según \eqref{ordenamiento_lexicografico}. Es decir, 
+
+\[ (A)_{ij} = \mathbbm{1}_{ \{i \in A_j\} } = 
+\begin{cases*}
+    1 \text{ si } i \in A_j \\
+    0 \text{ si no}
+\end{cases*}
+\]
+
+Notaremos $A_j$ tanto al $j$-ésimo conjunto de $\binom{[n]}{k}$ según el ordenamiento lexicográfico como a la $j$-ésima columna de la 
+matriz $A$, ya que esencialmente son representaciones del mismo conjunto: la $j$-ésima columna de la matriz $A$ es el vector
+indicador del conjunto $A_j$.
+El vector $\vec{\mu}$ indica, para cada $A_i \in \binom{[n]}{k}$, la probabilidad $\vec{\mu}_i$ 
+de seleccionarlo. La función objetivo resulta $\vec{c}^{ t} \cdot \vec{\mu}$. Al óptimo, expresado vectorialmente, lo denotaremos
+$\vec{\mu}^{*}_{\vec{c}}(\vec{p})$, y $\vec{\mu}^{*}_{\vec{c}}(\vec{p})_i$ a su $i$-ésima coordenada.
+Un primer intento de buscar $\vec{p}$ y $\vec{p'}$ puede ser considerar que $\vec{p'} = \vec{p} + \epsilon e_i - \epsilon e_j$,
+para cierto $\epsilon > 0$, con $e_m$ el $m$-ésimo vector canónico. 
+De esta forma, si existe algún $A_l \in \binom{[n]}{k}$ tal que $i \in A_l, j \notin A_l$ y 
+$\vec{\mu}^{*}_{\vec{c}}(\vec{p})_l > \vec{\mu}^{*}_{\vec{c}}(\vec{p'})_l$ tendremos un contraejemplo para el vector
+de costos $\vec{c}$.
+Hay dos motivaciones para pensar en definir $\vec{p'} = \vec{p} + \epsilon e_i - \epsilon e_j$:
+
+\begin{enumerate}
+    \item Estas perturbaciones son fácilmente controlables, pues dependen solamente del parámetro $\epsilon$.
+    \item Teniendo en cuenta el análisis de sensibilidad (\cita{bertsimas}, 5.2) para problemas lineales,
+    sabemos que si $\epsilon$ es lo suficientemente chico, perturbar al vector de restricciones $\vec{p}$ en
+    $\epsilon$ no altera la base óptima.
+\end{enumerate}
+
+Analizaremos qué condiciones se deben cumplir para que $\vec{p'}$ sea tal que la base óptima no cambia.
+Asumamos como fijo el vector de costos $\vec{c}$, y supongamos que $B = \{ B(1), \dots, B(n)\}$ es la base óptima para $\vec{p}$, 
+definida a partir de los índices de las columnas de $A$ que
+la componen. La matriz básica resultante —que denotaremos también $B$— es 
+
+\[
+B \vcentcolon= \begin{pmatrix}
+| & | &        & | \\
+A_{B(1)} & A_{B(2)} & \cdots & A_{B(n)} \\
+| & | &        & |
+\end{pmatrix}.
+\]
+
+Se tiene entonces que 
+
+$$\vec{\mu}^{*}_{\vec{c}}(\vec{p}) = B^{-1} \vec{p}.$$
+
+\vspace{0.5em}
+
+Recordamos que las condiciones de factibilidad y optimalidad para una base $B$ son
+
+\begin{align*}
+    B^{-1} \vec{p} \geq 0 \hspace{5em}& (\textbf{Factibilidad}) \\
+        \vec{\bar{c}} = \vec{c} - \vec{c}_B^{\ t} B^{-1} A \leq 0 \hspace{5em}& (\textbf{Optimalidad})
+\end{align*}
+
+Luego, si $B$ es óptima para $\vec{p}$, debe cumplir ambas condiciones. Para que sea óptima también con $\vec{p'}$, como la optimalidad no depende de $\vec{p}$,
+únicamente se debe cumplir la condición de factibilidad con $\vec{p'}$:
+
+\begin{align*}
+    0   &\leq B^{-1}\vec{p'} \\ 
+        &= B^{-1}\vec{p} + \epsilon (B^{-1})_i - \epsilon (B^{-1})_j \\
+        &= \vec{\mu^{*}}_B + \epsilon ((B^{-1})_i - (B^{-1})_j) \\
+        &= \vec{\mu^{*}}_B + \epsilon \left(
+            \begin{pmatrix}
+                \beta_{1i} \\
+                \vdots \\
+                \beta_{ni}
+            \end{pmatrix}
+            - \begin{pmatrix}
+                \beta_{1j} \\
+                \vdots \\
+                \beta_{nj}
+            \end{pmatrix}
+         \right) \hspace{1.5em} \text{ con } \beta_{si}, \beta_{sj} \text{ los coefs. de las columnas $i$ y $j$ de } B^{-1}\\
+         \\
+         \iff &\max\limits_{\{ s / \beta_{si} - \beta_{sj} > 0\}} \left\{ \frac{-\mu_{B(s)}}{\beta_{si} - \beta_{sj}}\right\}
+         \leq \epsilon \leq \min\limits_{\{ s / \beta_{si} - \beta_{sj} < 0\}} \left\{ \frac{-\mu_{B(s)}}{\beta_{si} - \beta_{sj}}\right\}.
+\end{align*}
+
+Bajo esta condición, $B$ sigue resultando óptima para $\vec{p'}$ —pues la condición de optimalidad no depende de $\vec{p'}$, por
+lo que sigue valiendo—. Luego,
+
+\begin{align*}
+    \vec{\mu}^{*}_{\vec{c}}(\vec{p'}) =& \ B^{-1} \vec{p'} \\
+                                      =& \ \vec{\mu}^{*}_{\vec{c}}(\vec{p})
+                                      + \epsilon \left(
+                                        \begin{pmatrix}
+                                            \beta_{1i} \\
+                                            \vdots \\
+                                            \beta_{ni}
+                                        \end{pmatrix}
+                                        - \begin{pmatrix}
+                                            \beta_{1j} \\
+                                            \vdots \\
+                                            \beta_{nj}
+                                        \end{pmatrix}
+                                     \right). \\
+\end{align*}
+
+Para tener un contraejemplo, basta encontrar una columna de $B$, digamos $A_{B(l)}$, tal que $i \in A_{B(l)},
+j \notin A_{B(l)}$ y $\beta_{li} < \beta_{lj}$ $\textcolor{rojoOscuro}{\mathlarger{(*)}}$. De esta forma, resultaría
+
+\begin{align*}
+    \vec{\mu}^{*}_{\vec{c}}(\vec{p'})_l &= \vec{\mu}^{*}_{\vec{c}}(\vec{p})_l
+            + \epsilon ( \beta_{li} - \beta_{lj} ) \\
+            &<  \vec{\mu}^{*}_{\vec{c}}(\vec{p})_l.
+\end{align*}
+
+y tendríamos un contraejemplo de \textsl{monotonía de selección} a partir de $\vec{p}$ y $\epsilon$, puesto que esta última desigualdad 
+muestra que la probabilidad asignada a $A_{B(l)}$ disminuye para $\vec{p'}$ a pesar de que la probabilidad marginal del partido $1 \in A_{B(l)}$
+aumentó.
+
+Vemos que la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$ sobre $B$ no depende ni de $\vec{p}$ ni de $\epsilon$. De cumplirse, basta que exista
+un vector $\vec{p}$ que haga a la base $B$ factible y a la solución $\vec{\mu}^{*}_{\vec{c}}(\vec{p})$ no degenerada para que haya contraejemplo. En efecto,
+si $B$ es óptima para $\vec{c}$ y factible para $\vec{p}$, el hecho de que $\vec{\mu}^{*}_{\vec{c}}(\vec{p})$ sea no degenerada provoca que 
+$\min\limits_{\{ s / \beta_{si} - \beta_{sj} < 0\}} \left\{ \frac{-\mu_{B(s)}}{\beta_{si} - \beta_{sj}}\right\} > 0$, y por ende hay un rango válido positivo para
+$\epsilon$, por lo que se puede generar $\vec{p'} = \vec{p} + \epsilon e_i - \epsilon e_j$ tal que $B$ sigue siendo factible y $\vec{p}$ y $\vec{p'}$ violan
+\textsl{monotonía de selección}. De esta forma, suponiendo que para toda base $B$ existe $\vec{p} \in \Omega_n^{k}$ tal que $\vec{\mu}^{*}_{\vec{c}}(\vec{p})$ es no degenerada,
+alcanza con que se cumpla $\textcolor{rojoOscuro}{\mathlarger{(*)}}$.
+
+Ahora bien, la base $B$ que analicemos depende del vector $\vec{c}$, puesto que nos interesan solo las bases $B$ para las cuales se verifica la condición 
+de optimalidad. Igualmente, si se verificara la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$ para toda base $B$, dejaríamos de depender de $\vec{c}$, puesto
+que no importa quién sea $\vec{c}$, existirá alguna base $B$ (o más de una) para la cual se verifica optimalidad, y si $B$ verificara también $\textcolor{rojoOscuro}{\mathlarger{(*)}}$
+podríamos concluir que existe contraejemplo de $\textsl{monotonía de selección}$.
+No obstante, podría existir un conjunto $\mathcal{R}$ de bases para las cuales se rompe la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$. Para poder garantizar
+que ninguna de estas bases sea base óptima factible se puede buscar un vector $\vec{p}$ que las haga infactibles a todas simultáneamente. De esta forma, si alguna de estas bases
+fuese óptima para un $\vec{c}$ dado, al utilizar el $\vec{p}$ encontrado, se forzaría al programa lineal a que la base óptima factible sea otra, una de las que sí verifican 
+la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$.
+
+%Una cuestión importante para observar es que en este razonamiento, lo único que utilizamos del vector $\vec{p}$ es el hecho de que
+%tiene como base factible a $B$. Ahora bien, como la optimalidad de $B$ depende del vector de costos $\vec{c}$, no podemos garantizar que
+%una base fija $B$ sea óptima y factible únicamente controlando el vector $\vec{p}$. Necesitamos, de alguna forma, independizarnos de $\vec{c}$.
+%Esto nos lleva a proponer la siguiente idea, que consiste
+%en explotar el hecho de que la cantidad de bases es limitada para $n$ y $k$ fijos (hay a lo sumo $\binom{\binom{n}{k}}{n}$ bases, pues definir una base es elegir $n$ columnas linealmente
+%independientes de las $\binom{n}{k}$ que tiene $A$):
+
+%si se cumple que $\forall B$ base, $\exists \vec{p} \in \Omega_n^{k}$ tal que se verifican
+%
+%\begin{align}
+%    &0 \leq B^{-1} \vec{p}  \hspace{17.4em} \text{(Factibilidad de $B$ para } \vec{p})& \\
+%    &0 < \min\limits_{\{ i / \beta_{i1} - \beta_{in} < 0\}} \left\{ \frac{-\mu_{B(i)}}{\beta_{i1} - \beta_{in}}\right\} \hspace{9em} \text{(Rango válido para $\epsilon$)}& \\
+%    &\exists i \in [n] \text{ tal que } 1 \in A_{B(i)}, n \notin A_{B(i)} \text{ y } \beta_{i1} < \beta_{in} \hspace{1em} \text{(Existe cjto. que viola mon. de sel.)}&
+%\end{align}
+%
+%entonces tendremos contraejemplo para cualquier $\vec{c}$. Esto se debe a que, dado $\vec{c}$, habrá ciertas bases para las cuales se verificará la condición
+%de optimalidad con dicho $\vec{c}$. Si para alguna base $B$ de ese conjunto de bases existe $\vec{p} \in \Omega_n^{k}$ tal que se verifican las condiciones (4.2), (4.3) y (4.4) 
+%se tiene, entonces
+
+%\begin{itemize}
+%    \item la base $B$ es óptima y factible (por (4.2)) para $\vec{p}$ 
+%    \item la base $B$ es óptima y factible (por (4.3)) para $\vec{p'}$, definiéndolo como $\vec{p'} = \vec{p} + \epsilon e_1 - \epsilon e_n$, con y $\epsilon \in (0, \min\limits_{\{ i / \beta_{i1} - \beta_{in} < 0\}} \left\{ \frac{-\mu_{B(i)}}{\beta_{i1} - \beta_{in}}\right\})$ 
+%    \item $\vec{\mu}^{*}_{\vec{c}}(\vec{p'})_i < \vec{\mu}^{*}_{\vec{c}}(\vec{p})_i$ (por (4.4))
+%\end{itemize}
+%
+%por lo que $\vec{p}$ y $\vec{p'}$ son contraejemplo de \textsl{monotonía de selección} para $\vec{c}$.
+
+%Ahora bien, la condición (4.4) depende exclusivamente de la base: no depende ni de $\vec{p}$ ni de $\vec{c}$, por lo que se puede verificar de forma 
+%independiente. 
+%Aquellas bases que la verifiquen, tendrán potencial de funcionar para construir contraejemplos, en caso de que sean la base óptima para algún $\vec{c}$.
+%Si hubiera bases $B$ que no verifican dicha condición, se puede buscar un vector $\vec{p}$ que resulte infactible para todas esas 
+%bases, de manera tal que si alguna fuese óptima para un $\vec{c}$ dado, igualmente sea infactible y por ende se deba utilizar otra base para tener factibilidad. 
+%De esta forma, el vector $\vec{p}$ deberá ser factible para alguna de las bases restantes, que sí verifican la condición (4.4), y entonces
+%habrá potencial de encontrar un contraejemplo.
+
+Si bien la cantidad de bases sobre las cuales hay que verificar estas condiciones puede ser exponencial en $n$, si $n$ y $k$ son lo suficientemente
+chicos esto resulta computable por una computadora estándar, a través del siguiente programa, que nos permitirá definir si este camino para encontrar
+contraejemplos generales para cualquier $\vec{c}$ es útil o no:
+
+\vspace{0.5em}
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwInput{$n\in\mathbb{N}_0$ cantidad de partidos, $k\in\mathbb{N}_0$ cantidad de bancas pendientes.}
+    \KwResult{Devuelve \textsf{verdadero} si toda base genera un contraejemplo de monotonía de selección, o para aquellas que no verifiquen las condiciones existe vector $\vec{p}$ que las haga infactibles; \textsf{falso} en caso contrario.}
+    Construir la matriz de restricciones $A$ para $n$ y $k$ dados\;
+    Construir $\mathcal{B}\leftarrow$ conjunto de bases válidas\;
+    Construir $\mathcal{V}\leftarrow \left\{\right\}$, conjunto de bases que verifican la condición (4.4)\;
+    Construir $\mathcal{R}\leftarrow \left\{\right\}$, conjunto de bases que rompen la condición (4.4)\;
+    \For{$B\in\mathcal{B}$}{
+        \If{verificar\_condicion($B$)}{
+            $\mathcal{V} \leftarrow \mathcal{V} \cup \{ B \}$\;
+        }
+        \Else{
+            $\mathcal{R} \leftarrow \mathcal{R} \cup \{ B \}$\;
+        }
+    }
+    $p \leftarrow$ buscar\_p($\mathcal{R}$)\;
+    \If{$p$ no es nulo}{
+        \Return{\textsf{verdadero}}
+    }
+    \caption{Verificación exhaustiva sobre bases}
+\end{algorithm}
+
+\vspace{0.5em}
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwIn{Base $B$ (matriz invertible).}
+    \KwResult{Retorna \textsf{verdadero} si la base $B$ verifica la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$ 
+    (i.e. permite construir contraejemplo); \textsf{falso} en caso contrario.}
+    
+    Calcular $B^{-1}$\;
+    \For{cada fila indexada por $l$ de $B^{-1}$}{
+        $S\leftarrow$ conjunto de $\binom{[n]}{k}$ correspondiente a la columna $B(l)$ de $B$
+        \For{$i \in S$}{
+            \For{$j \in S^c$}{
+                \If{$\beta_{li} < \beta_{lj}$}{
+                    \Return \textsf{verdadero} \tcp*{se cumple la condición que viola la monotonía}
+                }
+            }
+        }
+    }
+    \Return \textsf{falso}
+    \caption{verificar\_condicion}
+\end{algorithm}
+
+\vspace{0.5em}
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \KwIn{Conjunto de bases $\mathcal{R}$ para las cuales no se verifica la condición $\textcolor{rojoOscuro}{\mathlarger{(*)}}$.}
+    \KwResult{A través de un programa lineal verifica si existe $\vec{p} \in \Omega_n^{k}$ que sea infactible para todas las bases en $\mathcal{R}$, y lo retorna en caso de existir.
+    Sino, retorna \textsf{null}.}
+    
+    Definir como variable el vector $\vec{p} \in [0,1]^n$ \;
+    \For{$B \in \mathcal{R}$}{
+        Introducir restricción de infactibilidad: $B^{-1}\vec{p} \leq 0$ \;
+    }
+    Introducir restricción de dominio $\Omega_n^{k}$: $\sum_{i=1}^{n}{p_1} = k$ \;
+    Introducir función objetivo $\equiv 0$ \tcp*{o cualquier otra f.o., es indistinto} \;
+    Resolver para variable $\vec{p}$ con solver \;
+    \Return $\vec{p}$
+    \caption{buscar\_p}
+\end{algorithm}
+
+\vspace{0.5em}
+
+Lamentablemente, utilizando este programa (con el solver Gurobi para la función \texttt{buscar\_p}) con $n \in \{4,5\}$ y $k =2$, resultó que ninguna base satisfizo la condición
+$\textcolor{rojoOscuro}{\mathlarger{(*)}}$ y tampoco existe $\vec{p} \in \Omega_n^k$ que vuelva infactibles a todas las bases. Este camino no permite acercarse a demostrar que exista
+contraejemplo de \textsl{monotonía de selección} para cualquier $\vec{c}$.
+
+Buscando entender la forma en la que se comportan los vectores $\vec{p}$ en relación vector de costos $\vec{c}$ fijo, analizamos un caso pequeño con
+$n=4, k=2, \vec{c} = (6,5,4,3,2,1)$, observando que todas las bases eran óptimas para cualquier vector $\vec{p}$, y que además al perturbarlo con una base $B$ fija, 
+se verificaba \textsl{monotonía de selección}. Este resultado motivó la siguiente prueba, desarrollada en la próxima sección.
+
+% ---------------------
+\subsection{Análisis con cambio de base}
+
+A la hora de encontrar un contraejemplo de \textsf{monotonía de selección} para el método de programación lineal con $n=4, \ k=2$ y $\vec{c} = (6,5,4,3,2,1)$, 
+hemos visto que si la base óptima no cambia, 
+la solución óptima verifica \textsl{monotonía de selección}. Por lo tanto, buscaremos con qué condiciones alcanza para poder encontrar un contraejemplo en el cual $\vec{p}$ y $\vec{p'}$
+tienen bases óptimas factibles distintas.
+Consideraremos un vector $\vec{p} \in \Omega_n^{k}$ de probabilidades y un vector $\vec{\alpha}$ de 
+perturbaciones tales que, para dos bases $B_1$ y $B_2$ y cierto conjunto $S \in B_1 \cap B_2$ --$S$ es un conjunto de partidos que está en ambas bases--, se verifique una
+serie de condiciones lineales que enunciaremos a continuación, en vistas de intentar encontrar vectores $\vec{p}$ y $\vec{\alpha}$ que satisfagan todas las condiciones y a partir de esto
+permitan construir un contraejemplo de $\textsl{monotonía de selección}$. Previamente, definiremos $\vec{p'} = \vec{p} + \sum_{j \in S}{\alpha_j} - \sum_{j \notin S}{\alpha_j}$ 
+y $s_1$ y $s_2$ los índices del cjto. $S$ en las bases $B_1$ y $B_2$ respectivamente, es decir, $S = B_1(s_1) = B_2(s_2)$. 
+Las condiciones esencialmente serán: que $B_1$ y $B_2$ sean factibles para $\vec{p}$ y $\vec{p'}$ respectivamente, que ninguna base distinta de $B_1$ sea factible para $\vec{p}$ --y
+lo propio para $\vec{p'}$ con $B_2$--, que ambos vectores de probabilidades estén bien definidos --es decir, que sumen $k$ y tengan coordenadas en $(0,1)$--, y por último que efectivamente
+violen la condición de $\textsl{monotonía de selección}$.
+
+\begin{align*}
+    \begin{alignedat}{3}
+        B_1^{-1} \vec{p} \ge 0 
+        &\quad\wedge\quad 
+        B_2^{-1} \vec{p'} \ge 0   
+        &\qquad& \text{(factibilidad)} \\[0.4em]
+        B^{-1} \vec{p} \ngeq 0 \;\forall B\neq B_1 
+        &\quad\wedge\quad 
+        B^{-1} \vec{p'} \ngeq 0 \;\forall B\neq B_2
+        &\qquad& \text{(infactibilidad para otras bases)} \\[0.4em]
+        \sum_{i\in[n]} \vec{p}_i = k 
+        &\quad\wedge\quad 
+        \sum_{i\in[n]} \vec{p'}_i = k
+        &\qquad& \text{(buena definición de $\vec{p}$ y $\vec{p'}$)} \\[0.4em]
+        &0 \le p_i,\, p'_i \le 1\;\forall i\in[n] 
+        &\qquad& \text{(buena definición de $\vec{p}$ y $\vec{p'}$)} \\[0.4em]
+        (B_1^{-1}\vec{p})_{s_1} 
+        &> (B_2^{-1}\vec{p'})_{s_2}
+        &\qquad& \text{($\vec{p}$ y $\vec{p'}$ violan mon. sel.)}.
+    \end{alignedat}
+\end{align*}
+
+La condición de infactibilidad para otras bases establece que alguna de las coordenadas de $B^{-1} \vec{p}$ debe ser negativa. Definiendo $s_i^{B} := (B^{-1} \vec{p})_i$, para una base 
+$B \neq B_1$ introducimos las variables $y_i^B \in \{0, 1\}, i\in [n]$, que van a funcionar como indicadoras de cuál coordenada 
+de $B^{-1} \vec{p} = s_i^B$ es la que toma un valor negativo. Introduciendo estas variables, junto con la restricción $\sum_{i\in [n]}{y_i^B} \geq 1$ para 
+garantizar que se active al menos una variable, y el parámetro $\epsilon > 0$ para convertir las restricciones de desigualdad estricta en desigualdades de menor o igual, se tiene que:
+
+\begin{align*}
+    \bigvee_{i \in [n]} & (s_i^{B} + \epsilon \leq 0) \\
+\iff (s_i^B + \epsilon ) \cdot & y_i^B \leq 0 \hspace{1.5em} \forall i \in [n].
+\end{align*}
+
+De esta forma, la restricción se satisfará trivialmente para aquellos $i\in[n]$ para los cuales $y_i^B=0$, y por la restricción adicional introducida, habrá al menos un $j \in [n]$ tal que $y_j^B=1$. 
+Para dicho $j$, se deberá satisfacer $(s_j^{B} + \epsilon) \leq 0$.
+En definitiva, para cada base $B \neq B_1$ se introducirán las restricciones:
+
+\begin{align*}
+    (s_i^B + \epsilon ) \cdot y_i^B \leq 0 \hspace{1.5em} & \forall i \in [n] \\
+    \sum_{i\in [n]}{y_i^B} \geq1& \\
+    y_i^B \in \{0,1\} \hspace{1.5em} & \forall i \in [n].
+\end{align*}
+
+De manera análoga, para cada base $B \neq B_2$ se introducirán las siguientes restricciones, con $t_i^B = B^{-1}\vec{p'}$:
+
+\begin{align*}
+    (t_i^B + \epsilon ) \cdot z_i^B \leq 0 \hspace{1.5em} & \forall i \in [n] \\
+    \sum_{i\in [n]}{z_i^B} \geq1& \\
+    z_i^B \in \{0,1\} \hspace{1.5em} & \forall i \in [n].
+\end{align*}
+
+Si bien estos últimos dos conjuntos de restricciones no son lineales, al ser cuadráticos pueden ser introducidos como restricciones válidas para solvers
+como Gurobi. 
+Implementando este problema convexo en Gurobi para $n=4$ y $k=2$, y corriéndolo para todo par de bases $B_1$ y $B_2$, se obtuvieron los siguientes resultados:
+
+\begin{align*}
+    &B_1 = \{1, 2, 3, 5\} = \begin{pmatrix}
+        1 & 1 & 1 & 0\\
+        1 & 0 & 0 & 1\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 1 & 1
+    \end{pmatrix} \\
+    &B_2 = \{1, 2, 3, 4 \} = \begin{pmatrix}
+        1 & 1 & 1 & 0\\
+        1 & 0 & 0 & 1\\
+        0 & 1 & 0 & 1\\
+        0 & 0 & 1 & 0
+    \end{pmatrix} \\
+    &\vec{p} = (0.10000099999968737, 0.8999994999996874, 0.1, 0.8999995000003126) \\
+    &\vec{\alpha} = (0.8999985000009378, 0.8999985000003126, 0.0, 0.0) \\
+    &\vec{p'} = \vec{p} + e_1 \alpha_1 - e_2 \alpha_2 + e_3 \alpha_3 - e_4 \alpha_4  \\
+    & \hspace{0.73em} = (0.9999995000006252, 9.999993748621705e-07, 0.1, 0.8999995000003126) \\
+    &S = \{1, 3\} \\
+\end{align*}
+
+No obstante, al evaluar que efectivamente esta solución verificara todas las restricciones del problema convexo planteado anteriormente, se comprobó que
+varias de las condiciones de infactibilidad para otras bases no se satisfacían. El error numérico del solver ocasionó que esta solución fuese tomada como válida cuando
+en realidad no lo era. Dos de los parámetros que afectan este resultado son el parámetro \texttt{FeasibilityTol} de Gurobi, fijado en $10^{9}$ (el valor más chico que puede tomar), 
+y $\epsilon > 0$, el parámetro para convertir las restricciones de desigualdad estricta en restricciones de menor o igual, fijado en $10^{-7}$.
+Corriendo el mismo programa para $n = 5$ y $k = 2$ sucedió lo mismo. El hecho de que las soluciones encontradas no verificaran verdaderamente las restricciones no indica que este
+camino no sea válido, sino que posiblemente haya que controlar mejor los parámetros \texttt{FeasibilityTol} y $\epsilon$ para que el error numérico no perjudique la solución. Otra 
+alternativa posible es aumentar la dimensionalidad del problema, esperando que haya más espacio para los valores de $\vec{p}$ y $\vec{\alpha}$.
+Estos caminos siguen pendientes de ser realizados. El código en el que se implementa este programa está disponible en el repositorio de Github asociado a esta tesis, disponible en 
+la introducción.
+
 % ----------------
-\subsection{Definir medida sobre $[n]$}
+\section{Definir medida sobre $[n]$}
 
 La idea es, en lugar de definir una medida de probabilidad sobre $\binom{[n]}{k}$, definir una medida genérica (incluso puede ser signada) sobre $[n]$. Si llamamos $\mu$ a dicha medida, y $\mu_i := \mu(i) \quad \forall i \in [n]$, se debe cumplir:
 
@@ -125,74 +563,9 @@ Fácilmente se puede ver que, por ejemplo, tomando $p=(\frac{1}{6}, \frac{1}{6},
 
 La ventaja que tiene esta forma de definir $\mu$ es que, al tener linealidad sobre $p_i$ (pues cada $\mu_i$ es lineal sobre $p_i$), las propiedades de \textit{selection monotonicity} y \textit{strong selection monotonicity} se verifican trivialmente.
 
-% ----------------
-\subsection{Prueba exhaustiva de factibilidad de bases para el método de programación lineal}
-
-A la hora de encontrar un contraejemplo de selection monotonicity para el método de programación lineal con $n=4$ y $k=2$, hemos visto que si la base óptima no cambia, la solución óptima verifica selection monotonicity (demostrar esto). Por lo tanto, en esencia buscamos encontrar un vector $p$ de probabilidades y un vector $\alpha$ de perturbaciones tales que, para dos bases $B_1$ y $B_2$ y cierto conjunto $S \in B_1 \cap B_2$ ($S$ es un conjunto de partidos que está en ambas bases), se verifiquen las siguientes condiciones, definiendo previamente $p' = p + \sum_{j \in S}{\alpha_j} - \sum_{j \notin S}{\alpha_j}$ y $s_1$ y $s_2$ los índices del cjto. $S$ en las bases $B_1$ y $B_2$ resp.: 
-
-\begin{align*}
-    \begin{alignedat}{3}
-        B_1^{-1} p \ge 0 
-        &\quad\wedge\quad 
-        B_2^{-1} p' \ge 0   
-        &\qquad& \text{(factibilidad)} \\[0.4em]
-        B^{-1} p \ngeq 0 \;\forall B\neq B_1 
-        &\quad\wedge\quad 
-        B^{-1} p' \ngeq 0 \;\forall B\neq B_2
-        &\qquad& \text{(infactibilidad para otras bases)} \\[0.4em]
-        \sum_{i\in[n]} p_i = k 
-        &\quad\wedge\quad 
-        \sum_{i\in[n]} p'_i = k
-        &\qquad& \text{(buena definición de $p$ y $p'$)} \\[0.4em]
-        &0 \le p_i,\, p'_i \le 1\;\forall i\in[n] 
-        &\qquad& \text{(buena definición de $p$ y $p'$)} \\[0.4em]
-        (B_1^{-1}p)_{s_1} 
-        &> (B_2^{-1}p')_{s_2}
-        &\qquad& \text{($p$ y $p'$ rompen sel. mon.)}
-    \end{alignedat}
-\end{align*}
-
-La condición de infactibilidad para otras bases establece que alguna de las coordenadas de $B^{-1} \cdot p$ debe ser negativa. Definiendo $s_i^{B} := (B^{-1} \cdot p)_i$, para una base $B \neq B_1$ requerimos:
-
-\begin{align*}
-    \bigvee_{i \in [n]} &\left( s_i^{B} < 0 \right) \\
-\iff \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B} < 0 \quad (\leq -\epsilon < 0), \quad \text{donde } y_i^B \in \{ 0, 1\}
-\end{align*}
-
-Las variables $y_i^B$ nos indican cuáles de las coordenadas $s_i^B$ verifican la condición buscada. Si el mínimo expresado arriba es efectivamente menor que 0, significa que alguna de las coordenadas $s_i^B = (B^{-1} \cdot p)_i$ es menor que 0.
-
-Ahora, como requerimos que esta condición se verifique para toda base $B \neq B_1$, debemos verificar que se cumpla la siguiente condición:
-
-\begin{align*}
-    \bigwedge_{B \neq B_1} ( \bigvee_{i \in [n]} &(s_i^{B} < 0) ) \\
-\iff \bigwedge_{B \neq B_1} ( \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B} \leq -\epsilon) \\
-\iff \underset{B \neq B_1}{max} \hspace{0.2em} ( \underset{y^{B}}{min} &\sum_{i \in [n]}{y_i^B \cdot s_i^B}) \leq -\epsilon
-\end{align*}
-
-Esta expresión no pareciera ser directamente representable a partir de un conjunto de restricciones lineales/cuadráticas procesables por Gurobi. Planteamos una forma alternativa de representar la condición de infactibilidad para otras bases:
-
-Para una base $B \neq B_1$, introducimos las variables $y_i^B \in \{0, 1\}, i\in [n]$, que van a funcionar como indicadoras de cuál coordenada de $B^{-1} \cdot p = s_i^B$ es la que toma un valor negativo. Introduciendo estas variables, junto con la restricción $\sum_{i\in [n]}{y_i^B}=1$ para garantizar que se active solo una variable, se tiene que:
-
-\begin{align}
-    \bigvee_{i \in [n]} & (s_i^{B} + \epsilon \leq 0) \\
-\iff (s_i^B + \epsilon ) \cdot & y_i^B \leq 0 \hspace{1.5em} \forall i \in [n]
-\end{align}
-
-De esta forma, la restricción se satisfará trivialmente para aquellos $i\in[n]$ para los cuales $y_i^B=0$, y por la restricción extra introducida, habrá un único $j \in [n]$ tal que $y_j^B=1$. Para dicho $j$, se deberá satisfacer $(s_j^{B} + \epsilon) \leq 0$.
-
-En definitiva, para cada base $B \neq B_1$ se introducirán las restricciones:
-
-\begin{align*}
-    (s_i^B + \epsilon ) \cdot y_i^B \leq 0 \hspace{1.5em} & \forall i \in [n] \\
-    \sum_{i\in [n]}{y_i^B} \geq1& \\
-    y_i^B \in \{0,1\} \hspace{1.5em} & \forall i \in [n]
-\end{align*}
-
-Algunos resultados corriendo esto en Gurobi para $n=4$ y $k=2$:
-
 
 % ----------------
-\subsection{Preguntas}
+\section{Preguntas}
 
 \textbullet ¿Existe método de apportionment que verifique quota e incentive coaliciones? No existe. Basta tomar 5 partidos y 2 bancas, con remainders de 2/5 para todos los partidos. Si un método incentiva coaliciones, al considerar la coalición de los dos partidos que efectivamente obtienen las bancas, dicha coalición debería obtener una cantidad de bancas mayor o igual a 2 (la suma de las bancas obtenidas por cada partido). A la vez, como la suma de los remainders es 4/5 < 1, por quota, dicha coalición puede obtener a lo sumo 1 banca.\\
 \textbullet \ ¿Todos los divisor methods violan quota? Por Balinski-Young, sí. \\

@@ -188,12 +188,12 @@ Los vectores $\vec{\lambda}$ y $\vec{\lambda'}$ hallados fueron los siguientes:
 \begin{align*}
     \vec{\lambda} = (99620001435175085845613951348591, 33206667145059699577734936400435, \\
     33206667145059699577734936400435, 23244667001544291253373835102276586, \\
-    23244667001544291253373835102276586, 1660333357252963458777541885429371)  
+    23244667001544291253373835102276586, 1660333357252963458777541885429371),
 \end{align*}
 \begin{align*}
     \vec{\lambda'} = (99620001435175193801835755646020, 33206667145059681577227243883092, \\
     33206667145059681577227243883092, 23244667001544299141767505142336500, \\
-    23244667001544299141767505142336500, 1660333357252962147206216649823732)  
+    23244667001544299141767505142336500, 1660333357252962147206216649823732). 
 \end{align*}
 
 Normalizando por las constantes $N$ y $N'$ adecuadas, estos vectores definen probabilidades marginales $\vec{p}$ y $\vec{p'}$ 
@@ -207,7 +207,7 @@ $p_6 \ge p'_6$,
 y sin embargo la probabilidad de selección del conjunto $\{1,2,3\}$ es mayor con $\vec{p}$ que con $\vec{p'}$:
 \[
 \frac{\pi_1 \pi_2 \pi_3}{N} \;\ge\;
-\frac{\pi'_1 \pi'_2 \pi'_3}{N'},
+\frac{\pi'_1 \pi'_2 \pi'_3}{N'}.
 \]
 
 Este resultado nos motiva a descartar el método de máxima entropía, en vistas de encontrar algún otro método que satisfaga 
@@ -216,7 +216,8 @@ Este resultado nos motiva a descartar el método de máxima entropía, en vistas
 % ------------------------------------------------------
 \subsection{Algoritmo de Sampford}
 
-Dado que no es trivial ver que este método resulta \textit{proporcional ex-ante}, procederemos a demostrarlo. Para esto, 
+Dado que no es trivial ver que este método resulta \textit{proporcional ex-ante}, y tampoco se encuentra demostrado en \cita{correa2024monotonerandomizedapportionment}, 
+procederemos a demostrarlo. Para esto, 
 primero calcularemos la probabilidad de seleccionar un subconjunto $A \in \binom{[n]}{k}$ en particular.
 
 Llamando $S \sim r(\cdot)$ al conjunto retornado por el algoritmo de Sampford, tenemos, por la definición
@@ -236,7 +237,7 @@ $(1-p_i)$ de la segunda productoria.
                       &= \frac{\sum_{i \in A}{p_i} \prod_{j \in A \setminus \{i\}}{p_j} \prod_{j \notin (A \setminus \{i\})}{(1 - p_j)}}
                       {\sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{p_i} \prod_{j \in B \setminus \{i\}}{p_j} \prod_{j \notin (B \setminus \{i\})}{(1 - p_j)}} \\
                       &= \frac{\sum_{i \in A}{(1-p_i)} \prod_{j \in A}{p_j} \prod_{j \notin A }{(1 - p_j)}}
-                      {\sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}} \\
+                      {\sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}}. \\
 \end{align*}
 
 De esta forma tenemos una expresión para $\mathbb{P}(S = A)$.
@@ -247,14 +248,15 @@ para demostrar la \textit{proporcionalidad ex-ante}:
 \begin{lemma}
     \begin{align*} 
         \sum_{A \in \binom{[n]}{k-1}}\sum_{i \notin A}{p_i} \prod_{j \in A}{p_j} \prod_{j \notin A}{(1 - p_j)} = \\
-        \sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}
+        \sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}.
     \end{align*}
 
     \begin{proof}
         Dados $A \in \binom{[n]}{k-1}$ e $i \notin A$, hay exactamente un término
         en la sumatoria izquierda con la forma 
 
-        $$ s \vcentcolon= p_i \prod_{j \in A}{p_j} \prod_{j \notin A}{(1 - p_j)}$$
+        $$ s \vcentcolon= p_i \prod_{j \in A}{p_j} \prod_{j \notin A}{(1 - p_j)}$$.
+
         INSERTAR DIBUJITO ACÁ
         
         A su vez, considerando el conjunto $B \vcentcolon= A \cup \{ i \} \in \binom{[n]}{k}$,
@@ -263,21 +265,21 @@ para demostrar la \textit{proporcionalidad ex-ante}:
             t &\vcentcolon= (1-p_i) \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)} \\
                          &= (1-p_i) \prod_{j \in A \cup \{ i \}}{p_j} \prod_{j \notin A \cup \{ i \}}{(1 - p_j)} \\
                          &= \prod_{j \in A }{p_j \cdot p_i} \prod_{j \notin A}{(1 - p_j)} \\
-                         &= s
+                         &= s.
         \end{align*}
 
         Luego, considerando la relación biyectiva dada por 
         
             $$\left\{ (A,i): A \in \binom{[n]}{k-1}, i \notin A \right\} \rightarrow
             \left\{ (B,i'): B \in \binom{[n]}{k}, i \in B \right\}$$
-            $$(A,i) \rightarrow (A \cup \{ i \}, i)$$
+            $$(A,i) \rightarrow (A \cup \{ i \}, i)$$,
         
 
         se ve que podemor asociar de manera biunívoca cada sumando
         de la izquierda con uno igual del lado derecho, y por lo tanto
         
         $$\sum_{A \in \binom{[n]}{k-1}}\sum_{i \notin A}{p_i} \prod_{j \in A}{p_j} \prod_{j \notin A}{(1 - p_j)} =
-        \sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}$$
+        \sum_{B \in \binom{[n]}{k}}\sum_{i \in B}{(1-p_i)} \prod_{j \in B}{p_j} \prod_{j \notin B}{(1 - p_j)}$$.
     \end{proof}
     \label{lema:identidad}
 \end{lemma}
@@ -300,17 +302,17 @@ $X_i = \mathbbm{1}_{ \{i \in S\} }$.
     \end{align*}
     \begin{align}
         &= \frac{
-            \sum_{\substack{A \in \binom{[n]}{k} \\ 1 \in A}}
-            \left(\sum_{i\in A}(1-p_i)\right)
-            \prod_{j\in A} p_j
-            \prod_{j\notin A}(1-p_j)
+            \displaystyle\sum_{\substack{A \in \binom{[n]}{k} \\ 1 \in A}}
+            \left(\displaystyle\sum_{i\in A}(1-p_i)\right)
+            \displaystyle\prod_{j\in A} p_j
+            \displaystyle\prod_{j\notin A}(1-p_j)
         }{
-            \sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}
+            \displaystyle\sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}
             \underbrace{
                 \left(\sum_{i\notin B}(p_i)\right)
-            }_{\textcolor{azulAcero}{\sum_{i\in B}(1-p_i) = \sum_{i\notin B}(p_i)}}
-            \prod_{j\in B} p_j
-            \prod_{j\notin B}(1-p_j)
+            }_{\textcolor{azulAcero}{\displaystyle\sum_{i\in B}(1-p_i) = \displaystyle\sum_{i\notin B}(p_i)}}
+            \displaystyle\prod_{j\in B} p_j
+            \displaystyle\prod_{j\notin B}(1-p_j)
             +
             \underbrace{
                 \sum_{\substack{B \in \binom{[n]}{k} \\ 1 \notin B}}
@@ -318,7 +320,7 @@ $X_i = \mathbbm{1}_{ \{i \in S\} }$.
                 \prod_{j\in B} p_j
                 \prod_{j\notin B}(1-p_j)
             }_{\textcolor{azulAcero}{\mathlarger{(*)}}}
-        }
+        }.
         \label{eq:prob-1-en-S}
         \end{align}
     
@@ -331,7 +333,7 @@ $X_i = \mathbbm{1}_{ \{i \in S\} }$.
     \prod_{j\notin B}(1-p_j) =
     (1-p_1)\sum_{i\in S}(1-p_i)
     \prod_{j\in S} p_j
-    \underbrace{\prod_{j\notin S}(1-p_j)}_{
+    \underbrace{\prod_{j\notin S}(1-p_j).}_{
         \text{no contiene a } (1-p_1) \text{, pues } S \in H
     }
     $$
@@ -355,8 +357,55 @@ $X_i = \mathbbm{1}_{ \{i \in S\} }$.
             \prod_{j\notin S}(1-p_j) \\
             &= \frac{(1-p_1)}{p_1}\sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}\sum_{i \notin S} p_i
             \prod_{j\in S} p_j
-            \prod_{j\notin S}(1-p_j) \\
+            \prod_{j\notin S}(1-p_j). \\
     \end{align*}
-    \end{proof}
+
+    Usando esta igualdad, por \ref{eq:prob-1-en-S} tenemos
+
+    \begin{align*}
+        \mathbb{P}(1 \in S)
+                &= \frac{
+                    \displaystyle\sum_{\substack{A \in \binom{[n]}{k} \\ 1 \in A}}
+            \left(\displaystyle\sum_{i\in A}(1-p_i)\right)
+            \displaystyle\prod_{j\in A} p_j
+            \displaystyle\prod_{j\notin A}(1-p_j)
+        }{
+            \displaystyle\sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}
+            \left(\displaystyle\sum_{i\notin B}(p_i)\right)
+            \displaystyle\prod_{j\in B} p_j
+            \displaystyle\prod_{j\notin B}(1-p_j)
+            +
+            \underbrace{\frac{(1-p_1)}{p_1}
+                \sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}
+                \left(\sum_{i\notin B}p_i\right)
+                \prod_{j\in B} p_j
+                \prod_{j\notin B}(1-p_j)
+            }_{\textcolor{azulAcero}{\mathlarger{(*)}}}
+        } \\
+            &= \frac{\alpha}{(1 + \frac{1-p_1}{p_1}) \alpha} \ , \hspace{1em} \text{ con } 
+            \alpha \vcentcolon= \sum_{\substack{B \in \binom{[n]}{k} \\ 1 \in B}}
+            \left(\sum_{i\notin B}p_i\right)
+            \prod_{j\in B} p_j
+            \prod_{j\notin B}(1-p_j) \\
+            &= p_1.
+    \end{align*}
+\end{proof}
     
 \end{proposition}
+
+\vspace{3em}
+
+El otro resultado relevante en relación al algoritmo de Sampford queda plasmado
+en la siguiente propiedad:
+
+\begin{proposition}
+    El algoritmo de Sampford satisface \textit{monotonía de selección}.
+
+    La demostración requiere varios lemas, y es el objeto central de \cita{correa2024monotonerandomizedapportionment}.
+\end{proposition}
+
+
+% ------------------------------------------------------
+\subsection{Algoritmo de Brewer}
+
+Demostración por inducción de que Brewer es Ex-Ante proportional.

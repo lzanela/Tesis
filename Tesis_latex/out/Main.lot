@@ -1,9 +1,11 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Cociente y asignación de bancas para los 15 estados originarios de EEUU. Tabla extraída de \blx@tocontentsinit {0}\parencite {balinski1982fair}}}{11}{table.1.1}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Actualización con datos del censo de 2020 para los 15 estados mencionados anteriormente. Datos extraídos de \href {https://www.census.gov/quickfacts/fact/table/CT/HSD410223}{Censo EE.UU.} }}{11}{table.1.2}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Comparación entre los cocientes y asignaciones originales (1780) y los valores actualizados con datos del censo 2020 para los 15 estados originarios. Tabla extraída de \blx@tocontentsinit {0}\parencite {balinski1982fair}, datos actuales extraídos de \href {https://www.census.gov/quickfacts/fact/table/CT/HSD410223}{Censo EE.UU.}}}{11}{table.1.1}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Distribución de bancas para diferentes tamaños de cámara, extraído de \href {https://en.wikipedia.org/wiki/Apportionment_paradox}{Wikipedia}.}}{14}{table.1.2}%
+\contentsline {table}{\numberline {1.3}{\ignorespaces Método D'Hondt aplicado a un escenario con 6 estados y $H=250$ bancas. Entre paréntesis se indican primero la \textit {Hare-Quota}, y luego un divisor $D$ para el cual el redondeo hacia abajo (propio de D'Hondt) realiza una asignación válida de bancas.}}{16}{table.1.3}%
+\contentsline {table}{\numberline {1.4}{\ignorespaces Método de Webster aplicado a un escenario con 4 estados y $H=35$ bancas. Entre paréntesis se indican primero la \textit {Hare-Quota}, y luego un divisor $D$ para el cual el redondeo estándar (propio de Webster) realiza una asignación válida de bancas. Extraído de \blx@tocontentsinit {0}\parencite {balinski1982fair}.}}{16}{table.1.4}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces \small Porcentajes de población por continente de acuerdo a la regla estándar de redondeo. Se observa cómo esta regla de redondeo no basta para alcanzar una solución en la que la suma de porcentajes sea efectivamente del $100\%$. Tabla extraída de \blx@tocontentsinit {0}\parencite {pukkelsheim2017}}}{17}{table.2.1}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces \small Porcentajes de población por continente de acuerdo a la regla estándar de redondeo. Se observa cómo esta regla de redondeo no basta para alcanzar una solución en la que la suma de porcentajes sea efectivamente del $100\%$. Tabla extraída de \blx@tocontentsinit {0}\parencite {pukelsheim2017}}}{19}{table.2.1}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces Compración de votos y restos entre elecciones. Extraído de \blx@tocontentsinit {0}\parencite {correa2024monotonerandomizedapportionment}.}}{32}{table.3.1}%
+\contentsline {table}{\numberline {3.1}{\ignorespaces Compración de votos y restos entre elecciones. Extraído de \blx@tocontentsinit {0}\parencite {correa2024monotonerandomizedapportionment}.}}{34}{table.3.1}%
 \addvspace {10\p@ }

@@ -1,10 +1,12 @@
 \section{Métodos de quota}
 
-"In a way quota methods may be viewed as procedures complementary to
-divisor methods. Divisor methods fix the rounding rule and adjust the divisor. Quota
-methods fix the divisor and adjust the rounding rule." \cita{pukkelsheim2017}
 
-Los métodos de quota se caracterizan por tener un divisor $Q > 0$ prefijado (típicamente la \textit{Hare-Quota}),
+Citando las palabras de \cita{pukelsheim2017}, una manera de pensar a los métodos de quota es la siguiente:
+\say{[...] los métodos de quota se pueden ver como procedimientos complementarios a los 
+métodos de divisor. Los métodos de divisor fijan la regla de redondeo y ajustan el divisor. Los métodos
+de quota fijan el divisor y ajustan la regla de redondeo.}
+
+De esta forma, los métodos de quota se caracterizan por tener un divisor $Q > 0$ prefijado (típicamente la \textit{Hare-Quota}),
 elegido por tener alguna característica persuasiva. Posteriormente, lo que se modifica es la regla de redondeo utilizada
 para ajustar los cocientes resultantes al dividir los votos por $Q$.
 
@@ -37,7 +39,7 @@ Los métodos shift-quota surgen a partir de pensar en que utilizando un divisor 
 un método de quota con mejores propiedades que el de Hamilton.
 Se define la shift-quota con shift $s \in [-1; 1)$ como el divisor
 \[
-    d = Q(s) \vcentcolon= \frac{v_+}{H + s}
+    d = Q(s) \vcentcolon= \frac{v_+}{H + s}.
 \]
 
 La utilidad de usar shifts $s \in [-1; 1)$ tiene que ver con buscar que, al utilizar la shift-quota y luego ajustar los residuos
@@ -50,7 +52,7 @@ $y_j = \lfloor \frac{v_j}{Q(s)} \rfloor = \lfloor \frac{v_j}{v_+} \cdot (H+s) \r
     y_+ &= \sum_{i=1}^{n}{\lfloor \frac{v_j}{v_+} \cdot (H+s) \rfloor} \\
         &\leq \sum_{i=1}^{n}{\frac{v_j}{v_+} \cdot (H+s)} \\
         &= H + s \\
-        &< H + 1 \quad \text{pues s < 1}
+        &< H + 1, \quad \text{pues s < 1},
 \end{align*}
 
 y por la integralidad de $y_+$ resulta $y_+ \leq H$.
@@ -59,7 +61,7 @@ Para la cota inferior,
 \begin{align*}
     y_+ &> \sum_{i=1}^{n}{\left[ \frac{v_j}{v_+} \cdot (H+s) - 1 \right]} \\
         &= (H + s) - n \\
-        &\geq H - n - 1 \quad \text{pues s } \geq -1
+        &\geq H - n - 1, \quad \text{pues s } \geq -1.
 \end{align*}
 
 
@@ -69,14 +71,14 @@ Para la cota inferior,
     shift $s \in [-1; 1)$ $A_s(\cdot, H)$. Entonces un vector de asignaciones
     $x \in \mathbb{N}^{n}_0(H) \in A_s(\vec{v}, H)$ si y solo si
     \[
-        \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \leq \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right)
+        \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \leq \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right).
     \]
 \end{proposition}
 
 Esta desigualdad permite definir el intervalo de \textit{splits}
 
 \[
-    R(\vec{v}, x) \vcentcolon= \left[  \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \ ; \ \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right) \right]
+    R(\vec{v}, x) \vcentcolon= \left[  \max\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) - x_j \right) \ ; \ \min\limits_{j \in [n]} \left( \frac{v_j}{v_+} (H + s) + 1 - x_j \right) \right].
 \]
 
 Este intervalo tiene los valores $r \in [0;1]$ que sirven como umbral, al considerar los restos,
@@ -93,6 +95,6 @@ de los que no.
     divisor con regla de redondeo estacionario de parámetro $r^{*}$ tienen
     el mismo conjunto de asignaciones,
     \[
-        shQgrR_s(\vec{v}, H) = DivSta_{r^{*}}(\vec{v}, H)
+        shQgrR_s(\vec{v}, H) = DivSta_{r^{*}}(\vec{v}, H).
     \]  
 \end{corollary}

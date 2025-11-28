@@ -4,139 +4,95 @@ Una cantidad que aparecerá recurrentemente en distintos métodos es la \textit{
 
 $$HQ(\vec{v}, H)=\frac{1}{H} \cdot \sum_{i=1}^{n}{v_i},$$
 
-que podemos pensar como la cantidad promedio de votos representados por una banca, o el \textit{"precio justo"} (en
+que podemos pensar como la cantidad promedio de votos representados por una banca, o el "precio justo" (en
 cantidad de votos) a pagar por una banca.
-
-Usaremos el término \textit{quota} indistintamente para referirnos a la propiedad recién enunciada o al
-cociente de la cantidad de votos de un partido por algún divisor $d$. En caso de no especificarse 
-el divisor, se asume que es la \textit{Hare-Quota}.
 
 A modo de raconto, vale la pena mencionar que en el siglo XVIII en Estados Unidos, en los orígenes de 
 esta problemática, se pensaba en no dejar fija la cantidad de bancas a ocupar en el congreso, sino en fijar una
-"razón de representación", es decir, buscar que haya "una banca cada $x$ personas". Naturalmente, surgen dos problemáticas
+"razón de representación", es decir, determinar un divisor $x$ de forma que haya "una banca cada $x$ personas". Naturalmente, surgen dos problemáticas
 con este enfoque: por un lado, resulta ambigüo si se debe dividir el total de la población por $x$ para determinar el total
-de bancas a repartir o si se debe dividir la población propia de cada estado por $x$ (definiendo también qué hacer con 
-las partes fraccionarias resultantes). Estos dos posibles acercamientos producen, en general, resultados distintos.
+de bancas a repartir, o si se debe dividir la población propia de cada estado por $x$ — definiendo también qué hacer con 
+las partes fraccionarias resultantes— para determinar la cantidad de bancas que le corresponden. Estos dos posibles acercamientos producen, 
+en general, resultados distintos.
 Por otro lado, el hecho de no dejar fijo el \textit{house size} provoca que a medida que crece la población de un país con el
-correr de los años, el house size pueda tender a infinito (obviamente, suponiendo que el divisor $x$ permanece constante a lo largo
+correr de los años, el tamaño de la cámara pueda tender a infinito (obviamente, suponiendo que el divisor $x$ permanece constante a lo largo
 del tiempo, y que los estados no varían sus legislaciones para distribuir las bancas). Para ejemplificar esto, basta apreciar el caso de los Estados Unidos,
 en donde se estableció $30.000$ como divisor tras haber realizado su primer censo en 1790. La primera metodología utilizada
 para asignar las bancas fue dividir la población de cada estado por este divisor, y redondear los valores obtenidos hacia abajo.
-Por la cantidad de habitantes de ese entonces, el \textit{house size} resultante era de 112 miembros, como se puede apreciar
-en la tabla 1.1.
+Por la cantidad de habitantes de ese entonces, el \textit{house size} resultante era de 112 miembros.
 Si se realizara el mismo procedimiento con las poblaciones actualizadas de los mismos 15 estados que existían en ese entonces
 utilizando la información del último censo (2020) y el mismo divisor, el \textit{house size} resultante sería de 3.420, como 
-se puede apreciar en la tabla 1.2.
+se puede apreciar en la tabla \ref{tab:asignaciones_originales}.
 
 \begin{table}[h!]
-\centering
-\begin{tabular}{lcc}
-\hline
-\textit{Estado} & \textit{Cociente (30.000)} & \textit{Asignación} \\
-\hline
-Connecticut      &  7.895  &  7  \\
-Delaware         &  1.851  &  1  \\
-Georgia          &  2.361  &  2  \\
-Kentucky         &  2.290  &  2  \\
-Maryland         &  9.284  &  9  \\
-Massachusetts    & 15.844  & 15  \\
-Nuevo Hampshire  &  4.727  &  4  \\
-Nueva Jersey     &  5.986  &  5  \\
-Nueva York       & 11.053  & 11  \\
-Carolina del Norte & 11.784 & 11  \\
-Pensilvania      & 14.429  & 14  \\
-Rhode Island     &  2.282  &  2  \\
-Carolina del Sur &  6.875  &  6  \\
-Vermont          &  2.851  &  2  \\
-Virginia         & 21.019  & 21  \\
-\hline
-\textbf{Total}   & \textbf{120.531} & \textbf{112} \\
-\hline
-\end{tabular}
-\caption{Cociente y asignación de bancas para los 15 estados originarios de EEUU. Tabla extraída de \cita{balinski1982fair}}
-\end{table}
-
-\vspace{15em}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{lrrr}
-\hline
-\textit{Estado} & \textit{Población (2020)} & \textit{Cociente (30.000)} & \textit{Asignación} \\
-\hline
-Connecticut            &  3\,605\,944 & 120.198 & 120 \\
-Delaware               &    989\,948 &  32.998 &  32 \\
-Georgia                & 10\,711\,908 & 357.063 & 357 \\
-Kentucky               &  4\,505\,836 & 150.194 & 150 \\
-Maryland               &  6\,185\,278 & 206.176 & 206 \\
-Massachusetts          &  7\,029\,917 & 234.331 & 234 \\
-Nuevo Hampshire        &  1\,377\,529 &  45.918 &  45 \\
-Nueva Jersey           &  9\,288\,994 & 309.633 & 309 \\
-Nueva York             & 20\,201\,249 & 673.375 & 673 \\
-Carolina del Norte     & 10\,439\,388 & 347.980 & 347 \\
-Pensilvania            & 13\,002\,700 & 433.423 & 433 \\
-Rhode Island           &  1\,097\,379 &  36.579 &  36 \\
-Carolina del Sur       &  5\,118\,425 & 170.615 & 170 \\
-Vermont                &    643\,077 &  21.436 &  21 \\
-Virginia               &  8\,631\,393 & 287.713 & 287 \\
-\hline
-\textbf{Total} & \textbf{102\,828\,965} & \textbf{3\,427.632} & \textbf{3\,420} \\
-\hline
-\end{tabular}
-\caption{Actualización con datos del censo de 2020 para los 15 estados mencionados anteriormente. Datos extraídos de \href{https://www.census.gov/quickfacts/fact/table/CT/HSD410223}{Censo EE.UU.}
-}
-\end{table}
-    
-
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{lccccr}
+    \hline
+    \textit{Estado} 
+    & \textit{Cociente (1780)} 
+    & \textit{Asig. (1780)} 
+    & \textit{Población (2020)} 
+    & \textit{Cociente (2020)} 
+    & \textit{Asig. (2020)} \\
+    \hline
+    Connecticut            &   7.895 &   7 &   3\,605\,944 & 120.198 & 120 \\
+    Delaware               &   1.851 &   1 &     989\,948 &  32.998 &  32 \\
+    Georgia                &   2.361 &   2 &  10\,711\,908 & 357.063 & 357 \\
+    Kentucky               &   2.290 &   2 &   4\,505\,836 & 150.194 & 150 \\
+    Maryland               &   9.284 &   9 &   6\,185\,278 & 206.176 & 206 \\
+    Massachusetts          &  15.844 &  15 &   7\,029\,917 & 234.331 & 234 \\
+    Nuevo Hampshire        &   4.727 &   4 &   1\,377\,529 &  45.918 &  45 \\
+    Nueva Jersey           &   5.986 &   5 &   9\,288\,994 & 309.633 & 309 \\
+    Nueva York             &  11.053 &  11 &  20\,201\,249 & 673.375 & 673 \\
+    Carolina del Norte     &  11.784 &  11 &  10\,439\,388 & 347.980 & 347 \\
+    Pensilvania            &  14.429 &  14 &  13\,002\,700 & 433.423 & 433 \\
+    Rhode Island           &   2.282 &   2 &   1\,097\,379 &  36.579 &  36 \\
+    Carolina del Sur       &   6.875 &   6 &   5\,118\,425 & 170.615 & 170 \\
+    Vermont                &   2.851 &   2 &     643\,077 &  21.436 &  21 \\
+    Virginia               &  21.019 &  21 &   8\,631\,393 & 287.713 & 287 \\
+    \hline
+    \textbf{Total}        
+    & \textbf{120.531} & \textbf{112} 
+    & \textbf{102\,828\,965} 
+    & \textbf{3\,427.632} 
+    & \textbf{3\,420} \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Comparación entre los cocientes y asignaciones originales (1780) y los valores actualizados con datos del censo 2020 para los 15 estados originarios.
+    Tabla extraída de \cita{balinski1982fair},
+    datos actuales extraídos de \href{https://www.census.gov/quickfacts/fact/table/CT/HSD410223}{Censo EE.UU.}}
+    \end{table}
+    \label{tab:asignaciones_originales}
 \newpage
 
 %-------------------------------------------------------------------
 \subsection{Método de Hamilton}
-El primer sistema de distribución de bancas diseñado para el congreso estadounidense fue el \textit{método de Hamilton},
-diseñado por Alexander Hamilton en 1792, también conocido como el \textit{método de restos mayores} (\textit{greatest remainders}).
+El primer sistema de distribución de bancas diseñado para el congreso estadounidense fue el método de Hamilton,
+diseñado por Alexander Hamilton en 1792, también conocido como el \textsl{método de restos mayores} (\textit{greatest remainders}).
 Usualmente es considerado como el método más intuitivo. 
-El método consiste en:
+La estructura del método es:
 
-\begin{enumerate}[label=\textbf{Paso \arabic*.}, leftmargin=3.8em, itemsep=0.4em]
-    \item \textbf{Cálculo de cuotas exactas:} 
-    dividir los votos de cada partido por \( HQ(\vec{v}, H) \) y obtener \( q_i \coloneqq \frac{v_i}{HQ(\vec{v}, H)} = H\frac{v_i}{\sum_{i=1}^{n}{v_i}} \).
+\vspace{1em}
 
-    \item \textbf{Asignación inicial:} 
-    otorgar a cada partido \( i \) su \textit{lower quota}, \( \lfloor q_i \rfloor \).
-
-    \item \textbf{Distribución de bancas restantes:} 
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \textbf{Cálculo de quotas exactas:} 
+    dividir los votos de cada partido por \( HQ(\vec{v}, H) \) y obtener \( q_i \coloneqq \frac{v_i}{HQ(\vec{v}, H)} = H\frac{v_i}{\sum_{i=1}^{n}{v_i}} \) \;
+    \textbf{Asignación inicial:} 
+    otorgar a cada partido \( i \) su \textit{lower quota}, \( \lfloor q_i \rfloor \) \;
+    \textbf{Distribución de bancas restantes:} 
     ordenar los \textit{restos} \( p_i \coloneqq q_i - \lfloor q_i \rfloor \) de forma decreciente, 
-    y asignar las bancas a los partidos con mayores restos.
-\end{enumerate}
-
-\vspace{0.25cm}
-
-Un aspecto llamativo del \textit{método de Hamilton} es que no garantiza que si un partido recibe mayoría absoluta de los votos
-entonces vaya a tener la mayoría absoluta de las bancas. Para ver esto, alcanza con tomar un escenario de 100 bancas a repartise entre 
-3 partidos con el vector de votos $\vec{v} = (501,250,249)$. Las proporciones de votos obtenidas para este escenario resultan
-
-$$\vec{q} = (0.501, 0.25, 0.249),$$
-
-lo cual manifiesta la mayoría absoluta de votos para el partido $1$. 
-Sin embargo, al utilizar el \textit{método de Hamilton} para repartir las bancas, en primer lugar se asignan:
-
-\begin{itemize}[itemsep=0.6em]
-    \item \( \lfloor 50.1 \rfloor = 50 \) bancas al partido 1,
-
-    \item \( \lfloor 25 \rfloor = 25 \) bancas al partido 2,
-
-    \item \( \lfloor 24.9 \rfloor = 24 \) bancas al partido 3.
-\end{itemize}
-
-La banca pendiente de ser repartida es asignada al partido 3, por tener un resto de $0.9$. Se observa entonces que el partido 1 no obtiene
-la mayoría absoluta de las bancas a pesar de tener la mayoría absoluta de los votos.
-
-- Se puede definir la Droop quota
+    y asignar las bancas a los partidos con mayores restos \;
+    {\Return La asignación resultante;}
+    \caption{\textsf{Método de Hamilton}}
+\end{algorithm}
 
 %-------------------------------------------------------------------
-\subsection{Método de Jefferson/D'Hont}
+\subsection{Método de Jefferson/D'Hondt}
 
-Existen diversas formas de definir el método D'Hont. Como es el sistema utilizado para la distribución
+Existen diversas formas de definir el método D'Hondt. Como es el sistema utilizado para la distribución
 de bancas de la Honorable Cámara de Diputados de la Nación Argentina, se lo suele explicar en los
 colegios secundarios a través del siguiente algoritmo:
 
@@ -154,22 +110,11 @@ colegios secundarios a través del siguiente algoritmo:
  \textbf{Asignación de bancas:} 
  Asignar las $H$ bancas a los partidos que posean los $H$ números más grandes en la tabla confeccionada\;
  {\Return La asignación resultante;}
- \caption{Método D'Hont}
+ \caption{Método D'Hondt}
+ \label{alg:dhont}
 \end{algorithm}
 
-\begin{enumerate}[label=\textbf{Paso \arabic*.}, leftmargin=3.8em, itemsep=0.4em]
-    \item \textbf{Elaboración de tabla:} 
-    Ordenar los partidos decrecientemente por cantidad de votos, poniendo como filas a los
-    partidos.
-
-    \item \textbf{Cálculo de cocientes:} 
-    En la primera columna numérica poner la cantidad de votos; en la segunda, la cantidad 
-    de votos dividida por 2. Proceder de esta forma hasta llegar a la $H-$ésima columna, en la cual
-    aparece, para cada partido, su cantidad de votos dividida por $H$.
-
-    \item \textbf{Asignación de bancas:} 
-    Asignar las $H$ bancas a los partidos que posean los $H$ números más grandes en la tabla confeccionada.
-\end{enumerate}
+\vspace{1em}
 
 Otra forma de definir este método parte del siguiente razonamiento:
 si se quisiera asignar a cada partido $i$ el redondeo hacia abajo de la cantidad de bancas que le corresponden según la \textit{Hare-Quota}, 
@@ -179,38 +124,42 @@ Si se redondeara hacia arriba, la asignación excedería el total de bancas.
 Luego, se podría buscar un divisor $d \leq HQ(\vec{v}, H)$ tal que redondeando hacia abajo estos cocientes, la suma total sea $H$:
 
 \begin{equation}
-    \sum_{i=1}^{n} \left\lfloor \frac{v_i}{d} \right\rfloor = H
+    \sum_{i=1}^{n} \left\lfloor \frac{v_i}{d} \right\rfloor = H.
     \label{eq:divisor_method}
 \end{equation}
 
 De esta forma, asignando a cada partido $i$ la parte entera de su cociente, $\lfloor \frac{v_i}{d} \rfloor$, se tiene una asignación válida.
 De todos los divisores $d$ que sean solución a esta ecuación, usualmente se prefiere el más grande, a partir de pensar en este divisor
-como el "precio por banca", medido en cantidad de votos, que paga cada partido \cita{balinski1976jefferson}, \cita{wilson_dhondt}.
+como el "precio por banca", medido en cantidad de votos, que paga cada partido \cita{balinski1976jefferson, wilson_dhondt}.
 
 La siguiente propiedad muestra que la asignación devuelta por el algoritmo coincide con la asignación producida a partir de la ecuación anterior:
 
 \begin{proposition}
-    Llamando $A(\vec{v}, H)$ a la asignación de bancas dada por el \textbf{algoritmo 1} y $A_d(\vec{v}, H)$ a la asignación dada por 
+    Llamando $A(\vec{v}, H)$ a la asignación de bancas dada por el \textbf{algoritmo \ref{alg:dhont}} y $A_d(\vec{v}, H)$ a la asignación dada por 
     $$A_d(\vec{v}, H) = (\left\lfloor \frac{v_1}{d} \right\rfloor, \dots, \left\lfloor \frac{v_n}{d} \right\rfloor),$$
     con $d$ solución de la ecuación~\eqref{eq:divisor_method}, se tiene que $A(\vec{v}, H) = A_d(\vec{v}, H)$.
     
     \begin{proof}
-        Sin pérdida de generalidad, supongamos los partidos ordenados decrecientemente en cantidad de votos.
+        Sin pérdida de generalidad, supongamos los partidos ordenados decrecientemente por cantidad de votos.
         Al seleccionar el número más grande de la tabla, $a_{11}$ (la cantidad de votos del partido 1, el partido con más votos), si se
-        determina como precio por banca dicho valor, únicamente el partido 1 tiene la posibilidad de comprar una única banca.
+        determina como precio por banca dicho valor, únicamente el partido 1 tiene la posibilidad de comprar una única banca. Esto da la pauta de 
+        que para asignar las $H$ bancas será necesario reducir el divisor. Al utilizar el segundo número más grande de la tabla, se asignarán únicamente 
+        2 bancas: ambas al partido 1, si dicho número es $a_{12}$, o una al partido 1 y otra al partido 2, si el número es $a_{21}$.
         
-        TO DO: TERMINAR DEMO
-        
-        Llamemos $a_k$ al número seleccionado en el paso $k \in \{1, \dots, H\}$ a partir de la tabla construida en el algoritmo, es decir,
-        al $k$-ésimo valor más grande de la tabla. Digamos que es el valor ubicado en la posición $(ij)$ de la tabla: $a_k = \frac{v_i}{j}$.
-        Esto implica que, si se utiliza $a_k$ como divisor, únicamente se llegan a asignar $k$ bancas:
-        \begin{equation}
-            \lfloor \frac{v_l}{a_k} \rfloor
-                \begin{cases}
-                    q_l, & \text{si } v_l \geq a_k, \\[6pt]
-                    q_l - 1, & \text{si } v_l < a_k.
-                \end{cases}
-        \end{equation}
+        Continuando con este razonamiento, llamemos $d_k$ al número seleccionado en el paso $k \in \{1, \dots, H\}$ a partir de la tabla construida 
+        en el algoritmo, es decir,
+        al $k$-ésimo valor más grande de la tabla. Digamos que es el valor ubicado en la posición $(ij)$ de la tabla: $d_k = \frac{v_i}{j}$.
+        Esto significa que, si se utiliza $d_k$ como divisor, únicamente se llegan a asignar $k$ bancas:
+        justamente, por ser el $k$-ésimo valor más grande, al dividir la cantidad de votos $v_l$ de cada partido $l$, llamemos $a_{l j_l}$ al
+        número de la fila $l$ más chico que aparece entre $d_1, \dots, d_k$, 
+        tomando como convención $j_l = 1$ si $d_k > a_{l1}$. De acá resulta $a_{l j_l} = 0$ (es decir, si al partido $l$ no le alcanza ni siquiera para "comprar" una banca a precio
+        $d_k$), y se tiene
+            $$a_{l (j_l + 1)} < d_k \leq a_{l j_l} = \frac{v_l}{j_l} \implies j_l + 1 = \frac{v_l}{a_{l (j_l+1)}}> \frac{v_l}{d_k} \geq \frac{v_l}{a_{l j_l}} = j_{l},$$
+        por lo que
+           $$ \left\lfloor \frac{v_l}{d_k} \right\rfloor = j_l \text{  y  } \sum_{l = 1}^{n}{\left\lfloor \frac{v_l}{d_k} \right\rfloor} = k.$$
+
+        De esta forma, al utilizar $a_H$ como divisor, se asignan exactamente $H$ bancas al redondear hacia abajo los cocientes $\frac{v_i}{a_H}$, 
+        y por lo tanto $A_{a_H}(\vec{v}, H)$ coincide con $A(\vec{v}, H)$.
     \end{proof}
 \end{proposition}
 
@@ -225,17 +174,12 @@ Para definir este método, notemos
             \{\lfloor x \rfloor, \lceil x \rceil\}, & \text{si } x - \lfloor x \rfloor = \frac{1}{2}
         \end{cases}
 \end{equation} 
-Este método surge de un razonamiento análogo al del método anterior: buscamos un divisor $d$ tal que al redondear según $[[\cdot]]$,
+Este método surge de un razonamiento análogo al del método anterior: buscamos un divisor $d$ tal que al redondear según $\llbracket \cdot \rrbracket$,
 la asignación resultante sea válida, ie asigna $H$ bancas. Es decir, buscamos $d$ solución de 
 
 \begin{equation}
-    \sum_{i=1}^{n} \left\llbracket \frac{v_i}{d} \right\rrbracket = H
+    \sum_{i=1}^{n} \left\llbracket \frac{v_i}{d} \right\rrbracket = H.
 \end{equation}
 
 Vale observar que, por la ambigüedad del caso $x - \lfloor x \rfloor = \frac{1}{2}$ en el redondeo, este método puede llegar a devolver
 hasta $2^{\frac{s}{2}}$ asignaciones posibles para un $d$ fijo, con $s=|\{i \in [n]: \frac{v_i}{d} - \lfloor \frac{v_i}{d} \rfloor = \frac{1}{2}\}|$.
-
-\subsection{Observaciones de los métodos típicos}
-
-A continuación, veremos algunas situaciones atípicas que se han producido a lo largo de la historia ante la utilización
-de estos métodos, motivando un análisis más profundo de las propiedades que cumplen, además de la definición de nuevos métodos.

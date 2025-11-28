@@ -4,7 +4,7 @@ En esta sección nos dedicaremos a analizar la utilidad y el grado de "justicia"
 de métodos enunciadas anteriormente permiten resolver el problema de \textit{apportionment}. Esencialmente,
 veremos que los métodos de divisor son los únicos métodos que no producen ninguna de las paradojas de Alabama, Población
 y House Size mencionadas en la sección de ejemplos -- o, en otras palabras, son los únicos métodos
-que verifican las propiedades de \textit{monotonía de población}, \textit{house monotonicity} y \textit{coherencia} (que enunciaremos
+que verifican las propiedades de \textsl{monotonía de población}, \textsl{house monotonicity} y \textsl{coherencia} (que enunciaremos
 en breve) --.
 A su vez, el otro resultado importante que mencionaremos es que los métodos de divisor no satisfacen la propiedad 
 \textit{quota}, concluyendo de esta forma que no pueden existir métodos verdaderamente satisfactorios, en el sentido
@@ -13,26 +13,29 @@ de que no produzcan paradojas y satisfagan la propiedad \textit{quota} simultán
 Dado que los siguientes resultados fueron descubiertos y enunciados en relación a paradojas vinculadas a contextos de repartición
 de bancas entre estados (y no entre partidos), los enunciaremos en esos mismos términos.
 
-\begin{proposition}
-    (\textbf{Robustez de métodos de divisor ante \textit{paradoja de población}})
+\vspace{1em}
 
-    Un método de apportionment $A$ evita la \textit{paradoja de población} $\iff$ $A$ es un método de divisor.
+\begin{proposition}
+    (\textbf{Robustez de métodos de divisor ante \textsl{paradoja de población}})
+
+    Un método de apportionment $A$ evita la \textsl{paradoja de población} si y solo si $A$ es un método de divisor.
 
     \begin{proof}
-        Es fácil ver la vuelta: dado $A$ un método de divisor, supongamos que un estado $s_1$ aumenta su población \textit{relativo} a otro estado 
+        Es fácil ver la vuelta: dado $A$ un método de divisor, supongamos que un estado $s_1$ aumenta su población \textsl{relativo} a otro estado 
         $s_2$ y el estado $s_2$ gana bancas. Entonces, la quota del estado $s_2$ debe haber pasado algún punto de salto, pero como 
-        el aumento de $s_1$ es mayor \textit{relativo} al de $s_2$, la quota de $s_1$ también debe haber avanzado, y por lo tanto no
+        el aumento de $s_1$ es mayor \textsl{relativo} al de $s_2$, la quota de $s_1$ también debe haber avanzado, y por lo tanto no
         puede haber perdido bancas.
 
-        La ida es un poco más técnica y complicada, por lo que queda en el apéndice.
+        La ida es más técnica y complicada y escapa a los fines de este trabajo, por lo que se puede revisar de \cita{balinski1982fair}.
     \end{proof}
 \end{proposition}
 
+\vspace{1em}
 
 \begin{proposition}
-    (\textbf{Robustez de métodos de divisor ante \textit{paradoja de Alabama}})
+    (\textbf{Robustez de métodos de divisor ante \textsl{paradoja de Alabama}})
 
-    Todo método de divisor $A$ evita la \textit{paradoja de Alabama}.
+    Todo método de divisor $A$ evita la \textsl{paradoja de Alabama}.
 
     \begin{proof}
         En los métodos de divisor, la cantidad de bancas obtenidas por un estado es equivalente a 
@@ -42,40 +45,35 @@ de bancas entre estados (y no entre partidos), los enunciaremos en esos mismos t
     \end{proof}
 \end{proposition}
 
+\vspace{1em}
 
 \begin{proposition}
-    (\textbf{Robustez de métodos de divisor ante \textit{paradoja de nuevos estados}})
-    Todo método de divisor $A$ evita la \textit{paradoja de nuevos estados}.
-
-    \begin{proof}
-        Para ver esto, pensemos en la \textit{paradoja de nuevos estados} al revés de como fue planteada en la sección de paradojas: 
-        en lugar de considerar que se agrega un estado nuevo junto con la cantidad correspondiente de bancas según redondeando su quota justa (osea,
-        la quota obtenida al dividir la población del nuevo estado por la Hare-Quota), consideremos un estado $s$ que desaparece, llevándose consigo
-        la cantidad $a_s$ de bancas que tenía. Justamente, como sus bancas desaparecen, el divisor $D$ que estaba siendo utilizado antes de la desaparición del estado $s$ sigue 
-        sirviendo para los estados restantes, y al considerar $\llbracket \frac{v_i}{D} \rrbracket$ para $i \in [n] \setminus \{s\}$, se tiene que la asignación
-        que se tenía antes para los estados distintos de $s$ sigue sirviendo. Dado que las asignaciones permanecen constantes ante la aparición/desaparición
-        de un estado con sus respectivas bancas, no se produce la \textit{paradoja de nuevos estados}.
-    \end{proof}
+    (\textbf{Falencia de métodos de divisor ante propiedad \textit{quota}})
+    No existe método de divisor $A$ que verifique la propiedad \textit{quota} para todo problema.
 \end{proposition}
 
-"A viable solution for the whole problem should comprise viable solutions for its partial
-problems. Balinski / Young (1982) put it this way: An inherent principle of any
-fair division is that every part of a fair division should be fair. Conversely the whole
-solution should be retrievable by concatenating solutions of partial problems. The
-whole and its parts must fit together in a coherent way."
+\vspace{1em}
 
 Introducimos la siguiente notación, que facilitará la escritura de las siguientes propiedades:
-
 dado un vector $x \in \mathbb{R}^n$ y un subconjunto de índices $I \subset \{1, \dots , n\}$, notamos
 
 \[
-    x_I \coloneq \sum_{i \in I}{x_i}
+    x_I \coloneq \sum_{i \in I}{x_i}.
 \]
+
+Esto nos permitirá formalizar un concepto planteado por \cita{balinski1982fair}, con el cual caracterizan la relación
+que ha de existir entre las partes y el todo de una solución: 
+\say{
+    Un principio inherente a cualquier división justa es que toda parte de una división justa debe ser justa. 
+    A la inversa, la solución completa debe ser reconstruible a partir de concatenar soluciones de problemas parciales.
+    El todo y sus partes deben encajar juntos de forma coherente.
+}
+Introducimos entonces la definición de \textsl{coherencia}.
 
 \begin{definition}
 (\textbf{Coherencia})
-Un método de \textit{apportionment} $A$ verifica la propiedad de \textit{\textbf{Coherencia}} si $\forall n \in \mathbb{N}$ y 
-$\forall \vec{v} \in \mathbb{R}_{\geq 0}^{n}$, todo vector de asignaciones $x \in A(\vec{v}, x_+)$ satisface, para cualquier subconjunto
+Un método de \textit{apportionment} $A$ verifica la propiedad de \textit{\textbf{Coherencia}} si para todo $n \in \mathbb{N}$ y 
+para todo $\vec{v} \in \mathbb{R}_{\geq 0}^{n}$, todo vector de asignaciones $x \in A(\vec{v}, x_+)$ satisface, para cualquier subconjunto
 de partidos $I \subset \{ 1, \dots , n\}$, las siguientes propiedades:
 
 \begin{enumerate}
@@ -83,36 +81,54 @@ de partidos $I \subset \{ 1, \dots , n\}$, las siguientes propiedades:
     $$(x_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I)$$
 
     \item (\textit{Concatenación de soluciones parciales})
-    $$\forall (y_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I) \text{ y } 
-    \forall (z_i)_{i \in I^{c}} \in A((\vec{v}_i)_{i \in I^{c}}, x_{I^{c}})$$ 
-    se tiene que $((y_i)_{i \in I}, (z_i)_{i \in I^{c}}) \in A(\vec{v}, x_+)$
+    $$\text{para todo }(y_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I) \text{ y } 
+    \text{para todo }(z_i)_{i \in I^{c}} \in A((\vec{v}_i)_{i \in I^{c}}, x_{I^{c}})$$ 
+    se tiene que $((y_i)_{i \in I}, (z_i)_{i \in I^{c}}) \in A(\vec{v}, x_+)$.
 \end{enumerate}
 
-Esencialmente, la propiedad de \textit{coherencia} establece que, dada una asignación de bancas a partir de un método $A$, 
-si se utiliza el método sobre un subconjunto de partidos con el subconjunto de bancas que habían recibido, entonces la asignación
-correspondiente a ese subconjunto debe permanecer igual que antes.
+Esencialmente, la propiedad de \textsl{coherencia} establece que, dada una asignación $a$ de bancas a partir de un método $A$, 
+si se utiliza el método sobre un subconjunto $S$ de partidos con un tamaño de cámara de $\sum_{i \in S}{a_i}$, 
+entonces la asignación correspondiente $S$ debe permanecer igual que antes.
 
 \end{definition}
 
 \begin{theorem}
     (\textbf{Teorema de coherencia})
 
-    Un método satisface la propiedad de \textit{coherencia} si y solo si es un método de divisor.
+    Un método satisface la propiedad de \textsl{coherencia} si y solo si es un método de divisor.
 
     \begin{proof}
-        La demostración de la ida se realiza analizando una clase de métodos más amplia, los métodos rank-index, para
-        luego construir una secuencia de saltos que permite concluir que $A$ es un método de divisor. Debido a su tecnicidad,
-        esta demostración fue realizada originalmente por \cita{balinski1980theory}. 
-        Emulamos una demostración más novedosa, de \cita{PALOMARES201611} en el apéndice A.
+        La prueba de la ida se realiza analizando una clase de métodos más amplia, los métodos rank-index, para
+        luego construir una secuencia de saltos que permite concluir que $A$ es un método de divisor.
+        
+        Debido a su tecnicidad, no realizaremos esta demostración en el presente trabajo.
+        %Debido a su tecnicidad,
+        %esta demostración fue realizada originalmente por \cita{balinski1980theory}. 
+        %Emulamos una demostración más novedosa, de \cita{PALOMARES201611} en el apéndice A.
 
-        Para la vuelta, sea $A$ un método de divisor. Para verificar su \textit{coherencia}, basta ver que:
-
-        si existe divisor $D > 0$ para el cual $x \in A(\vec{v}, x_+)$, entonces, dado $I \subset \{ 1, \dots , n\}$, 
-        dicho divisor también sirve para $(x_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I)$, por lo que la 
-        \textit{coherencia de subproblemas} se verifica de forma inmediata.
-
-        Por otro lado, si se tiene $(y_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I) \text{ y } 
-        (z_i)_{i \in I^{c}} \in A((\vec{v}_i)_{i \in I^{c}}, x_{I^{c}})$, es por
+        %Para la vuelta, sea $A$ un método de divisor. Para verificar su \textit{coherencia}, basta ver que:
+        %
+        %si existe divisor $D > 0$ para el cual $x \in A(\vec{v}, x_+)$, entonces, dado $I \subset \{ 1, \dots , n\}$, 
+        %dicho divisor también sirve para $(x_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I)$, por lo que la 
+        %\textit{coherencia de subproblemas} se verifica de forma inmediata.
+        %
+        %Por otro lado, si se tiene $(y_i)_{i \in I} \in A((\vec{v}_i)_{i \in I}, x_I) \text{ y } 
+        %(z_i)_{i \in I^{c}} \in A((\vec{v}_i)_{i \in I^{c}}, x_{I^{c}})$, es por
 
     \end{proof}
 \end{theorem}
+
+\begin{corollary}
+    (\textbf{Robustez de métodos de divisor ante \textsl{paradoja de nuevos estados}})
+    Todo método de divisor $A$ evita la \textsl{paradoja de nuevos estados}.
+
+    \begin{proof}
+        Para ver esto, pensemos en la \textsl{paradoja de nuevos estados} al revés de como fue planteada en la sección de paradojas: 
+        en lugar de considerar que se agrega un estado nuevo junto con la cantidad correspondiente de bancas según redondeando su quota justa (osea,
+        la quota obtenida al dividir la población del nuevo estado por la Hare-Quota), consideremos un estado $s$ que desaparece, llevándose consigo
+        la cantidad $a_s$ de bancas que tenía. Justamente, como sus bancas desaparecen, el divisor $D$ que estaba siendo utilizado antes de la desaparición del estado $s$ sigue 
+        sirviendo para los estados restantes, y al considerar $\llbracket \frac{v_i}{D} \rrbracket$ para $i \in [n] \setminus \{s\}$, se tiene que la asignación
+        que se tenía antes para los estados distintos de $s$ sigue sirviendo. Dado que las asignaciones permanecen constantes ante la aparición/desaparición
+        de un estado con sus respectivas bancas, no se produce la \textsl{paradoja de nuevos estados}.
+    \end{proof}
+\end{corollary}

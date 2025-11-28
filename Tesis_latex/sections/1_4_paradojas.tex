@@ -31,31 +31,33 @@ A continuación, se muestra un ejemplo concreto de esta paradoja:
     C & 2 & 1.429 & 2 & 1.571 & 1 \\
     \hline
     \end{tabular}
-    \caption{Distribución de bancas para diferentes tamaños de cámara extraído de \href{https://en.wikipedia.org/wiki/Apportionment_paradox#Alabama_paradox}{Wikipedia}.}
+    \caption{Distribución de bancas para diferentes tamaños de cámara, extraído de \href{https://en.wikipedia.org/wiki/Apportionment_paradox}{Wikipedia}.}
 \end{table}
-    
 
 \vspace{0.25cm}
 
-Un aspecto llamativo del \textit{método de Hamilton} es que no garantiza que si un partido recibe mayoría absoluta de los votos
-entonces vaya a tener la mayoría absoluta de las bancas. Para ver esto, alcanza con tomar un escenario de 100 bancas a repartise entre 
-3 partidos con el vector de votos $\vec{v} = (501,250,249)$. Las proporciones de votos obtenidas para este escenario resultan
+Otro aspecto llamativo del \textit{método de Hamilton} es que no garantiza que si un partido recibe mayoría absoluta de los votos
+entonces vaya a tener la mayoría absoluta de las bancas. Para ver esto, alcanza con tomar un escenario de 10 bancas a repartirse entre 
+3 partidos con el vector de votos $\vec{v} = (501,495,4)$. Las proporciones de votos obtenidas para este escenario resultan
 
-$$\vec{q} = (0.501, 0.25, 0.249),$$
+$$\vec{q} = (0.501, 0.495, 0.004),$$
 
 lo cual manifiesta la mayoría absoluta de votos para el partido $1$. 
 Sin embargo, al utilizar el \textit{método de Hamilton} para repartir las bancas, en primer lugar se asignan:
 
 \begin{itemize}[itemsep=0.6em]
-    \item \( \lfloor 50.1 \rfloor = 50 \) bancas al partido 1,
+    \item \( \lfloor 5.01 \rfloor = 5 \) bancas al partido 1,
 
-    \item \( \lfloor 25 \rfloor = 25 \) bancas al partido 2,
+    \item \( \lfloor 4.95 \rfloor = 4 \) bancas al partido 2,
 
-    \item \( \lfloor 24.9 \rfloor = 24 \) bancas al partido 3.
+    \item \( \lfloor 0.04 \rfloor = 0 \) bancas al partido 3.
 \end{itemize}
 
-La banca pendiente de ser repartida es asignada al partido 3, por tener un resto de $0.9$. Se observa entonces que el partido 1 no obtiene
+La banca pendiente de ser repartida es asignada al partido 2, por tener un resto de $0.95$, resultando en una asignación de 5 bancas para los partidos 1 y 2, y 0 bancas para el 3. 
+Se observa entonces que el partido 1 no obtiene
 la mayoría absoluta de las bancas a pesar de tener la mayoría absoluta de los votos.
+No obstante, puede ser razonable que este escenario resulte así, pues la proporción por la cual el partido $1$ tiene mayoría absoluta de los votos
+es chica en relación a la proporción de bancas correspondientes al partido $2$.
 
 %---------------------------------------------------------
 \subsection{Paradoja de nuevos estados}
@@ -69,12 +71,12 @@ de habitantes, le corresponderían al menos 5 bancas. Por este motivo, se ampli�
 tal que Oklahoma obtuviese sus 5 bancas. 
 
 Ante este escenario, lo esperable era que, al haber agregado las 5 bancas nuevas, el resto de los estados conserven las bancas que tenían.
-No obstante, el método de Hamilton produjo la denominada \textit{paradoja de nuevos estados}: aplicándose con 391 bancas, 
+No obstante, el método de Hamilton produjo la denominada \textsl{paradoja de nuevos estados}: aplicándose con 391 bancas, 
 le asignó 5 a Oklahoma, 4 a Maine y 37 a Nueva York; mientras que en el contexto anterior, sin la presencia de Oklahoma y con
 un total de 386 bancas, le asignaba 38 bancas a Nueva York y 3 a Maine.
 Esencialmente, al incorporarse Oklahoma agregando sus correspondientes bancas, Nueva York perdió una banca ante Maine. 
 
-En resumen, la \textit{paradoja de nuevos estados} se produce cuando la incorporación de un estado nuevo, incorporando también
+En resumen, la \textsl{paradoja de nuevos estados} se produce cuando la incorporación de un estado nuevo, incorporando también
 las respectivas bancas correspondientes, provoca alteraciones en la distribución de las bancas de los demás partidos.
 
 %---------------------------------------------------------
@@ -88,13 +90,96 @@ creciendo más rápido que Maine, había perdido una banca frente a este estado.
 Se analizaron las quotas, observándose que en 1900 eran de 9.599 para Virginia (redondeada hacia arriba por el método de Hamilton)
 y de 3.595 para Maine (redondeada para abajo). La tasa de crecimiento de estos estados era de 1.07\% anual para Virginia y de 
 0.67\% para Maine, contra una tasa general de 2.02\% del país entero. Con estos números, las quotas de estos estados en 1901 
-habían decrecido a 9.509 para Virginia y 3.595\%, resultando en asignaciones de 9 y 4 bancas respectivamente \cita{balinski1982fair}.
+habían decrecido a 9.509 para Virginia y 3.595 para Maine, resultando en asignaciones de 9 y 4 bancas respectivamente \cita{balinski1982fair}.
 
 El motivo por el cual se produjo esta paradoja está vinculado a que, a pesar de que el crecimiento de Virginia respecto a Maine
 era mayor, como ambos estados tenían tasas de crecimiento que no llegaban a alcanzar la tasa de crecimiento del país, naturalmente
 perderían bancas. Por ser Virginia un estado más grande, la diferencia entre su tasa de crecimiento y la tasa de crecimiento nacional
 representaba, en términos absolutos, una cantidad más grande, que repercutió provocando que Virginia quede detrás de Maine en
 términos de restos.
+
+%---------------------------------------------------------
+\subsection{D'Hondt y Webster no cumplen \textit{quota}}
+
+
+\begin{proposition}
+    El método D'Hondt no satisface la propiedad \textit{quota}.
+
+    \begin{proof}
+        Basta observar el ejemplo de la tabla \ref{tab:dhont_no_quota}, para $n=6$, 
+        $\vec{v} = (1646, 6936, 154, 2091, 685, 988)$ y $H = 250$.
+
+        Se puede ver que el partido B tiene una \textit{quota} exacta de 138.72, por lo que le corresponderían
+        138 ó 139 bancas si se verificara la propiedad \textit{quota}. Sin embargo, vemos que con este método recibe 
+        $140 \notin \{138, 139\}$ bancas.
+
+    \end{proof}
+\end{proposition}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcccc}
+    \hline
+    \textit{Partido} & 
+    \textit{Votos} &
+    \textit{Quota justa (D = 50)} &
+    \textit{D-Quota (D = 49.5)} &
+    \textit{Bancas} \\
+    \hline
+    A     & 1646  & 32.92  & 33.25  & 33  \\
+    B     & 6936  & 138.72 & 140.12 & 140 \\
+    C     & 154   & 3.08   & 3.11   & 3   \\
+    D     & 2091  & 41.82  & 42.24  & 42  \\
+    E     & 685   & 13.70  & 13.83  & 13  \\
+    F     & 988   & 19.76  & 19.95  & 19  \\
+    \cline{1-5}
+    Total & 12500 & 250    & 252.5  & 250 \\
+    \hline
+    \end{tabular}
+    \caption{Método D'Hondt aplicado a un escenario con 6 estados y $H=250$ bancas. Entre paréntesis se indican primero la \textit{Hare-Quota}, y luego 
+    un divisor $D$ para el cual el redondeo hacia abajo (propio de D'Hondt) realiza una asignación válida de bancas.}
+    \label{tab:dhont_no_quota}
+\end{table}
+
+\vspace{0.5em}
+
+\begin{proposition}
+    El método de Webster no satisface la propiedad \textit{quota}.
+
+    \begin{proof}
+        Basta observar el ejemplo de la tabla \ref{tab:webster_quota}, para $n=4$, 
+        $\vec{v} = (70653, 117404, 210923, 1194456)$ y $H = 35$.
+
+        Se puede ver que el partido D tiene una \textit{quota} exacta de 26.236, por lo que le corresponderían
+        26 ó 27 bancas si se verificara la propiedad \textit{quota}. Sin embargo, vemos que con este método recibe 
+        $25 \notin \{26, 27\}$ bancas. 
+
+    \end{proof}
+\end{proposition}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{lcccc}
+    \hline
+    \textit{Partido} & 
+    \textit{Votos} &
+    \textit{Quota justa (D = 45526)} &
+    \textit{D-Quota (D = 46850)} &
+    \textit{Bancas} \\
+    \hline
+    A     & 70653   & 1.552  & 1.508    & 2   \\
+    B     & 117404  & 2.579  & 2.505    & 3   \\
+    C     & 210923  & 4.633  & 4.502    & 5   \\
+    D     & 1194456 & 26.236 & 25.49    & 25  \\
+    \cline{1-5}
+    Total & 1593436 & 35     & 34.005   & 35  \\
+    \hline
+    \end{tabular}
+    \caption{Método de Webster aplicado a un escenario con 4 estados y $H=35$ bancas. Entre paréntesis se indican primero la \textit{Hare-Quota}, y luego 
+    un divisor $D$ para el cual el redondeo estándar (propio de Webster) realiza una asignación válida de bancas.
+    Extraído de \cita{balinski1982fair}.}
+    \label{tab:webster_quota}
+\end{table}
 
 %-------------------------------------------------------------------
 \subsection{Reflexiones acerca de los métodos típicos}

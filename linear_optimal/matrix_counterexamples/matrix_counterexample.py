@@ -6,7 +6,7 @@ import gurobipy as gp
 from gurobipy import GRB
 
 # Global parameters
-N = 4
+N = 5
 K = 2
 M = math.comb(N, K)
 

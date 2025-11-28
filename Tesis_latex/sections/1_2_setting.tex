@@ -1,31 +1,36 @@
 \section{Marco del problema}
 
-Sean $n \in \mathbb{N}$ con $\{ 1, \dots, n\}$ un conjunto que representará partidos, y $H \in \mathbb{N}$ un natural que representará
-cierta cantidad de bancas a repartir. Para sintetizar notación, definimos:
+Sean $n \in \mathbb{N}$ con $\{ 1, \dots, n\}$ un conjunto que representará el conjunto de partidos, y $H \in \mathbb{N}$ un natural que representará
+cierta cantidad de bancas a repartir — que denominaremos "tamaño de la cámara" o \textit{house size}—. Para sintetizar notación, definimos:
 \[
 [n] \vcentcolon= \{ 1, \dots, n\}
 \]
 
-\begin{itemize}
-    \item $ \vec{v} = (v_1, \dots, v_n) \in \mathbb{N}^n$ vector de votos recibidos por cada partido -- o poblaciones de cada estado. Nos referiremos a este vector
-    de cualquiera de las dos formas indistintamente--,
-    \item $\vec{q} = (q_1, \dots, q_n)$ vector de proporciones o \textit{quotas}, con $q_i = H\frac{v_i}{\sum_{i=1}^{n}{v_i}}$ y $\sum_{i=1}^{n}{q_i} = H$
-\end{itemize}
+Tendremos también 
+$$ \vec{v} = (v_1, \dots, v_n) \in \mathbb{N}^n,$$ 
+un vector de los votos recibidos por cada partido (o poblaciones de cada estado --nos referiremos a este vector de cualquiera 
+de las dos formas indistintamente--), y
+$$\vec{q} = (q_1, \dots, q_n) \in \mathbb{R}^n,$$ 
+un vector de proporciones, que denominaremos \textit{quotas}, con $q_i \vcentcolon= H\frac{v_i}{\sum_{i=1}^{n}{v_i}}$, 
+por lo que $\sum_{i=1}^{n}{q_i} = H$.
 
 Adicionalmente, para ciertos modelos se considera el vector $\vec{r} \in \mathbb{N}_0^{n}$ como un vector de requerimientos mínimos,
-de forma tal que cada partido $i$ debe recibir al menos $r_i$ bancas, y usualmente se toma $r_i = r \in \mathbb{N}_0^{n}$ constante.
+de forma tal que cada partido $i \in [n]$ debe recibir al menos $r_i$ bancas, y usualmente se toma $r_i = r \in \mathbb{N}_0^{n}$ constante.
 Sin embargo, para el presente trabajo no consideraremos la presencia de restricciones de esta índole sobre las cantidades de bancas asignadas.
 
-Intuitivamente, uno definiría un método de \textit{apportionment A} como una función que toma un vector de votos $\vec{v}$, una cantidad de bancas 
-$H$, y retorna un vector $A(\vec{v}, H) \in \mathbb{N}^n$ que suma H, e indica la cantidad de bancas asignadas a cada partido. No obstante,
+Intuitivamente, uno definiría un método de \textit{apportionment A} como una función que toma como parámetros $\vec{v}$, $H$, 
+y retorna un vector $A(\vec{v}, H) \in \mathbb{N}^n$ que suma H, e indica la cantidad de bancas asignadas a cada partido. No obstante,
 considerando el ejemplo de 2 partidos con exactamente la misma cantidad de votos y una única banca a repartir (enunciado en la introducción),
-podríamos pensar que un método debe como opciones válidas a cualquiera de las dos asignaciones posibles. Esto motiva la definición de los
-métodos de apportionment como funciones que retornan conjuntos de asignaciones (en lugar de una única asignación).
+podríamos pensar que un método debe contemplar como opciones válidas a cualquiera de las dos asignaciones posibles en el ejemplo. 
+Esto motiva la definición de los métodos de apportionment como funciones que retornan conjuntos de asignaciones 
+posibles (en lugar de una única asignación).
 
-Dado que en ocasiones trataremos al vector $\vec{v}$ directamente como un vector de proporciones, consideraremos que $\vec{v} \in \mathbb{R}_{+}^{n}$.
-Para simplificar notación, denotaremos $x_+ \vcentcolon= \sum_{i=1}^{n}x_i$ a la suma de elementos de un vector $(x_1, \dots, x_n)$. De esta forma, el total de votos 
+Dado que en ocasiones trataremos al vector $\vec{v}$ directamente como un vector de proporciones (en lugar de votos o habitantes), 
+consideraremos que $\vec{v} \in \mathbb{R}_{+}^{n}$.
+Para simplificar notación, denotaremos $x_+ \vcentcolon= \sum_{i=1}^{n}x_i$ a la suma de elementos de un vector $(x_1, \dots, x_n) \in \mathbb{R}^n$. 
+De esta forma, el total de votos 
 (o de proporciones), que será una cantidad recurrente, se podrá sintetizar como $v_+$.
-Asimismo, al conjunto de asignaciones válidas lo denotaremos de la siguiente forma, siguiendo la escritura de \cita{pukkelsheim2017}:
+Asimismo, al conjunto de asignaciones válidas lo denotaremos de la siguiente forma, siguiendo la escritura de \cita{pukelsheim2017}:
 
 \[
 \mathbb{N}_0^n(H) \vcentcolon= \left\{ (x_1, \ldots, x_n) \in \mathbb{N}_0^n \,\middle|\, x_+ = H \right\}.
@@ -46,21 +51,23 @@ $A(\vec{v}, H) = \{ x \}$.
 \subsection{Propiedades deseables}
 \label{subsec:props_deseables}
 Enunciaremos una serie de propiedades deseables que han ido surgiendo en la literatura a lo largo de la historia, el grueso de ellas definidas por Balinski y Young en 
-\cita{balinski1980theory}, y otra gran parte por Pukkelsheim en \cita{pukkelsheim2017}. Este último comienza por caracterizar a una regla de \textit{apportionment}
+\cita{balinski1980theory}, y otra gran parte por Pukelsheim en \cita{pukelsheim2017}. Este último comienza por caracterizar a una regla de \textit{apportionment}
 razonable como aquella que satisface "anonimidad, balance, concordancia, decencia y exactitud". Qué significan estos términos quedará más claro al terminar esta sección.
+
+\vspace{0.5em}
 
 \begin{definition}
 (\textbf{Anonimidad - Simetría})
-    Un método de \textit{apportionment} $A$ satisface \textit{\textbf{anonimidad}} si cualquier reordenamiento del vector de votos conlleva el mismo reordenamiento
-    sobre los vectores de asignaciones. En esencia, esto caracteriza a los métodos anónimos como aquellos en los que la posición que se le asigne a un partido
+    Un método de \textit{apportionment} $A$ satisface \textbf{anonimidad} si cualquier reordenamiento del vector de votos conlleva el mismo reordenamiento
+    sobre los vectores de asignaciones. En esencia, esto caracteriza a los métodos anónimos como aquellos en los que la posición de un partido
     en el vector de votos no tiene influencia en la cantidad de bancas que se le asignarán. Formalmente, dado $\vec{v} \in \mathbb{R}_{+}^{n}$,
     si $\vec{v'} = \sigma(\vec{v})$ para $\sigma$ una permutación de las coordenadas de $\vec{v}$, 
-    entonces $\sigma(\vec{a}) \in A(\sigma(\vec{v}), H) \hspace{0.5em}\forall \vec{a} \in A(\vec{v}, H)$.
+    entonces $A(\sigma(\vec{v}), H) = \{ \sigma(\vec{a}) : \vec{a} \in A(\vec{v}, H) \}$.
 \end{definition}
 
 \begin{definition}
 (\textbf{Balance})
-    Un método de \textit{apportionment} $A$ se dice \textit{\textbf{balanceado}} si para dos partidos que tienen la misma cantidad de votos, sus asignaciones
+    Un método de \textit{apportionment} $A$ se dice \textbf{balanceado} si para dos partidos que tienen la misma cantidad de votos, sus asignaciones
     correspondientes difieren a lo sumo en una banca. Formalmente, dados $\vec{v} \in \mathbb{R}_{+}^{n}, \ H \in \mathbb{N}$, y dada una asignación $\vec{a}
     \in A(\vec{v}, H)$,
     \[
@@ -70,7 +77,7 @@ razonable como aquella que satisface "anonimidad, balance, concordancia, decenci
 
 \begin{definition}
 (\textbf{Concordancia})
-    Un método de \textit{apportionment} $A$ se dice \textit{\textbf{concordante}} si dados dos partidos, el más fuerte no recibe menos bancas que el menos fuerte. 
+    Un método de \textit{apportionment} $A$ se dice \textbf{concordante} si dados dos partidos, el más fuerte no recibe menos bancas que el menos fuerte. 
     Formalmente, dados $\vec{v} \in \mathbb{R}_{+}^{n}, \ H \in \mathbb{N}$, y dada una asignación $\vec{a}
     \in A(\vec{v}, H)$,
     \[
@@ -80,64 +87,58 @@ razonable como aquella que satisface "anonimidad, balance, concordancia, decenci
 
 \begin{definition}
 (\textbf{Decencia - Homogeneidad})
-    Un método de \textit{apportionment} $A$ se dice \textit{\textbf{decente}} u \textit{\textbf{homogéneo}} si cualquier reescalamiento del vector de votos
+    Un método de \textit{apportionment} $A$ se dice \textbf{decente} u \textbf{homogéneo} si cualquier reescalamiento del vector de votos
     no produce cambios en las asignaciones retornadas por el método. Formalmente, dados $\vec{v} \in \mathbb{R}_{+}^{n}, \ H \in \mathbb{N}, \ \alpha \in \mathbb{R}_+$,
     \[
         A(\vec{v}, H) = A(\alpha \cdot \vec{v}, H)
     \]
     
-    Esencialmente, esta propiedad nos dice que un método \textit{\textbf{decente}} debe basar sus asignaciones en las \textit{proporciones} de votos, y 
-    no en las \textit{cantidades} netas de votos. En particular, utilizando el factor de reescalamiento $\alpha = \frac{1}{v_+}$, cualquier problema
+    Esencialmente, esta propiedad nos dice que un método \textbf{decente} debe basar sus asignaciones en las \textsl{proporciones} de votos, y 
+    no en las \textsl{cantidades netas} de votos. En particular, utilizando el factor de reescalamiento $\alpha = \frac{1}{v_+}$, cualquier problema
     de \textit{apportionment} se puede tratar utilizando el vector de proporciones $\vec{w} \vcentcolon= \alpha \cdot \vec{v}$ en lugar del vector de votos $\vec{v}$. 
-    Como veremos más adelante, esta reformulación nos permite incorporar una interpretación probabilística del problema, dado que con este reescalamiento
-    se tiene que $w_i \in (0,1) \ \forall i \in [n]$, y $w_+ = 1$.
 \end{definition}
 
 \begin{definition}
 (\textbf{Exactitud})
-    Un método de \textit{apportionment} $A$ se dice \textit{\textbf{exacto}} si ante un vector entero de votos que suma $H$, el método retorna exactamente
+    Un método de \textit{apportionment} $A$ se dice \textbf{exacto} si ante un vector entero de votos que suma $H$, el método retorna exactamente
     el mismo vector: dados $\vec{v} \in \mathbb{R}_{+}^{n}, \ H \in \mathbb{N}, \ \alpha \in \mathbb{R}_+$,
     \[
-        A(\vec{v}, H) = \vec{v} \ \forall \vec{v} \in \mathbb{N}^n(h)
+        A(\vec{v}, H) = \vec{v} \ \ \forall \vec{v} \in \mathbb{N}^n_0(H)
     \]
-    
-    Esencialmente, esta propiedad nos dice que un método \textit{\textbf{decente}} debe basar sus asignaciones en las \textit{proporciones} de votos, y 
-    no en las \textit{cantidades} netas de votos. En particular, utilizando el factor de reescalamiento $\alpha = \frac{1}{v_+}$, cualquier problema
-    de \textit{apportionment} se puede tratar utilizando el vector de proporciones $\vec{w} \vcentcolon= \alpha \cdot \vec{v}$ en lugar del vector de votos $\vec{v}$. 
-    Como veremos más adelante, esta reformulación nos permite incorporar una interpretación probabilística del problema, dado que con este reescalamiento
-    se tiene que $w_i \in (0,1) \ \forall i \in [n]$, y $w_+ = 1$.
 \end{definition}
 
 \begin{definition}
 (\textbf{Quota})
-    Un método de \textit{apportionment} $A$ satisface la \textit{propiedad \textbf{Quota}} si $\forall \ \vec{v}, H$, se tiene que $\vec{a}_i \in \{ \lfloor q_i \rfloor, \lceil q_i \rceil \} \ \forall \ i \in [n], \forall \vec{a} \in A(\vec{v}, H)$. 
+    Un método de \textit{apportionment} $A$ satisface la propiedad \textbf{quota} si $\forall \ \vec{v}, H$, se tiene que $\vec{a}_i \in \{ \lfloor q_i \rfloor, \lceil q_i \rceil \} \ \forall \ i \in [n], \forall \vec{a} \in A(\vec{v}, H)$. 
     Es decir, las asignaciones devueltas por $A$ verifican que a cada partido se le otorga el redondeo hacia arriba o hacia abajo de su respectiva quota.
 \end{definition}
 
-\vspace{2em}
+\vspace{1em}
 
-Introduciremos una definición que permitirá entender y caracterizar la forma esperada en la que se debería comportar un método de \textit{apportionment} ante variaciones
-en las cantidades de votos de los partidos. Dado que un método "razonable" debe depender exclusivamente de las proporciones de votos y no de las cantidades
-netas (\textit{homogeneidad}), nos interesará considerar la variación relativa de la población de dos estados: los cocientes
+Introduciremos dos definiciones que permitirán entender y caracterizar la forma esperada en la que se debería comportar un método de \textit{apportionment} ante variaciones
+en las cantidades de votos de los partidos o del tamaño de la cámara. 
+
+Dado que un método "razonable" debe depender exclusivamente de las proporciones de votos y no de las cantidades
+netas (por \textsl{homogeneidad}), al analizar cambios en las cantidades de votos, nos interesará considerar la variación relativa de la población 
+de dos estados $i$ y $j$: los cocientes
 $\frac{v_i}{v_j}$ y $\frac{v_i'}{v_j'}$, donde $v_i, v_j$ son las poblaciones "iniciales" y $v_i', v_j'$ las poblaciones 
-posteriores. Si dicho cociente aumenta es porque el estado $i$ aumentó su población en relación a $j$, independientemente de 
-si las poblaciones de ambos estados aumentaron, decrecieron, o la de $i$ aumentó mientras la de $j$ decreció. 
+posteriores de ambos estados. Si dicho cociente aumenta es porque el estado $i$ aumentó su población en relación a $j$, independientemente de 
+si las poblaciones de ambos estados aumentaron, decrecieron, o la de $i$ aumentó mientras la de $j$ decreció.
 
 \begin{definition}
-(\textbf{Population monotonicity - Vote ratio monotonicity})
+(\textbf{Monotonía de población - \textit{Population monotonicity}})
 
-Un método de \textit{apportionment} $A$ satisface la propiedad de \textit{\textbf{Population monotonicity}} si dados $ \ H \in \mathbb{N}, \ \vec{v}, \vec{w} 
-\in \mathbb{N}^n$ tales que $\frac{v_i}{v_j} < \frac{v_i'}{v_j'}$ para $i, j \in [n], \ i \neq j$, se tiene que $\vec{a}_i \geq \vec{a'}_i$ ó $\vec{a'}_j \geq \vec{a'}_j$ 
-$\forall \vec{a} \ in A(\vec{v}, H), \forall \vec{a'} \ in A(\vec{v'}, H)$. 
+Un método de \textit{apportionment} $A$ satisface la propiedad de \textit{\textbf{population monotonicity}} si dados $ \ H \in \mathbb{N}, \ \vec{v}, \vec{w} 
+\in \mathbb{N}^n$ tales que $\frac{v_i}{v_j} < \frac{v_i'}{v_j'}$ para $i, j \in [n], \ i \neq j$, se tiene que $\vec{a}_i \leq \vec{a'}_i$  ó  $\vec{a}_j \geq \vec{a'}_j$ 
+$\forall \ \vec{a} \in A(\vec{v}, H), \forall \ \vec{a'} \in A(\vec{v'}, H)$.
 
 Lo que establece esta propiedad es que si la razón entre las poblaciones de dos estados $i$ y $j$ aumenta, 
 entonces o bien $i$ debe haber aumentado la cantidad de bancas recibidas, o bien $j$ debe haber reducido dicha cantidad.
 \end{definition}
 
-
 \begin{definition}
-(\textbf{House monotonicity})
-Un método de \textit{apportionment} $A$ satisface la propiedad de \textit{\textbf{House monotonicity}} si dados $ \ H \in \mathbb{N}, \ \vec{v} \in \mathbb{R}_{>0}^n$
+(\textbf{Monotonía de cámara - \textit{House monotonicity}})
+Un método de \textit{apportionment} $A$ satisface la propiedad de \textit{\textbf{house monotonicity}} si dados $ \ H \in \mathbb{N}, \ \vec{v} \in \mathbb{R}_{>0}^n$
 , se tiene que $\vec{a}_i \leq \vec{a'}_i$ $\forall i \in [n], \forall \vec{a} \in A(\vec{v}, H), \forall \vec{a'} \in A(\vec{v}, H+1)$. Es decir, si aumenta la cantidad total de bancas a repartir y 
 la cantidad de votos de cada partido permanece constante, no puede decrecer la cantidad de bancas recibida por algún partido.
 \end{definition}
@@ -147,7 +148,7 @@ Particularmente, esta pregunta toca de cerca a los métodos que verifican \texti
 una asignación de $H$ bancas a una de $H+1$, basta con elegir un partido para asignarle la banca extra, dejando a los partidos restantes
 con la misma cantidad de bancas.
 
-Hay una última propiedad deseable para un sistema de repartición, la \textit{coherencia} (también denominada
-\textit{uniformidad} o \textit{consistencia}). No obstante, la enunciaremos 
+Hay una última propiedad deseable para un sistema de repartición, la \textsl{coherencia} (también denominada
+\textsl{uniformidad} o \textsl{consistencia}). No obstante, la enunciaremos 
 más adelante, puesto que cobrará mayor relevancia para generalizar algunas de las propiedades
 ya enunciadas y categorizar familias de métodos.

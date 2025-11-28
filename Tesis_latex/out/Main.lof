@@ -1,10 +1,10 @@
 \babel@toc {spanish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Ejemplo de secuencia de saltos espuria, con $s(0) = 0; s(i) = 1 - \frac {1}{i} \hskip 1em\relax \forall i \in \mathbb {N}$.}}{16}{figure.2.1}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Ejemplo de secuencia de saltos estacionaria con $r=\frac {1}{2}$: $s_{r}(i) = i - \frac {1}{2}$.}}{17}{figure.2.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Ejemplo de secuencia de saltos espuria, con $s(0) = 0; s(i) = 1 - \frac {1}{i} \hskip 1em\relax \forall i \in \mathbb {N}$.}}{18}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Ejemplo de secuencia de saltos estacionaria con $r=\frac {1}{2}$: $s_{r}(i) = i - \frac {1}{2}$.}}{19}{figure.2.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Segmento ilustrativo de la disposición inicial del método de Grimmett, con $n=5$ y $k=3$. La longitud de los segmentos $[s_{i-1}, s_i]$ es $p_i$ para $i \in \{1, \dots , 5 \}$. Los puntos $s_i$ están ubicados en las posiciones $s_i = \DOTSB \sum@ \slimits@ _{j=1}^{i}p_i$.}}{27}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Segmento ilustrativo de la disposición final del ejemplo anterior. Los segmentos $[s'_{i-1}, s'_i]$ fueron desplazados en $U$. Marcados en \textcolor {rojoOscuro}{rojo} se encuentran los segmentos que contienen a un entero, correspondientes a los partidos 2, 3 y 5.}}{27}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Ilustración del método de Grimmett para dos elecciones. Los intervalos correspondientes a partidos de izquierda están sombreados en gris. Las líneas punteadas indican las posiciones de los enteros antes del desplazamiento aleatorio. Extraído de \blx@tocontentsinit {0}\parencite {correa2024monotonerandomizedapportionment}}}{32}{figure.3.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Segmento ilustrativo de la disposición inicial del método de Grimmett, con $n=5$ y $k=3$. La longitud de los segmentos $[s_{i-1}, s_i]$ es $p_i$ para $i \in \{1, \dots , 5 \}$. Los puntos $s_i$ están ubicados en las posiciones $s_i = \DOTSB \sum@ \slimits@ _{j=1}^{i}p_i$.}}{29}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Segmento ilustrativo de la disposición final del ejemplo anterior. Los segmentos $[s'_{i-1}, s'_i]$ fueron desplazados en $U$. Marcados en \textcolor {rojoOscuro}{rojo} se encuentran los segmentos que contienen a un entero, correspondientes a los partidos 2, 3 y 5.}}{29}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Ilustración del método de Grimmett para dos elecciones. Los intervalos correspondientes a partidos de izquierda están sombreados en gris. Las líneas punteadas indican las posiciones de los enteros antes del desplazamiento aleatorio. Extraído de \blx@tocontentsinit {0}\parencite {correa2024monotonerandomizedapportionment}}}{34}{figure.3.3}%
 \addvspace {10\p@ }

@@ -6,10 +6,10 @@ import gurobipy as gp
 from gurobipy import GRB
 
 # Global parameters
-N = 5
+N = 4
 K = 2
 M = math.comb(N, K)
-tol = 5e-6
+tol = 5e-7
 delta = 0.1
 
 # Aux functions

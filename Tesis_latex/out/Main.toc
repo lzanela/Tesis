@@ -1,40 +1,48 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1}Introducción}{5}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Esquema del trabajo}{5}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Introducción al problema de apportionment (\textit {prorrateo})}{5}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Marco del problema}{7}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Propiedades deseables}{8}{subsection.1.3.1}%
-\contentsline {section}{\numberline {1.4}Algunos métodos típicos}{9}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Método de Hamilton}{11}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Método de Jefferson/D'Hont}{12}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Método de Webster/Saint-Laguë}{14}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}Observaciones de los métodos típicos}{14}{subsection.1.4.4}%
-\contentsline {chapter}{\numberline {2}Desarrollo teórico}{15}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Métodos de divisor}{15}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Métodos de quota}{19}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Métodos shift-quota}{20}{subsection.2.2.1}%
-\contentsline {section}{\numberline {2.3}Resultados principales del área}{21}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Conclusiones y algunos resultados extra}{23}{section.2.4}%
-\contentsline {chapter}{\numberline {3}Métodos aleatorizados}{25}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introducción a métodos aleatorizados}{25}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Propiedades fundamentales para métodos aleatorizados}{26}{subsection.3.1.1}%
-\contentsline {section}{\numberline {3.2}Ejemplos}{27}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Método de Grimmett (2004) - \textit {Systematic rounding}}{27}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Formulación como problema de optimización de medida}{27}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Conditional Poisson Rounding - Máxima Entropía}{29}{subsection.3.2.3}%
-\contentsline {subsection}{\numberline {3.2.4}Algoritmo de Sampford (67')}{30}{subsection.3.2.4}%
-\contentsline {subsection}{\numberline {3.2.5}Algoritmo de Brewer (63')}{31}{subsection.3.2.5}%
-\contentsline {section}{\numberline {3.3}Resultados sobre métodos aleatorizados}{31}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Método de Grimmett - \textit {Systematic rounding}}{31}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Conditional Poisson Rounding - Máxima Entropía}{32}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Algoritmo de Sampford}{33}{subsection.3.3.3}%
-\contentsline {chapter}{\numberline {4}Trabajo realizado}{37}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Resultados}{37}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Idea de distribución con orden lexicográfico sobre subconjuntos de cardinal k}{37}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Soluciones del problema lineal no satisfacen selection monotonicity}{38}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Definir medida sobre $[n]$}{38}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Prueba exhaustiva de factibilidad de bases para el método de programación lineal}{40}{subsection.4.1.4}%
-\contentsline {subsection}{\numberline {4.1.5}Preguntas}{41}{subsection.4.1.5}%
-\contentsline {section}{\numberline {4.2}Ejemplos de cosas}{43}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Títulos posibles}{43}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Cosas a corregir/agregar}{43}{section.4.4}%
+\contentsline {section}{\numberline {1.1}Introducción al problema de \textit {apportionment}}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Código de las pruebas computacionales}{7}{subsection.1.1.1}%
+\contentsline {section}{\numberline {1.2}Marco del problema}{7}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Propiedades deseables}{8}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Algunos métodos típicos}{10}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Método de Hamilton}{11}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Método de Jefferson/D'Hondt}{11}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Método de Webster/Saint-Laguë}{13}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Paradojas y falencias de los métodos típicos}{13}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Paradoja de Alabama}{13}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Paradoja de nuevos estados}{14}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Paradoja de población}{15}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}D'Hondt y Webster no cumplen \textit {quota}}{15}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Reflexiones acerca de los métodos típicos}{16}{subsection.1.4.5}%
+\contentsline {chapter}{\numberline {2}Desarrollo teórico}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Métodos de divisor}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Métodos de quota}{22}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Métodos shift-quota}{22}{subsection.2.2.1}%
+\contentsline {section}{\numberline {2.3}Resultados principales del área}{23}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Conclusiones y algunos resultados extra}{25}{section.2.4}%
+\contentsline {chapter}{\numberline {3}Métodos aleatorizados}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introducción a métodos aleatorizados}{27}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Propiedades fundamentales para métodos aleatorizados}{28}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Ejemplos}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Método de Grimmett (2004) - \textit {Systematic rounding}}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Formulación como problema de optimización de medida}{29}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Conditional Poisson Rounding - Máxima Entropía}{31}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Algoritmo de Sampford (67')}{32}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Algoritmo de Brewer (63')}{33}{subsection.3.2.5}%
+\contentsline {section}{\numberline {3.3}Resultados sobre métodos aleatorizados}{33}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Método de Grimmett - \textit {Systematic rounding}}{33}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Conditional Poisson Rounding - Máxima Entropía}{34}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Algoritmo de Sampford}{35}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Algoritmo de Brewer}{38}{subsection.3.3.4}%
+\contentsline {chapter}{\numberline {4}Trabajo realizado}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Función objetivo lineal con pesos decrecientes por orden lexicográfico sobre subconjuntos de cardinal k}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Funciones objetivo lineales}{41}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Análisis con base fija}{41}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Análisis con cambio de base}{45}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Definir medida sobre $[n]$}{48}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Preguntas}{50}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Ejemplos de cosas}{51}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Temas a charlar en la reu}{51}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Títulos posibles}{51}{section.4.7}%
+\contentsline {section}{\numberline {4.8}Cosas a corregir/agregar}{51}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Cosas sacadas (se pueden volver a agregar)}{52}{section.4.9}%

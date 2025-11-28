@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.5.1)  20 NOV 2025 18:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.3) (preloaded format=pdflatex 2024.5.1)  28 NOV 2025 15:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,57 +640,60 @@ Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/csquotes\csquotes.cfg
 File: csquotes.cfg 
-)) (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
+)) (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/dirtytalk\dirtytalk.sty
+Package: dirtytalk 2010/11/21 A package making "quoting" easier
+\c@dirtytalk@qdepth=\count338
+) (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.sty
 Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.sty
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count338
+\lrq@indent=\count339
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/logreq\logreq.def
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 ))
-\c@tabx@nest=\count339
-\c@listtotal=\count340
-\c@listcount=\count341
-\c@liststart=\count342
-\c@liststop=\count343
-\c@citecount=\count344
-\c@citetotal=\count345
-\c@multicitecount=\count346
-\c@multicitetotal=\count347
-\c@instcount=\count348
-\c@maxnames=\count349
-\c@minnames=\count350
-\c@maxitems=\count351
-\c@minitems=\count352
-\c@citecounter=\count353
-\c@maxcitecounter=\count354
-\c@savedcitecounter=\count355
-\c@uniquelist=\count356
-\c@uniquename=\count357
-\c@refsection=\count358
-\c@refsegment=\count359
-\c@maxextratitle=\count360
-\c@maxextratitleyear=\count361
-\c@maxextraname=\count362
-\c@maxextradate=\count363
-\c@maxextraalpha=\count364
-\c@abbrvpenalty=\count365
-\c@highnamepenalty=\count366
-\c@lownamepenalty=\count367
-\c@maxparens=\count368
-\c@parenlevel=\count369
-\blx@tempcnta=\count370
-\blx@tempcntb=\count371
-\blx@tempcntc=\count372
-\c@blx@maxsection=\count373
-\blx@maxsegment@0=\count374
-\blx@notetype=\count375
-\blx@parenlevel@text=\count376
-\blx@parenlevel@foot=\count377
-\blx@sectionciteorder@0=\count378
-\blx@sectionciteorderinternal@0=\count379
-\blx@entrysetcounter=\count380
-\blx@biblioinstance=\count381
+\c@tabx@nest=\count340
+\c@listtotal=\count341
+\c@listcount=\count342
+\c@liststart=\count343
+\c@liststop=\count344
+\c@citecount=\count345
+\c@citetotal=\count346
+\c@multicitecount=\count347
+\c@multicitetotal=\count348
+\c@instcount=\count349
+\c@maxnames=\count350
+\c@minnames=\count351
+\c@maxitems=\count352
+\c@minitems=\count353
+\c@citecounter=\count354
+\c@maxcitecounter=\count355
+\c@savedcitecounter=\count356
+\c@uniquelist=\count357
+\c@uniquename=\count358
+\c@refsection=\count359
+\c@refsegment=\count360
+\c@maxextratitle=\count361
+\c@maxextratitleyear=\count362
+\c@maxextraname=\count363
+\c@maxextradate=\count364
+\c@maxextraalpha=\count365
+\c@abbrvpenalty=\count366
+\c@highnamepenalty=\count367
+\c@lownamepenalty=\count368
+\c@maxparens=\count369
+\c@parenlevel=\count370
+\blx@tempcnta=\count371
+\blx@tempcntb=\count372
+\blx@tempcntc=\count373
+\c@blx@maxsection=\count374
+\blx@maxsegment@0=\count375
+\blx@notetype=\count376
+\blx@parenlevel@text=\count377
+\blx@parenlevel@foot=\count378
+\blx@sectionciteorder@0=\count379
+\blx@sectionciteorderinternal@0=\count380
+\blx@entrysetcounter=\count381
+\blx@biblioinstance=\count382
 \labelnumberwidth=\skip85
 \labelalphawidth=\skip86
 \biblabelsep=\skip87
@@ -702,9 +705,9 @@ File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
 \blx@bcfin=\read4
 \blx@bcfout=\write4
 \blx@langwohyphens=\language80
-\c@mincomprange=\count382
-\c@maxcomprange=\count383
-\c@mincompwidth=\count384
+\c@mincomprange=\count383
+\c@maxcomprange=\count384
+\c@mincompwidth=\count385
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\blx-dm.def
@@ -714,74 +717,74 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'alphabetic.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count385
-\c@savedafterword=\count386
-\c@annotator=\count387
-\c@savedannotator=\count388
-\c@author=\count389
-\c@savedauthor=\count390
-\c@bookauthor=\count391
-\c@savedbookauthor=\count392
-\c@commentator=\count393
-\c@savedcommentator=\count394
-\c@editor=\count395
-\c@savededitor=\count396
-\c@editora=\count397
-\c@savededitora=\count398
-\c@editorb=\count399
-\c@savededitorb=\count400
-\c@editorc=\count401
-\c@savededitorc=\count402
-\c@foreword=\count403
-\c@savedforeword=\count404
-\c@holder=\count405
-\c@savedholder=\count406
-\c@introduction=\count407
-\c@savedintroduction=\count408
-\c@namea=\count409
-\c@savednamea=\count410
-\c@nameb=\count411
-\c@savednameb=\count412
-\c@namec=\count413
-\c@savednamec=\count414
-\c@translator=\count415
-\c@savedtranslator=\count416
-\c@shortauthor=\count417
-\c@savedshortauthor=\count418
-\c@shorteditor=\count419
-\c@savedshorteditor=\count420
-\c@labelname=\count421
-\c@savedlabelname=\count422
-\c@institution=\count423
-\c@savedinstitution=\count424
-\c@lista=\count425
-\c@savedlista=\count426
-\c@listb=\count427
-\c@savedlistb=\count428
-\c@listc=\count429
-\c@savedlistc=\count430
-\c@listd=\count431
-\c@savedlistd=\count432
-\c@liste=\count433
-\c@savedliste=\count434
-\c@listf=\count435
-\c@savedlistf=\count436
-\c@location=\count437
-\c@savedlocation=\count438
-\c@organization=\count439
-\c@savedorganization=\count440
-\c@origlocation=\count441
-\c@savedoriglocation=\count442
-\c@origpublisher=\count443
-\c@savedorigpublisher=\count444
-\c@publisher=\count445
-\c@savedpublisher=\count446
-\c@language=\count447
-\c@savedlanguage=\count448
-\c@origlanguage=\count449
-\c@savedoriglanguage=\count450
-\c@pageref=\count451
-\c@savedpageref=\count452
+\c@afterword=\count386
+\c@savedafterword=\count387
+\c@annotator=\count388
+\c@savedannotator=\count389
+\c@author=\count390
+\c@savedauthor=\count391
+\c@bookauthor=\count392
+\c@savedbookauthor=\count393
+\c@commentator=\count394
+\c@savedcommentator=\count395
+\c@editor=\count396
+\c@savededitor=\count397
+\c@editora=\count398
+\c@savededitora=\count399
+\c@editorb=\count400
+\c@savededitorb=\count401
+\c@editorc=\count402
+\c@savededitorc=\count403
+\c@foreword=\count404
+\c@savedforeword=\count405
+\c@holder=\count406
+\c@savedholder=\count407
+\c@introduction=\count408
+\c@savedintroduction=\count409
+\c@namea=\count410
+\c@savednamea=\count411
+\c@nameb=\count412
+\c@savednameb=\count413
+\c@namec=\count414
+\c@savednamec=\count415
+\c@translator=\count416
+\c@savedtranslator=\count417
+\c@shortauthor=\count418
+\c@savedshortauthor=\count419
+\c@shorteditor=\count420
+\c@savedshorteditor=\count421
+\c@labelname=\count422
+\c@savedlabelname=\count423
+\c@institution=\count424
+\c@savedinstitution=\count425
+\c@lista=\count426
+\c@savedlista=\count427
+\c@listb=\count428
+\c@savedlistb=\count429
+\c@listc=\count430
+\c@savedlistc=\count431
+\c@listd=\count432
+\c@savedlistd=\count433
+\c@liste=\count434
+\c@savedliste=\count435
+\c@listf=\count436
+\c@savedlistf=\count437
+\c@location=\count438
+\c@savedlocation=\count439
+\c@organization=\count440
+\c@savedorganization=\count441
+\c@origlocation=\count442
+\c@savedoriglocation=\count443
+\c@origpublisher=\count444
+\c@savedorigpublisher=\count445
+\c@publisher=\count446
+\c@savedpublisher=\count447
+\c@language=\count448
+\c@savedlanguage=\count449
+\c@origlanguage=\count450
+\c@savedoriglanguage=\count451
+\c@pageref=\count452
+\c@savedpageref=\count453
 \shorthandwidth=\skip93
 \shortjournalwidth=\skip94
 \shortserieswidth=\skip95
@@ -805,19 +808,19 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/biblatex\biblatex.def
 File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
-\c@textcitecount=\count453
-\c@textcitetotal=\count454
-\c@textcitemaxnames=\count455
-\c@biburlbigbreakpenalty=\count456
-\c@biburlbreakpenalty=\count457
-\c@biburlnumpenalty=\count458
-\c@biburlucpenalty=\count459
-\c@biburllcpenalty=\count460
+\c@textcitecount=\count454
+\c@textcitetotal=\count455
+\c@textcitemaxnames=\count456
+\c@biburlbigbreakpenalty=\count457
+\c@biburlbreakpenalty=\count458
+\c@biburlnumpenalty=\count459
+\c@biburlucpenalty=\count460
+\c@biburllcpenalty=\count461
 \biburlbigskip=\muskip18
 \biburlnumskip=\muskip19
 \biburlucskip=\muskip20
 \biburllcskip=\muskip21
-\c@smartand=\count461
+\c@smartand=\count462
 )
 Package biblatex Info: Trying to load bibliography style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.bbx' found.
@@ -827,8 +830,8 @@ Package biblatex Info: Trying to load bibliography style 'standard'...
 Package biblatex Info: ... file 'standard.bbx' found.
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/biblatex/bbx\standard.bbx
 File: standard.bbx 2023/03/05 v3.19 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count462
-\c@bbx:relatedtotal=\count463
+\c@bbx:relatedcount=\count463
+\c@bbx:relatedtotal=\count464
 ))
 Package biblatex Info: Trying to load citation style 'alphabetic'...
 Package biblatex Info: ... file 'alphabetic.cbx' found.
@@ -856,7 +859,7 @@ Package biblatex Info: Document encoding is UTF8 ....
 Package: expl3 2024-02-20 L3 programming layer (loader) 
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count464
+\l__color_backend_stack_int=\count465
 \l__pdf_internal_box=\box77
 ))
 Package biblatex Info: ... and expl3
@@ -900,16 +903,16 @@ LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
  (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count465
+\scratchcounter=\count466
 \scratchdimen=\dimen311
 \scratchbox=\box78
-\nofMPsegments=\count466
-\nofMParguments=\count467
+\nofMPsegments=\count467
+\nofMParguments=\count468
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count468
+\MPscratchCnt=\count469
 \MPscratchDim=\dimen312
-\MPnumerator=\count469
-\makeMPintoPDFobject=\count470
+\MPnumerator=\count470
+\makeMPintoPDFobject=\count471
 \everyMPtoPDFconversion=\toks49
 ) (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -1005,7 +1008,7 @@ Package biblatex Info: Reference segment=0 on input line 8.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<imagenes/uba2.jpg, id=166, 295.1025pt x 298.11375pt>
+<imagenes/uba2.jpg, id=198, 295.1025pt x 298.11375pt>
 File: imagenes/uba2.jpg Graphic file (type jpg)
 <use imagenes/uba2.jpg>
 Package pdftex.def Info: imagenes/uba2.jpg  used on input line 9.
@@ -1030,7 +1033,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.34 ...ection monotonicity}{38}{subsection.4.1.2}
+l.36 ...Algoritmo de Brewer}{38}{subsection.3.3.4}
                                                   % [1
 
 
@@ -1063,32 +1066,46 @@ LaTeX Info: Redefining \% on input line 1.
 
  (capitulos/1_introduccion.tex
 Cap\'{\i }tulo 1.
-(sections/1_0_mapa_de_trabajo.tex) (sections/1_1_apportionment.tex [5
+(sections/1_1_apportionment.tex [5
 
 
-] [6]) (sections/1_2_setting.tex [7] [8]) (sections/1_3_ejemplos.tex [9]
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
+] [6]) (sections/1_2_setting.tex [7] [8] [9]) (sections/1_3_ejemplos.tex
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10] [11] [12] [13])) [14]
+[10]
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 89.
+ (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmss.fd
+File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+) [11] [12]) (sections/1_4_paradojas.tex [13] [14]
+Overfull \hbox (83.33415pt too wide) in paragraph at lines 109--111
+[]\T1/cmr/m/n/12 Basta ob-ser-var el ejem-plo de la ta-bla [][]1.3[][], pa-ra $\OML/cmm/m/it/12 n \OT1/cmr/m/n/12 = 6$\T1/cmr/m/n/12 , $[] \OT1/cmr/m/n/12 = (1646\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 6936\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 154\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2091\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 685\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 988)$
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (90.43132pt too wide) in paragraph at lines 150--152
+[]\T1/cmr/m/n/12 Basta ob-ser-var el ejem-plo de la ta-bla [][]1.4[][], pa-ra $\OML/cmm/m/it/12 n \OT1/cmr/m/n/12 = 4$\T1/cmr/m/n/12 , $[] \OT1/cmr/m/n/12 = (70653\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 117404\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 210923\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1194456)$
+ []
+
+[15])) [16]
 \openout2 = `capitulos/2_marco_teorico.aux'.
 
  (capitulos/2_marco_teorico.tex
 Cap\'{\i }tulo 2.
-(sections/2_1_divisor_methods.tex [15
+(sections/2_1_divisor_methods.tex [17
 
 
 
 
-] [16] [17] [18]) (sections/2_2_quota_methods.tex [19] [20]) (sections/2_3_resultados_principales.tex [21] [22]) (sections/2_4_conclusiones_y_extras.tex [23])) [24]
+] [18] [19] [20]) (sections/2_2_quota_methods.tex [21] [22]) (sections/2_3_resultados_principales.tex [23] [24]) (sections/2_4_conclusiones_y_extras.tex [25])) [26]
 \openout2 = `capitulos/3_metodos_aleatorizados.aux'.
 
  (capitulos/3_metodos_aleatorizados.tex
 Cap\'{\i }tulo 3.
-(sections/3_1_intro_metodos_aleatorizados.tex [25
+(sections/3_1_intro_metodos_aleatorizados.tex [27
 
 
 
@@ -1101,7 +1118,7 @@ Overfull \hbox (2.00113pt too wide) in paragraph at lines 72--81
 LaTeX Font Info:    Trying to load font information for U+bbm on input line 95.
 (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/bbm\ubbm.fd
 File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [26]) (sections/3_2_ejemplos.tex [27] [28] [29] [30]) (sections/3_3_resultados_aleatorizados.tex
+) [28]) (sections/3_2_ejemplos.tex [29] [30] [31] [32]) (sections/3_3_resultados_aleatorizados.tex
 Overfull \hbox (28.28905pt too wide) in paragraph at lines 20--35
  [][] 
  []
@@ -1109,78 +1126,88 @@ Overfull \hbox (28.28905pt too wide) in paragraph at lines 20--35
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[31] [32]
-Overfull \hbox (10.52982pt too wide) in paragraph at lines 229--232
+[33] [34]
+Overfull \hbox (10.52982pt too wide) in paragraph at lines 230--233
 []\T1/cmr/m/n/12 La se-gun-da igual-dad re-sul-ta de mul-ti-pli-car nu-me-ra-dor y de-no-mi-na-dor por $[][] []$.
  []
 
-[33] [34]
-Overfull \hbox (24.0862pt too wide) detected at line 323
+[35] [36]
+Overfull \hbox (6.80565pt too wide) detected at line 325
 []
  []
 
 
-Overfull \hbox (24.9935pt too wide) in paragraph at lines 325--328
+Overfull \hbox (24.9935pt too wide) in paragraph at lines 327--330
 []$[]$\T1/cmr/m/n/12 : Ob-ser-va-mos que lla-man-do $\OML/cmm/m/it/12 H []\OT1/cmr/m/n/12 = [\OML/cmm/m/it/12 n\OT1/cmr/m/n/12 ] \OMS/cmsy/m/n/12 n f\OT1/cmr/m/n/12 1\OMS/cmsy/m/n/12 g$\T1/cmr/m/n/12 , exis-te bi-yec-ción en-tre $[]$
  []
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 359.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 361.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 359.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 361.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 359.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 361.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 359.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 361.
 
-[35])) [36]
+[37]
+Overfull \hbox (12.4174pt too wide) detected at line 391
+[]
+ []
+
+)) [38]
 \openout2 = `capitulos/4_trabajo.aux'.
 
  (capitulos/4_trabajo.tex
 Cap\'{\i }tulo 4.
-(sections/4_1_resultados.tex [37
+(sections/4_1_resultados.tex [39
 
 
 
 
-]
+] [40] [41] [42]
+Overfull \hbox (20.5307pt too wide) detected at line 232
+[]
+ []
+
+[43]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 367.
+ (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+) [44] [45] [46]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 63.
+(hyperref)                removing `math shift' on input line 501.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 63.
+(hyperref)                removing `math shift' on input line 501.
 
-[38] [39] [40] [41]))
-Underfull \hbox (badness 10000) in paragraph at lines 204--22
+[47] [48] [49]))
+Underfull \hbox (badness 10000) in paragraph at lines 577--22
 
  []
 
-[42]
+[50]
 \openout2 = `capitulos/n_notas.aux'.
 
- (capitulos/n_notas.tex) [43
+ (capitulos/n_notas.tex [51
 
 
 
-]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 28.
- (C:\Users\lucaz\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [44
+]) [52] [53
 
 
 
-] [45]
+] [54]
 \openout2 = `anexos/anexo_a.aux'.
 
  (anexos/anexo_a.tex
 Ap\'{e}ndice A.
-) [46
+) [55
 
 
 ] (c:\Users\lucaz\OneDrive\Documents\Exactas\Tesis\Tesis\tesis_latex\out\Main.aux
@@ -1193,23 +1220,23 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: 67A23B40CCAC3069504B95AC0B68A9E6;8741.
+(rerunfilecheck)             Checksum: 71E15ADBE7EF58157C93FDF3F5F8DD91;10230.
 Package logreq Info: Writing requests to 'Main.run.xml'.
 \openout1 = `Main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 33979 strings out of 474436
- 652570 string characters out of 5741955
- 1958190 words of memory out of 5000000
- 55477 multiletter control sequences out of 15000+600000
- 586394 words of font info for 113 fonts, out of 8000000 for 9000
+ 34172 strings out of 474436
+ 656296 string characters out of 5741955
+ 1959190 words of memory out of 5000000
+ 55574 multiletter control sequences out of 15000+600000
+ 595474 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  98i,28n,116p,2085b,3255s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1440.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/public/bbm/dpi600\bbm12.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0800.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1728.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/hoekwater/stmary10.pfb>
-Output written on c:\Users\lucaz\OneDrive\Documents\Exactas\Tesis\Tesis\tesis_latex\out\Main.pdf (47 pages, 656096 bytes).
+ <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/public/bbm/dpi600\bbm12.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbl1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1440.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0800.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsl1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1728.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\lucaz\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/lucaz/AppData/Local/Programs/MiKTeX/fonts/type1/public/hoekwater/stmary10.pfb>
+Output written on c:\Users\lucaz\OneDrive\Documents\Exactas\Tesis\Tesis\tesis_latex\out\Main.pdf (56 pages, 816433 bytes).
 PDF statistics:
- 1423 PDF objects out of 1440 (max. 8388607)
- 211 named destinations out of 1000 (max. 500000)
- 338 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1832 PDF objects out of 2073 (max. 8388607)
+ 289 named destinations out of 1000 (max. 500000)
+ 402 words of extra memory for PDF output out of 10000 (max. 10000000)
 

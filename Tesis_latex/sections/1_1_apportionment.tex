@@ -1,90 +1,102 @@
-\section{Introducción al problema de apportionment (\textit{prorrateo})}
+\section{Introducción al problema de \textit{apportionment}}
 
-El problema de \textit{apportionment} (o \textit{prorrateo} en español, pero es una palabra un poco
-fea así que usaremos su versión en inglés) trata sobre cómo repartir de 
+El \textit{apportionment}\footnote{O "prorrateo" en español, pero usaremos su versión en inglés por ser la 
+opción más utilizada en la literatura.} 
+trata sobre cómo repartir de 
 forma "justa" una cantidad finita de objetos indivisibles entre los miembros de un grupo, de acuerdo
-a ciertas proporciones. Tipicamente, el intento de respetar estas proporciones provoca que las asignaciones
-ideales de objetos requieran dividirlos en partes fraccionarias, lo cual no está permitido por las condiciones
-del problema. El conflicto surge a la hora de intentar "redondear" esas partes fraccionarias de los objetos a 
-repartir, de forma tal que al final se termine asignando cantidades enteras a cada individuo, y no falten ni 
-sobren objetos por asignar. 
+a ciertas proporciones. Generalmente, el intento de respetar estas proporciones provoca que las asignaciones
+ideales requieran dividir los objetos en partes fraccionarias, lo cual no está permitido por las condiciones
+del problema. El conflicto surge a la hora de intentar "redondear" esas partes fraccionarias, de forma tal que al final se asignen cantidades enteras a cada individuo, 
+y no sobren ni falten objetos por asignar.
 
 Para ejemplificar este escenario, se puede pensar en el problema de repartir 5 cabras entre 3 hermanos de forma
-proporcional de acuerdo a sus edades.
+proporcional de acuerdo a sus edades: si las edades de los hermanos fuesen de 15, 20 y 25 años, la proporción exacta 
+correspondiente a cada hermano sería de $\frac{5}{4}$, $\frac{5}{3}$ y $\frac{25}{12}$\footnote{
+    Para cada hermano $h$, el total de cabras que le corresponde se calcula como el total de cabras multiplicado por
+    la edad de $h$ sobre la suma de las edades. En el caso del hermano menor, resulta $5 \cdot \frac{15}{15+20+25} = \frac{5}{4}$.
+} respectivamente. Ninguna de estas 
+cantidades es entera, lo cual puede llegar a tentarnos a fraccionar las cabras, violando las restricciones del problema.
+La pregunta que surge entonces es: ¿cómo redondeamos estas proporciones para que se asignen las cabras de la forma más justa posible?
+La teoría del \textit{apportionment} trata precisamente sobre esta problemática.
 
-No obstante, el escenario que más ha alentado y motivado el desarrollo teórico y el estudio de este problema viene del
-mundo de la "Teoría de Elección Social" (\textit{"Social Choice"}), que se encarga, en términos generales, de estudiar cómo 
-hacer una agregación de preferencias individuales en un único perfil de preferencias colectivo. Con esta motivación, 
-en el contexto del \textit{apportionment} esta disciplina busca entender cómo repartir las bancas de un 
-congreso o parlamento según la proporción de votos obtenidos
-por distintos partidos políticos, o según la proporción de poblaciones de los distintos estados
-o provincias. La definición de qué significa que un sistema sea "justo" tendrá que ver con 
-qué tan cercana es la asignación que provee dicho sistema a la proporcionalidad exacta, y la definiremos con precisión en la próxima sección.
+Sin embargo, el escenario que más ha alentado y motivado el desarrollo teórico y el estudio de este problema viene del
+mundo de la Teoría de Elección Social (\textit{Social Choice}), que se encarga, en términos generales, de estudiar cómo
+tomar decisiones de forma colectiva, típicamente 
+haciendo una agregación de preferencias individuales en un único perfil de preferencias colectivo y buscando que esto suceda de la forma más justa posible. 
+El resultado más famoso de esta disciplina es el Teorema de Imposibilidad de Arrow, que plantea, no obstante, que a la hora de elegir
+colectivamente entre ciertas opciones a partir de los perfiles de preferencias de cada individuo (en donde estos perfiles de preferencias son simplemente
+ordenamientos de las opciones), no existe forma de agregarlos en un único perfil de preferencias colectivo de forma que se 
+satisfaga una serie de desiderata. Posiblemente el lector recuerde una entrevista a Milei en 2023, en la que la entrevistadora le pregunta si cree en la 
+democracia, y este contesta "¿Vos conocés el teorema de imposibilidad de Arrow?" \cita{mileiarrow2023}, insinuando que la democracia no es posible.
+Si bien mucha gente ha interpretado el resultado de Arrow como una demostración de la imposibilidad de diseñar un sistema verdaderamente democrático, 
+el propio Arrow ha dicho que
 
-CITA DE QUE EL CONGRESO ES UNA REPRESENTACIÓN DE LA SOCIEDAD EN PEQUEÑA ESCALA.
+\say{[las] implicaciones filosóficas y distributivas de la paradoja de la elección social todavía no están claras.
+Ciertamente, no hay una salida simple. Espero que otros tomen esta paradoja como un desafío más que como una barrera
+desalentadora.} \cita{suzumura1983rational}, sugiriendo que encontrar formas democráticas de decisión colectiva es un 
+reto a la imaginación.
+Recordaremos esta reflexión al finalizar el capítulo 2.
+
+Con respecto al problema de \textit{apportionment}, la Teoría de Elección Social lo ha tratado dentro del contexto de distribución 
+de bancas parlamentarias, bajo la idea de que el congreso debe ser una representación en pequeña escala de la sociedad, y 
+guiándose por el lema "una persona, un voto" \cita{balinski1982fair}.
+Desde esta perspectiva, se ha intentado entender cómo repartir de forma "justa" las bancas de un congreso o parlamento 
+según la proporción de votos obtenidos por distintos partidos políticos, o según la proporción de poblaciones de los distintos estados o provincias. 
+La definición de qué significa que un sistema de asignación de bancas sea "justo" tendrá que ver con 
+qué tan cercana es la asignación que provee dicho sistema a la proporcionalidad exacta, y la definiremos con precisión en la próxima sección a 
+través de una serie de desiderata planteada por \cita{balinski1980theory} y profundizada por \cita{pukelsheim2017}.
+
+Esencialmente, el problema se reduce al redondeo de fracciones: cómo redondear de la forma más "justa" posible
+un vector de fracciones (las proporciones de bancas correspondientes a los distintos partidos/estados)
+a valores enteros, de manera tal que la suma de las fracciones sea igual a la suma de los enteros
+redondeados (en ambos casos, esta suma debe ser igual a la cantidad total de bancas a repartir).
+
+A pesar de que el problema aparenta ser de una naturaleza simple, veremos que tiene una complejidad
+intrínseca considerable, que incluso nos llevará a concluir que la existencia de un sistema "perfecto"
+es imposible. Para comenzar con un ejemplo quizás clarificador, pensemos en el siguiente escenario de juguete:
+2 partidos que reciben exactamente la mitad de los votos cada uno, entre los cuales hay que repartir únicamente una banca.
+¿Cómo ha de asignarse esa banca?
+Más allá de la definición que se brinde
+del término \textsl{justicia} — siempre y cuando no haya preferencia arbitraria por ninguno de los partidos—, cualquiera de los candidatos
+merecería la banca en igual proporción, y por ende cualquiera de las asignaciones posibles sería igual de justa o injusta.
+
+Otro escenario, ubicado en las antípodas, sería el caso en el que la cantidad de bancas a repartir es
+exactamente igual a la cantidad de votantes —podría ser el caso de un consejo barrial, por ejemplo—, en donde cada miembro tiene representatividad 
+total.
 
 Las formas y metodologías de encarar la resolución de esta problemática han ido variando en gran medida a lo largo de la 
 historia. Algunas preguntas orientadoras a la hora de pensar distintos esquemas bajo los cuales intentar resolver el 
 problema pueden ser:
 
 \begin{itemize}[itemsep=0.6em]
-    \item ¿Debe estar fijada de antemano la cantidad de bancas?
-
+    \item ¿Debe estar fijada de antemano la cantidad de bancas a asignarse?
     \item ¿Debe estar fijada de antemano la cantidad de individuos representados por cada miembro del parlamento?
-
-    \item ¿Se debe intentar encontrar un sistema que optimice alguna métrica como la cantidad de gente no representada?
+    \item ¿Se debe intentar encontrar un sistema que optimice alguna métrica, como por ejemplo la cantidad de gente no representada?
 \end{itemize}
 
-A un nivel un poco más general, el problema consiste en repartir cierta cantidad predeterminada de objetos discretos, indivisibles,
-entre ciertos agentes de acuerdo a proporciones de correspondencia dadas: a cada agente $i$ le corresponde una proporción 
-$p_i$ de la cantidad de objetos discretos. Esencialmente, el problema se reduce al redondeo de fracciones: cómo redondear de la forma más "justa" posible
-un vector de fracciones (las proporciones de bancas correspondientes a los distintos partidos/estados)
-a valores enteros, de manera tal que la suma de las fracciones sea igual a la suma de los enteros
-redondeados (en ambos casos, esta suma debe ser igual a la cantidad total de bancas a repartir).
+Todas estas preguntas han llevado al diseño de diversos métodos, que posteriormente fueron tratados y analizados de una forma 
+más general y sistemática por Balinski y Young en \cita{balinski1980theory}. Estos concluyeron, a través de los teoremas de Coherencia y de Quota,
+que no existe ningún sistema de repartición de bancas que satisfaga todos los desiderata.
 
-A pesar de que el problema aparenta ser de una naturaleza simple, veremos que tiene una complejidad
-intrínseca muy grande, que incluso nos llevará a concluir que la existencia de un sistema "perfecto"
-es imposible. Para comenzar con un ejemplo quizás clarificador, pensemos en el siguiente escenario de juguete:
-2 partidos que reciben exactamente la mitad de los votos cada uno, entre los cuales hay que repartir únicamente una banca.
-¿Cómo se asigna esa banca de la forma más justa posible, y qué significa que esa asignación sea "justa"?
-Más allá de la definición que se brinde
-del término \textit{justicia} - siempre y cuando no haya preferencia particular por ninguno de los partidos- cualquiera de los candidatos
-merecería la banca en igual proporción, y por ende cualquiera de las asignaciones sería igual de justa o injusta.
+Inspirado por este resultado de imposibilidad, Geoffrey Grimmett plantea en \cita{Grimmett01042004} la idea 
+de utilizar métodos aleatorizados para asignar bancas, en vistas de encontrar algún sistema que satisfaga
+un conjunto de propiedades análogas al desiderata planteado por \cita{balinski1980theory} para métodos determinísticos.
 
-Otro escenario pedagógico, ubicado en las antípodas, sería el caso en el que la cantidad de bancas a repartir es
-exactamente igual a la cantidad de votantes. : podría ser el caso de un consejo barrial, por ejemplo, en donde cada miembro tiene representatividad 
-total.
+\vspace{0.5em}
 
-Haremos un recorrido por la historia de este problema, enunciando su definición
+Con respecto al trabajo de esta tesis, haremos un recorrido por la historia de este problema, enunciando su definición
 formal, los axiomas solicitados para considerar que un sistema es deseable, coherente o "justo", 
 los desarrollos teóricos que se fueron produciendo alrededor de esto (principalmente por Balinski, Young,
-Pukhelsheim \cita{balinski1980theory}, \cita{balinski1982fair}, \cita{pukkelsheim2017}). Enunciaremos la definición de los llamados "\textit{métodos de divisor}", junto 
-con sus propiedades fundamentales, para luego enunciar y demostrar el teorema de imposibilidad de Balinski-Young.
-Esto nos servirá como motivación para definir métodos aleatorizados junto con sus respectivos axiomas deseables. 
+Pukelsheim \cita{balinski1980theory, balinski1982fair, pukelsheim2017}). Daremos la definición de los llamados "\textsl{métodos de divisor}", junto 
+con sus propiedades fundamentales, para luego enunciar el teorema de imposibilidad de Balinski-Young.
+Esto nos servirá como motivación para definir la familia de métodos aleatorizados junto con sus respectivos axiomas deseables. 
 Atravesaremos algunos ejemplos de métodos aleatorizados, analizaremos sus características y propiedades,
-presentando el trabajo de \cita{correa2024monotonerandomizedapportionment}.
+presentando el trabajo de \cita{correa2024monotonerandomizedapportionment}, y posteriormente trabajaremos alrededor
+de algunas ideas que fueron surgiendo durante la ejecución de esta tesis, vinculadas a esta última familia de métodos.
 
-Si los métodos aleatorizados son factibles de ser usados o no en escenarios electorales reales, es una 
-cuestión/inquietud que queda para el lector.
+Si los métodos aleatorizados son factibles de ser usados en escenarios electorales reales o no, es una 
+inquietud que queda para el lector.
 
-%Another category of methods may appeal to the gambling man. As one example, 
-%construct a roulette wheel divided into fifty slots, one for each state, the 
-%size of each slot being exactly proportional to the population of the state. 
-%Spin the wheel and drop a small ball onto it: the state at which it comes to 
-%rest4 'wins5 5 and is awarded one seat. Do this 435 times consecutively and the 
-%house is apportioned. The method is perfectly unbiased: every state is treated 
-%fairly; none can complain that the method discriminates against it. 
-%An alternative and perhaps preferable scheme is to compare the quotas of the states 
-%and first give to each the whole number in its quota; then use a roulette 
-%wheel, with each slot proportional to a state's remainder, to distribute the 
-%seats left over. Which of all possible methods is fairest! To answer this question, 
-%standards or principles must be formulated by which methods can be evaluated. 
-%History itself points to such principles. What are the methods that avoid the population 
-%paradox, the Alabama paradox, the new states paradox? What are the methods that 
-%always stay within the quota? What are the methods that systematically favor neither 
-%the large states at the expense of the small nor the small at the expense of the large? 
-%Or, for proportional representation systems, which methods discourage the splintering 
-%of large parties into smaller ones? Each of these questions captures a principle of apportionment. 
-%They have repeatedly been used in history to judge the merits of competing proposals. 
-%In a word, they are the guides to those methods that feel right, that are fair, 
-%that are indeed proportional. \cita{balinski1982fair} discusses various methods of apportionment in detail.
+\subsection{Código de las pruebas computacionales}
+
+Todo el código propio de las pruebas computacionales desarrolladas a lo largo de este trabajo está disponible en \href{https://github.com/lzanela/Tesis}{este repositorio de Github}.

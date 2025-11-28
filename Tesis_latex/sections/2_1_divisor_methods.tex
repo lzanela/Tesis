@@ -1,17 +1,17 @@
 \section{Métodos de divisor}
 
-"The decisive conclusion of the preceding section is that the
-only realistic candidates for methods of apportionment are the divisor methods. 
-The question then becomes: which of the infinite number of divisor 
-methods should be chosen?" \cita{balinski1980theory}
-
-"Divisor methods fix the rounding rule and adjust the divisor. Quota
-methods fix the divisor and adjust the rounding rule." \cita{pukkelsheim2017}
+%"The decisive conclusion of the preceding section is that the
+%only realistic candidates for methods of apportionment are the divisor methods. 
+%The question then becomes: which of the infinite number of divisor 
+%methods should be chosen?" \cita{balinski1980theory}
+%
+%"Divisor methods fix the rounding rule and adjust the divisor. Quota
+%methods fix the divisor and adjust the rounding rule." \cita{pukelsheim2017}
 
 Parte fundamental de la esencia del problema de apportionment radica en la dificultad de 
 definir cómo redondear satisfactoriamente las partes fraccionarias de las quotas: el método de
 Webster, por ejemplo, divide los votos de cada partido por un divisor $d$ y luego redondea los resultados utilizando el método 
-tradicional de redondeo al entero más cercano. Por su parte, el método D'Hont utiliza la función "piso",
+tradicional de redondeo al entero más cercano. Por su parte, el método D'Hondt utiliza la función "piso",
 redondeando a la parte entera. Para extender esta metodología y poder considerar otros métodos necesitamos
 introducir las nociones de "función de redondeo" y "regla de redondeo", que nos permitirán definir la familia de 
 métodos de divisor.
@@ -20,20 +20,20 @@ métodos de divisor.
     (\textbf{Función de redondeo})
     Una función de redondeo se define como una función 
     \[
-    f: [0,\infty) \rightarrow \mathbb{N} \ \text{creciente y sobreyectiva.}
+    f: [0,\infty) \rightarrow \mathbb{N}_0 \ \text{creciente y sobreyectiva.}
     \]
 \end{definition}
 
-El hecho de que una función de redondeo sea creciente implica que 
+El hecho de que una función de redondeo sea creciente y sobreyectiva implica que 
 
-$$f(0) = 0$$
+$$f(0) = 0,$$
 
 y que 
 
 \begin{align*}
 [0,\infty) 
 &= \bigcup\limits_{i \in \mathbb{N}_0} f^{-1}(\{ i \}) \\
-&= \bigcup\limits_{i \in \mathbb{N}_0} [s_i, s_{i+1})
+&= \bigcup\limits_{i \in \mathbb{N}_0} [s_i, s_{i+1}),
 \end{align*}
 
 para $s_i \vcentcolon= \min \{s \in \mathbb{R}_{\geq 0} : f(s) = i\}$, por lo que podemos pensar 
@@ -67,10 +67,10 @@ por lo que utilizaremos cualquiera de estas dos caracterizaciones de manera indi
 mejor el vínculo es la siguiente:
 
 \[
-n \in \llbracket t \rrbracket \iff s(n) \leq t \leq s(n+1) \quad \forall n \in \mathbb{N}, t \geq 0
+n \in \llbracket t \rrbracket \text{ si y solo si } s(n) \leq t \leq s(n+1) \quad \forall n \in \mathbb{N}, t \geq 0.
 \]
 
-\vspace{5em}
+\vspace{1em}
 
 En principio, partiendo de la definición anterior, una secuencia de saltos podría tener varios puntos concentrados 
 en un mismo intervalo de la forma $[n, n+1]$ para $n \in \mathbb{N}$, como podemos observar en el siguiente ejemplo:
@@ -109,7 +109,7 @@ en un mismo intervalo de la forma $[n, n+1]$ para $n \in \mathbb{N}$, como podem
 \label{fig:sucesion-espuria-s}
 \end{figure}
 
-\vspace{2em}
+\vspace{1em}
 
 Como queremos evitar esto, extenderemos la definición de \textit{secuencia de saltos} para que solamente contemple sucesiones
 "razonables". Este término lo entendemos en el sentido de que los números redondeados a $n \in \mathbb{N}$ deben tener a $n$ cerca, es decir, 
@@ -228,7 +228,7 @@ Australia y Oceanía   &    20\,000\,000 & 0.00499 &  0 \\
 \end{tabular}
 \caption{\small Porcentajes de población por continente de acuerdo a la regla estándar de redondeo.
 Se observa cómo esta regla de redondeo no basta para alcanzar una solución en la que la suma de porcentajes sea efectivamente del $100\%$.
-Tabla extraída de \cita{pukkelsheim2017}}
+Tabla extraída de \cita{pukelsheim2017}}
 \end{table}
 
 
@@ -238,24 +238,21 @@ Tabla extraída de \cita{pukkelsheim2017}}
     cuya imagen es el conjunto de asignaciones dado por
     \[
         A(\vec{v}, H) \vcentcolon= \left\{ (x_1, \dots, x_n) \in \mathbb{N}^{n}(H) : x_i \in \Big\llbracket \frac{v_i}{D} \Big\rrbracket 
-        \ \forall i \in [n], \text{ para cierto } D > 0 \right\}
+        \ \forall i \in [n], \text{ para cierto } D > 0 \right\}.
     \]
 \end{definition}
 
 \vspace{2em}
-La idea de esta familia de métodos es "dividir y redondear" (\cite{pukkelsheim2017}), dividiendo los votos por cierto divisor 
+La idea de esta familia de métodos es "dividir y redondear" (\cite{pukelsheim2017}), dividiendo los votos por cierto divisor 
 $D>0$ y luego aplicando la regla de redondeo $\llbracket \cdot \rrbracket$ a los resultados, de forma tal que tomando 
 cantidades $x_i \in \Big\llbracket \frac{v_i}{D} \Big\rrbracket$, los vectores resultantes sean asignaciones válidas, ie
 $x_+ = H$.
-
-Como a veces se utilizará el vector $\vec{w}$ de proporciones dado por $\vec{w}_i = \frac{\vec{v_i}}{v_+}$ en lugar de 
-$\vec{v}$, tendrá sentido considerar también un multiplicador $\mu$ en lugar de solo el divisor $D$.
 
 
 \begin{proposition}
     Los métodos de divisor satisfacen anonimidad, balance, concordancia, decencia y exactitud.
     \begin{proof}
-        La demostración no es ni muy relevante ni muy instructiva, por lo que queda relegada al apéndice.
+        La demostración no es ni muy relevante ni muy instructiva, por lo que no la realizaremos en el presente trabajo.
     \end{proof}
 \end{proposition}
 
@@ -289,6 +286,14 @@ $\vec{v}$, tendrá sentido considerar también un multiplicador $\mu$ en lugar d
     \end{proof}
 \end{theorem}
 
+Definiremos los siguientes conjuntos de índices, que permitirán entender cómo construir nuevas soluciones a partir de una solución
+dada:
+
+\begin{align*}
+    I(x, v) = \left\{ i \in [n] : \frac{v_i}{s(x_i + 1)} = \max\limits_{j \in [n]} \frac{v_j}{s(x_j + 1)} \right\} \\
+    K(x, v) = \left\{ k \in [n] : \frac{v_k}{s(x_k)} = \min\limits_{j \in [n]} \frac{v_j}{s(x_j)} \right\} \\
+\end{align*}
+
 \begin{proposition}
     (\textbf{Unicidad de divisor})
 
@@ -301,12 +306,38 @@ $\vec{v}$, tendrá sentido considerar también un multiplicador $\mu$ en lugar d
     $A$ retorna soluciones múltiples.
 
     \begin{proof}
-        Teniendo en cuenta que ambas condiciones son complementarias, basta con probar una sola de las dos equivalencias.
+        Teniendo en cuenta que ambas condiciones son complementarias, basta con probar la segunda.
         
-        Supongamos que 
-        $$\max\limits_{j \in [n]} \frac{v_j}{s(x_j + 1)} = \min\limits_{j \in [n]} \frac{v_j}{s(x_j)}$$
-        Luego, existe un único divisor $D > 0$ tal que $\sum_{i=1}^{n}{\llbracket \frac{v_i}{D} \rrbracket} = k$ tiene solución.
-        Además, como 
+        Para la ida, supongamos que $x, y \in A(\vec{v}, H)$ son dos soluciones distintas, $x \neq y$.
+        Sean $D(x), D(y)$ divisores para $x$ e $y$ respectivamente. Si se tuviera que
+        $D(x) > D(y)$, por monotonía valdría que $x_i \leq y_i \ \forall i \in [n]$. Dado que el total de bancas
+        es igual para ambos vectores -- $x_+ = y_+ = H$--, ambos vectores deben coincidir, contradiciendo 
+        el hecho de que sean distintos, por lo que no puede suceder que $D(x) > D(y)$. 
+        De igual forma se ve que tampoco vale $D(x) < D(y)$, por lo que se concluye que $D(x) = D(y) = D$.
+        Se tiene entonces que $x_i, y_i \in \llbracket \frac{v_i}{D} \rrbracket \ \forall i \in [n]$. 
+        Como $x \neq y$ y $x_+ = y_+ = H$, debe haber dos componentes $j \neq k$ tales que $x_j < y_j$ y $x_k > y_k$.
+        Pero como $x_j, y_j \in \llbracket \frac{v_i}{D}$, debe tenerse $x_j + 1 = y_j$, y se debe cumplir 
+        $\frac{v_j}{D} = s(x_j + 1)$. De igual forma, $x_k = y_k + 1$, y se tiene el empate $\frac{v_k}{D} = s(x_k)$.
+        En consecuencia,
+
+        $$D = \frac{v_j}{s(x_j + 1)} \leq \max\limits_{i \in [n]} \frac{v_i}{s(x_i + 1)} \leq 
+        \min\limits_{i \in [n]} \frac{v_i}{s(x_i)} = \frac{v_k}{s(x_k)} = D,$$
+
+        por lo que vale la igualdad en la desigualdad Max-Min.
+
+        Para la vuelta, supongamos que $\max\limits_{i \in [n]} \frac{v_i}{s(x_i + 1)} = 
+        \min\limits_{i \in [n]} \frac{v_i}{s(x_i)} = D$.
+        Como las opciones de incremento $i \in I(x, v)$ están empatadas -- $\frac{v_i}{D} = s(x_i + 1)$--,
+        se redondean a $\llbracket \frac{v_i}{D} \rrbracket = \{ x_i, x_i + 1\}$. Las opciones de decremento
+        $k \in K(x, v)$ también se encuentran empatadas -- $\frac{v_k}{D} = s(x_k)$--, por lo que se redondean
+        a $\llbracket \frac{v_k}{D} \rrbracket = \{ x_k - 1, x_k\}$. 
+
+        Estos dos conjuntos son disjuntos: $I(x,v) \cap K(x,v) = \emptyset$. Si no fuese el caso, se tendría 
+        $j \in I(x,v) \cap K(x,v)$ tal que $\frac{v_j}{s(x_j + 1)} = D = \frac{v_j}{s(x_j)}$, contradiciendo el 
+        hecho de que las secuencias de saltos son estrictamente crecientes.
+        Luego, podemos tomar $i \in I(x,v)$ y $k \in K(x, v)$, y definir el vector $y$ como
+        $y_i = x_i + 1$, $y_k = x_k - 1$, $y_j = x_j \ \forall j \neq i,k$, construyendo otra solución 
+        $y \neq x$, $y \in A(H, \vec{v})$. 
     \end{proof}
 \end{proposition}
 
@@ -314,16 +345,22 @@ $\vec{v}$, tendrá sentido considerar también un multiplicador $\mu$ en lugar d
 La desigualdad max-min, con la respectiva elaboración de los conjuntos $I(\vec{v}, H)$ y $D(\vec{v}, H)$, ayuda a pensar en 
 el siguiente algoritmo polinomial para construir vectores de asignaciones $x \in A(\vec{v}, H)$:
 
-\begin{algorithm}
+\vspace{0.5em}
+
+\begin{algorithm}[H]
     \SetAlgoLined
     \KwResult{$x \in A(\vec{v}, H)$ vector de asignaciones}
     Tomando $D \vcentcolon= \frac{v_+}{H}$, definir: \\
     \hspace{2em} x$_j = \llbracket \frac{v_j}{D} \rrbracket$ para cada $j \in [n]$ \\
-    \If{x$_+=k$}
+    \If{x$_+=H$}
        {\Return x}
     \Else{
         \If{x$_+ < k$}
-            {fas}
+        {elegir $i \in I(x, v)$ y aumentar $x_i$ en una unidad \\
+         repetir este paso hasta que que x$_+ = H$}
+        \Else{elegir $k \in K(x, v)$ y disminuir $x_k$ en una unidad \\
+         repetir este paso hasta que que x$_+ = H$}
     }
+    \Return x \\
     \caption{Construcción de vector de asignaciones para métodos de divisor.}
 \end{algorithm}

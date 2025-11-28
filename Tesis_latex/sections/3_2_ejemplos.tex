@@ -144,6 +144,7 @@ de ser repartidas, puesto que en el intervalo $[U, k + U)$ hay exactamente $k$ e
 
 % ------------------------------------------------------
 \subsection{Formulación como problema de optimización de medida}
+\label{section:optimizacion_medida}
 
 Pensando en que estamos buscando algoritmos aleatorizados que seleccionen conjuntos de $k$ 
 partidos verificando cumplir con las probabilidades marginales dadas por $p_i$, 
@@ -200,7 +201,7 @@ y del lado derecho nos queda la suma de los $p_i$ que es exactamente $k$.
 
 Dividiendo por $k$ a ambos lados, se tiene la primera restricción:
 
-$$\sum_{B \in \binom{[n]}{k}}{\mu(B)} = 1$$
+$$\sum_{B \in \binom{[n]}{k}}{\mu(B)} = 1$$.
 
 Es importante ver que, más allá de cuál sea la función objetivo $g$, existe 
 una única solución para los casos en los que $k \in \{ 1, n-1 \}$, pues en ambos casos 
@@ -222,7 +223,7 @@ como método de \textit{apportionment} en \cita{correa2024monotonerandomizedappo
 este método consiste en hacer exactamente el planteo de la sección anterior, utilizando como
 función objetivo la entropía de la distribución, dada por 
 
-$$H(S) = \sum_{B \in \binom{[n]}{k}}{\mu(B) \frac{1}{\log(\mu(B))}}$$
+$$H(S) = \sum_{B \in \binom{[n]}{k}}{\mu(B) \frac{1}{\log(\mu(B))}}$$,
 
 donde $S \in \binom{[n]}{k}$ tiene distribución dada por $\mu$.
 
@@ -234,7 +235,7 @@ partidos será seleccionado. En otras palabras, es un modo de intentar maximizar
 acerca de qué partidos serán seleccionados, siempre sujetos a la restricción de las probabilidades
 condicionales.
 
-\cita{singh2013entropyoptimizationcounting} y \cita{10.1093/biomet/81.3.457} caracterizan a esta distribución como una distribución
+\cita{singh2013entropyoptimizationcounting, 10.1093/biomet/81.3.457} caracterizan a esta distribución como una distribución
 producto: la solución del problema verifica que 
 $$\mu(S) = \prod_{i \in S}{\lambda_i},$$ 
 con $\vec{\lambda} \in \mathbb{R}_{>0}^n$ obtenido mediante la formulación dual del problema.

@@ -145,7 +145,6 @@
       \field{isbn}{1886529191}
       \field{title}{Introduction to Linear Optimization}
       \field{year}{1997}
-      \true{nocite}
       \keyw{ml}
     \endentry
     \entry{brewer_sampling}{article}{}
@@ -202,7 +201,6 @@
       \field{note}{Gannon University}
       \field{title}{Apportioning Representatives in the United States Congress: Paradoxes of Apportionment}
       \field{year}{2010}
-      \true{nocite}
       \verb{doi}
       \verb 10.4169/loci003163
       \endverb
@@ -505,6 +503,7 @@
       \field{title}{The whole and its parts: On the coherence theorem of Balinski and Young}
       \field{volume}{83}
       \field{year}{2016}
+      \true{nocite}
       \field{pages}{11\bibrangedash 19}
       \range{pages}{9}
       \verb{doi}
@@ -517,10 +516,10 @@
       \verb https://www.sciencedirect.com/science/article/pii/S0165489616300397
       \endverb
     \endentry
-    \entry{pukkelsheim2017}{book}{}
+    \entry{pukelsheim2017}{book}{}
       \name{author}{1}{}{%
-        {{hash=efe7f186adeedb65a41f25f7616a1f1b}{%
-           family={Pukkelsheim},
+        {{hash=49813af522fea15c0ac8ee3cfd8d3931}{%
+           family={Pukelsheim},
            familyi={P\bibinitperiod},
            given={Friedrich},
            giveni={F\bibinitperiod}}}%
@@ -528,12 +527,12 @@
       \list{publisher}{1}{%
         {Springer}%
       }
-      \strng{namehash}{efe7f186adeedb65a41f25f7616a1f1b}
-      \strng{fullhash}{efe7f186adeedb65a41f25f7616a1f1b}
-      \strng{bibnamehash}{efe7f186adeedb65a41f25f7616a1f1b}
-      \strng{authorbibnamehash}{efe7f186adeedb65a41f25f7616a1f1b}
-      \strng{authornamehash}{efe7f186adeedb65a41f25f7616a1f1b}
-      \strng{authorfullhash}{efe7f186adeedb65a41f25f7616a1f1b}
+      \strng{namehash}{49813af522fea15c0ac8ee3cfd8d3931}
+      \strng{fullhash}{49813af522fea15c0ac8ee3cfd8d3931}
+      \strng{bibnamehash}{49813af522fea15c0ac8ee3cfd8d3931}
+      \strng{authorbibnamehash}{49813af522fea15c0ac8ee3cfd8d3931}
+      \strng{authornamehash}{49813af522fea15c0ac8ee3cfd8d3931}
+      \strng{authorfullhash}{49813af522fea15c0ac8ee3cfd8d3931}
       \field{labelalpha}{Puk17}
       \field{sortinit}{P}
       \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
@@ -541,6 +540,47 @@
       \field{labeltitlesource}{title}
       \field{title}{Proportional Representation}
       \field{year}{2017}
+    \endentry
+    \entry{ASENS_1910_3_27__529_0}{article}{}
+      \name{author}{1}{}{%
+        {{hash=0473801ecb0c728a7a2cd0b7d6e72cb7}{%
+           family={Sainte-Laguë},
+           familyi={S\bibinithyphendelim L\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {fr}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \strng{fullhash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \strng{bibnamehash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \strng{authorbibnamehash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \strng{authornamehash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \strng{authorfullhash}{0473801ecb0c728a7a2cd0b7d6e72cb7}
+      \field{labelalpha}{Sai10}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Annales scientifiques de l'École Normale Supérieure}
+      \field{title}{La représentation proportionnelle et la méthode des moindres carrés}
+      \field{volume}{3e série, 27}
+      \field{year}{1910}
+      \field{pages}{529\bibrangedash 542}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.24033/asens.627
+      \endverb
+      \verb{urlraw}
+      \verb https://www.numdam.org/articles/10.24033/asens.627/
+      \endverb
+      \verb{url}
+      \verb https://www.numdam.org/articles/10.24033/asens.627/
+      \endverb
     \endentry
     \entry{10.1093/biomet/54.3-4.499}{article}{}
       \name{author}{1}{}{%
@@ -622,6 +662,39 @@
       \verb https://arxiv.org/abs/1304.8108
       \endverb
     \endentry
+    \entry{suzumura1983rational}{book}{}
+      \name{author}{1}{}{%
+        {{hash=1f42f475053bf9151bfc01d42a350fc9}{%
+           family={Suzumura},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{1f42f475053bf9151bfc01d42a350fc9}
+      \strng{fullhash}{1f42f475053bf9151bfc01d42a350fc9}
+      \strng{bibnamehash}{1f42f475053bf9151bfc01d42a350fc9}
+      \strng{authorbibnamehash}{1f42f475053bf9151bfc01d42a350fc9}
+      \strng{authornamehash}{1f42f475053bf9151bfc01d42a350fc9}
+      \strng{authorfullhash}{1f42f475053bf9151bfc01d42a350fc9}
+      \field{labelalpha}{Suz83}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780521122559}
+      \field{series}{Paperback reissue}
+      \field{title}{Rational Choice, Collective Decisions, and Social Welfare}
+      \field{year}{1983}
+      \verb{urlraw}
+      \verb https://books.google.com.ar/books?id=GVg5yfYNMD8C
+      \endverb
+      \verb{url}
+      \verb https://books.google.com.ar/books?id=GVg5yfYNMD8C
+      \endverb
+    \endentry
     \entry{Tillé2025}{inbook}{}
       \name{author}{1}{}{%
         {{hash=c226d149e60571f35d37c7d78b26307a}{%
@@ -672,6 +745,37 @@
       \endverb
       \verb{url}
       \verb https://doi.org/10.1007/978-3-662-69359-9_545
+      \endverb
+    \endentry
+    \entry{mileiarrow2023}{online}{}
+      \name{author}{1}{}{%
+        {{hash=271ddf829afeece44d8732757fba1a66}{%
+           family={TV},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {YouTube}%
+      }
+      \strng{namehash}{271ddf829afeece44d8732757fba1a66}
+      \strng{fullhash}{271ddf829afeece44d8732757fba1a66}
+      \strng{bibnamehash}{271ddf829afeece44d8732757fba1a66}
+      \strng{authorbibnamehash}{271ddf829afeece44d8732757fba1a66}
+      \strng{authornamehash}{271ddf829afeece44d8732757fba1a66}
+      \strng{authorfullhash}{271ddf829afeece44d8732757fba1a66}
+      \field{labelalpha}{TV23}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{¿Vos conocés el teorema de imposibilidad de Arrow?}
+      \field{urlyear}{2025}
+      \field{year}{2023}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb @https://www.youtube.com/shorts/YWbVegIKbHY
+      \endverb
+      \verb{url}
+      \verb @https://www.youtube.com/shorts/YWbVegIKbHY
       \endverb
     \endentry
     \entry{wilson_dhondt}{article}{}

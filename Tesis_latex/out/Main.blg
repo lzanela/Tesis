@@ -1,16 +1,16 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'out/Main.blg'
-[101] biber-MSWIN64:340> INFO - === 
-[135] Biber.pm:419> INFO - Reading 'out/Main.bcf'
-[248] Biber.pm:976> INFO - Using all citekeys in bib section 0
-[262] Biber.pm:4419> INFO - Processing section 0
-[274] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
-[353] bibtex.pm:1713> INFO - LaTeX decoding ...
-[397] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
-[527] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[527] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
-[527] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'es-ES'
-[544] bbl.pm:660> INFO - Writing 'out/Main.bbl' with encoding 'UTF-8'
-[551] bbl.pm:763> INFO - Output to out/Main.bbl
-[552] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'wilson_dhondt' is not an integer - this will probably not sort properly.
-[552] Biber.pm:133> INFO - WARNINGS: 1
+[90] biber-MSWIN64:340> INFO - === 
+[127] Biber.pm:419> INFO - Reading 'out/Main.bcf'
+[216] Biber.pm:976> INFO - Using all citekeys in bib section 0
+[229] Biber.pm:4419> INFO - Processing section 0
+[239] Biber.pm:4610> INFO - Looking for bibtex file 'referencias.bib' for section 0
+[304] bibtex.pm:1713> INFO - LaTeX decoding ...
+[337] bibtex.pm:1519> INFO - Found BibTeX data source 'referencias.bib'
+[465] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[465] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[465] Biber.pm:4239> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'es-ES'
+[486] bbl.pm:660> INFO - Writing 'out/Main.bbl' with encoding 'UTF-8'
+[495] bbl.pm:763> INFO - Output to out/Main.bbl
+[495] Biber.pm:131> WARN - legacy year field 'n.d.' in entry 'wilson_dhondt' is not an integer - this will probably not sort properly.
+[495] Biber.pm:133> INFO - WARNINGS: 1
